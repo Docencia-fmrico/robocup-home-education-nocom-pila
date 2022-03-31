@@ -5,7 +5,7 @@
                 <Sequence>
                     <Inverter>
                         <ReactiveSequence>
-                            <Bag_taked name="bag_taked"/>
+                            <Bag_taken name="Bag_taken"/>
                             <ReactiveSequence>
                                 <Detect_person name="detect_person"/>
                                 <Follow_person name="follow_person"/>
