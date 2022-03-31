@@ -32,7 +32,7 @@ int main(int argc, char **argv)
   BT::BehaviorTreeFactory factory;
   BT::SharedLibrary loader;
 
-  factory.registerFromPlugin(loader.getOSName("nc_bag_taked"));
+  factory.registerFromPlugin(loader.getOSName("nc_bag_taken"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_bag"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_person"));
   factory.registerFromPlugin(loader.getOSName("nc_follow_person_"));
