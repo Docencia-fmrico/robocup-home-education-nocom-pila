@@ -55,7 +55,7 @@ include_directories(
 
 add_library(pid SHARED src/robocup_nocom_pila/PIDController.cpp)
 
-add_library(nc_bag_taked SHARED src/robocup_nocom_pila/Bag_taked.cpp)
+add_library(nc_bag_taken SHARED src/robocup_nocom_pila/Bag_taken.cpp)
 add_library(nc_detect_bag SHARED src/robocup_nocom_pila/Detect_bag.cpp)
 add_library(nc_detect_person SHARED src/robocup_nocom_pila/Detect_person.cpp)
 add_library(nc_follow_person_ SHARED src/robocup_nocom_pila/Follow_person.cpp)
@@ -64,7 +64,7 @@ add_library(nc_search_person SHARED src/robocup_nocom_pila/Search_person.cpp)
 add_library(nc_take_bag SHARED src/robocup_nocom_pila/Take_bag.cpp)
 add_library(nc_go_home SHARED src/robocup_nocom_pila/Go_home.cpp)
 list(APPEND plugin_libs
-  nc_bag_taked
+  nc_bag_taken
   nc_detect_bag
   nc_detect_person
   nc_follow_person_
@@ -87,7 +87,7 @@ target_link_libraries(nodo_cml ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
 roslint_cpp(
   src/nodo_cml.cpp
 
-  include/robocup_nocom_pila/Bag_taked.h src/robocup_nocom_pila/Bag_taked.cpp
+  include/robocup_nocom_pila/Bag_taken.h src/robocup_nocom_pila/Bag_taken.cpp
   include/robocup_nocom_pila/Detect_bag.h src/robocup_nocom_pila/Detect_bag.cpp
   include/robocup_nocom_pila/Detect_person.h src/robocup_nocom_pila/Detect_person.cpp
   include/robocup_nocom_pila/Follow_person.h src/robocup_nocom_pila/Follow_person.cpp
