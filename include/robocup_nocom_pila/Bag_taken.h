@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_BAG_TAKED_H
-#define ROBOCUP_NOCOM_PILA_BAG_TAKED_H
+#ifndef ROBOCUP_NOCOM_PILA_BAG_TAKEN_H
+#define ROBOCUP_NOCOM_PILA_BAG_TAKEN_H
 
 #include "ros/ros.h"
 
@@ -29,10 +29,10 @@
 namespace robocup_nocom_pila
 {
 
-class Bag_taked : public BT::ActionNodeBase
+class Bag_taken : public BT::ActionNodeBase
 {
 public:
-    explicit Bag_taked(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Bag_taken(const std::string& name/*, const BT::NodeConfiguration& config*/);
 
     void halt();
 
@@ -59,4 +59,4 @@ private:
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_BAG_TAKED_H
+#endif  // ROBOCUP_NOCOM_PILA_BAG_TAKEN_H
