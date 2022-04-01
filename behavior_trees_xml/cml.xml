@@ -1,0 +1,30 @@
+<root main_tree_to_execute = "MainTree" >
+    <BehaviorTree ID="MainTree">
+        <ReactiveSequence>
+            <Inverter>
+                <Sequence>
+                    <Inverter>
+                        <ReactiveSequence>
+                            <Bag_taken name="Bag_taken"/>
+                            <ReactiveSequence>
+                                <Detect_person name="detect_person"/>
+                                <Follow_person name="follow_person"/>
+                            </ReactiveSequence>
+                            <Detect_bag name="detect_bag"/>
+                            <Take_bag name="take_bag"/>
+                        </ReactiveSequence>
+                    </Inverter>
+                    <Parallel failure_threshold="1" success_threshold="">
+                        <ReactiveSequence>
+                            <Detect_person name="detect_person"/>
+                            <Follow_person name="follow_person"/>
+                        </ReactiveSequence>
+                        <Listen_person name="listen_person"/>
+                    </Parallel>
+                    <Go_home name="go_home"/>
+                </Sequence>
+            </Inverter>
+            <Search_person name="search_person"/>
+        </ReactiveSequence>
+    </BehaviorTree>
+</root>
