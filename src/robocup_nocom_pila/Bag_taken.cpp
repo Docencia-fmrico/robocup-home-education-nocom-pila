@@ -22,10 +22,10 @@
 namespace robocup_nocom_pila
 {
 
-Bag_taken::Bag_taken(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
+Bag_taken::Bag_taken(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name,  config), counter_(0)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Bag_taked::PerceivePersonCallback, this);
+   //dist_sub = nh_.subscribe("/dist_person", 1, &Bag_taked::PerceivePersonCallback, this);
 }
 
 void
@@ -38,11 +38,10 @@ BT::NodeStatus
 Bag_taken::tick()
 {
     ROS_INFO("Bag_taken tick");
-/*
-    setOutput<std::string>("person", "hola");
 
-    std::cerr << dist << std::endl;
-*/
+    std::string object = getInput<std::string>("bag").value();
+    std::cerr << object << std::endl;
+
     return BT::NodeStatus::SUCCESS;
 }
 

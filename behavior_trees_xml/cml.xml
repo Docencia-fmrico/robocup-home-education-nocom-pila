@@ -5,13 +5,14 @@
                 <Sequence>
                     <Inverter>
                         <ReactiveSequence>
-                            <Bag_taken name="Bag_taken"/>
+                            <Bag_taken name="Bag_taken" bag="{data}"/>
                             <ReactiveSequence>
                                 <Detect_person name="detect_person"/>
                                 <Follow_person name="follow_person"/>
                             </ReactiveSequence>
                             <Detect_bag name="detect_bag"/>
-                            <Take_bag name="take_bag"/>
+                            <Take_bag name="take_bag" taken="{data}"/>
+                            
                         </ReactiveSequence>
                     </Inverter>
                     <Parallel failure_threshold="1" success_threshold="">

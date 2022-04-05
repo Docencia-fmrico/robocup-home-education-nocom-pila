@@ -32,16 +32,16 @@ namespace robocup_nocom_pila
 class Bag_taken : public BT::ActionNodeBase
 {
 public:
-    explicit Bag_taken(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Bag_taken(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
 
-   /*static BT::PortsList providedPorts()
+    static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("point")};
-    }*/
+        return { BT::InputPort<std::string>("bag")};
+    }
 
 private:
     /*const float ADVANCE_SPEED = 0.1;
@@ -55,6 +55,7 @@ private:
     float dist;
     int point;*/
     int counter_;
+    
 };
 
 }  // namespace robocup_nocom_pila
