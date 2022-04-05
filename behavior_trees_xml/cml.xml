@@ -7,8 +7,8 @@
                         <ReactiveSequence>
                             <Bag_taken name="Bag_taken" bag="{data}"/>
                             <ReactiveSequence>
-                                <Detect_person name="detect_person"/>
-                                <Follow_person name="follow_person"/>
+                                <Detect_person name="detect_person" dist_w="{dist}"/>
+                                <Follow_person name="follow_person" dist_r="{dist}"/>
                             </ReactiveSequence>
                             <Detect_bag name="detect_bag"/>
                             <Take_bag name="take_bag" taken="{data}"/>
@@ -17,8 +17,8 @@
                     </Inverter>
                     <Parallel failure_threshold="1" success_threshold="">
                         <ReactiveSequence>
-                            <Detect_person name="detect_person"/>
-                            <Follow_person name="follow_person"/>
+                            <Detect_person name="detect_person" dist_w="{dist}"/>
+                            <Follow_person name="follow_person" dist_r="{dist}"/>
                         </ReactiveSequence>
                         <Listen_person name="listen_person"/>
                     </Parallel>

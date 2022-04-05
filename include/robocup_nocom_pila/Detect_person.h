@@ -32,16 +32,16 @@ namespace robocup_nocom_pila
 class Detect_person : public BT::ActionNodeBase
 {
 public:
-    explicit Detect_person(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Detect_person(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
 
-   /*static BT::PortsList providedPorts()
+    static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("point")};
-    }*/
+        return { BT::OutputPort<float>("dist_w")};
+    }
 
 private:
     /*const float ADVANCE_SPEED = 0.1;
@@ -51,9 +51,9 @@ private:
     ros::Publisher vel_pub_;
     ros::Subscriber dist_point_person;
     ros::Subscriber px_point_person;
-
+*/
     float dist;
-    int point;*/
+    
     int counter_;
 };
 
