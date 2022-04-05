@@ -22,8 +22,8 @@
 namespace robocup_nocom_pila
 {
 
-Detect_person::Detect_person(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
+Detect_person::Detect_person(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config), counter_(0)
 {
   // dist_sub = nh_.subscribe("/dist_person", 1, &Detect_person::PerceivePersonCallback, this);
 }
@@ -38,11 +38,11 @@ BT::NodeStatus
 Detect_person::tick()
 {
     ROS_INFO("Detect_person tick");
-/*
-    setOutput<std::string>("person", "hola");
+
+    setOutput<float>("dist_w", 1);   // El valor debería ser el que devuelva el funcionamiento real de detect_person (1 es un valor provisional)
 
     std::cerr << dist << std::endl;
-*/
+
     return BT::NodeStatus::SUCCESS;
 }
 
