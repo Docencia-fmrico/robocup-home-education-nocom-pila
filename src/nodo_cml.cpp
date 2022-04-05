@@ -42,7 +42,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_go_home"));
 
   auto blackboard = BT::Blackboard::create();
-  blackboard->set("object", "cup");
+  blackboard->set("data", "no");
 
   std::string pkgpath = ros::package::getPath("robocup_nocom_pila");
   std::string xml_file = pkgpath + "/behavior_trees_xml/cml.xml";

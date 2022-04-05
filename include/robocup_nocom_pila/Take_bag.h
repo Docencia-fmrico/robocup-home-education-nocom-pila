@@ -24,6 +24,7 @@
 #include "std_msgs/Float64.h"
 #include "std_msgs/Int64.h"
 
+#include "ros/ros.h"
 #include <string>
 
 namespace robocup_nocom_pila
@@ -32,16 +33,16 @@ namespace robocup_nocom_pila
 class Take_bag : public BT::ActionNodeBase
 {
 public:
-    explicit Take_bag(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Take_bag(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
 
-   /*static BT::PortsList providedPorts()
+   static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("point")};
-    }*/
+        return { BT::OutputPort<std::string>("taken")};
+    }
 
 private:
     /*const float ADVANCE_SPEED = 0.1;

@@ -22,8 +22,8 @@
 namespace robocup_nocom_pila
 {
 
-Take_bag::Take_bag(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
+Take_bag::Take_bag(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config), counter_(0)
 {
   // dist_sub = nh_.subscribe("/dist_person", 1, &Take_bag::PerceivePersonCallback, this);
 }
@@ -38,11 +38,9 @@ BT::NodeStatus
 Take_bag::tick()
 {
     ROS_INFO("Take_bag tick");
-/*
-    setOutput<std::string>("person", "hola");
 
-    std::cerr << dist << std::endl;
-*/
+    setOutput<std::string>("taken", "taken");
+
     return BT::NodeStatus::SUCCESS;
 }
 
