@@ -39,9 +39,6 @@ Go_operator::tick()
 {
     ROS_INFO("Go_operator tick");
 
-    std::string object = getInput<std::string>("bag").value();
-    std::cerr << object << std::endl;
-
     return BT::NodeStatus::SUCCESS;
 }
 

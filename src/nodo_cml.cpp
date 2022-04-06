@@ -36,7 +36,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_speak_person"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_bag"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_person"));
-  factory.registerFromPlugin(loader.getOSName("nc_follow_person"));
+  factory.registerFromPlugin(loader.getOSName("nc_follow_person_"));
   factory.registerFromPlugin(loader.getOSName("nc_go_home"));
 
   auto blackboard = BT::Blackboard::create();
