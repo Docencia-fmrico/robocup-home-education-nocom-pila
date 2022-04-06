@@ -4,12 +4,12 @@
   <version>0.0.0</version>
   <description>Robocup projects</description>
 
-  <maintainer email="nocompila.urjc@gmail.com">fmrico</maintainer>
+  <maintainer email="nocompila.urjc@gmail.com"></maintainer>
 
   <license>Apache 2</license>
   <url type="website">https://www.aulavirtual.urjc.es/moodle/course/view.php?id=144699</url>
 
-  <author email="nocompila.urjc@gmail.com">Francisco Martín</author>
+  <author email="nocompila.urjc@gmail.com"></author>
 
   <buildtool_depend>catkin</buildtool_depend>
  

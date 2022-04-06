@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_BAG_TAKEN_H
-#define ROBOCUP_NOCOM_PILA_BAG_TAKEN_H
+#ifndef ROBOCUP_NOCOM_PILA_SPEAK_PERSON_H
+#define ROBOCUP_NOCOM_PILA_SPEAK_PERSON_H
 
 #include "ros/ros.h"
 
@@ -29,19 +29,19 @@
 namespace robocup_nocom_pila
 {
 
-class Bag_taken : public BT::ActionNodeBase
+class Speak_person : public BT::ActionNodeBase
 {
 public:
-    explicit Bag_taken(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Speak_person(const std::string& name/*, const BT::NodeConfiguration& config*/);
 
     void halt();
 
     BT::NodeStatus tick();
 
-    static BT::PortsList providedPorts()
+   /*static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("bag")};
-    }
+        return { BT::InputPort<std::string>("point")};
+    }*/
 
 private:
     /*const float ADVANCE_SPEED = 0.1;
@@ -55,9 +55,8 @@ private:
     float dist;
     int point;*/
     int counter_;
-    
 };
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_BAG_TAKEN_H
+#endif  // ROBOCUP_NOCOM_PILA_SPEAK_PERSON_H

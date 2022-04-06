@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_TAKE_BAG_H
-#define ROBOCUP_NOCOM_PILA_TAKE_BAG_H
+#ifndef ROBOCUP_NOCOM_PILA_GO_OPERATOR_H
+#define ROBOCUP_NOCOM_PILA_GO_OPERATOR_H
 
 #include "ros/ros.h"
 
@@ -24,24 +24,23 @@
 #include "std_msgs/Float64.h"
 #include "std_msgs/Int64.h"
 
-#include "ros/ros.h"
 #include <string>
 
 namespace robocup_nocom_pila
 {
 
-class Take_bag : public BT::ActionNodeBase
+class Go_operator : public BT::ActionNodeBase
 {
 public:
-    explicit Take_bag(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Go_operator(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
 
-   static BT::PortsList providedPorts()
+    static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<std::string>("taken")};
+        return { BT::InputPort<std::string>("bag")};
     }
 
 private:
@@ -56,8 +55,9 @@ private:
     float dist;
     int point;*/
     int counter_;
+    
 };
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_TAKE_BAG_H
+#endif  // ROBOCUP_NOCOM_PILA_GO_OPERATOR_H

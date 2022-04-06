@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "robocup_nocom_pila/Take_bag.h"
+#include "robocup_nocom_pila/Go_operator.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
 #include <string>
@@ -22,32 +22,35 @@
 namespace robocup_nocom_pila
 {
 
-Take_bag::Take_bag(const std::string& name, const BT::NodeConfiguration & config)
-: BT::ActionNodeBase(name, config), counter_(0)
+Go_operator::Go_operator(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name,  config), counter_(0)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Take_bag::PerceivePersonCallback, this);
+   //dist_sub = nh_.subscribe("/dist_person", 1, &Go_operator::PerceivePersonCallback, this);
 }
 
 void
-Take_bag::halt()
+Go_operator::halt()
 {
-    ROS_INFO("Take_bag halt");
+    ROS_INFO("Go_operator halt");
 }
 
 BT::NodeStatus
-Take_bag::tick()
+Go_operator::tick()
 {
-    ROS_INFO("Take_bag tick");
+    ROS_INFO("Go_operator tick");
 
-    setOutput<std::string>("taken", "taken");
+    std::string object = getInput<std::string>("bag").value();
+    std::cerr << object << std::endl;
 
     return BT::NodeStatus::SUCCESS;
 }
+
+
 
 }  // namespace robocup_nocom_pila
 
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<robocup_nocom_pila::Take_bag>("Take_bag");
+  factory.registerNodeType<robocup_nocom_pila::Go_operator>("Go_operator");
 }
