@@ -24,7 +24,10 @@
 #include "std_msgs/Float64.h"
 #include "std_msgs/Int64.h"
 
+#include "robocup_nocom_pila/PIDController.hpp"
+
 #include <string>
+
 
 namespace robocup_nocom_pila
 {
@@ -32,31 +35,44 @@ namespace robocup_nocom_pila
 class Follow_person : public BT::ActionNodeBase
 {
 public:
-    explicit Follow_person(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Follow_person(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
 
-   /*static BT::PortsList providedPorts()
+    static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("point")};
-    }*/
+        return { BT::InputPort<float>("dist_r")};
+    }
 
 private:
     /*const float ADVANCE_SPEED = 0.1;
-    const float TURNING_SPEED = 0.35;
+    const float TURNING_SPEED = 0.35;*/
+    const double MIN_TURN_SPEED = 0.0;
+    const double MAX_TURN_SPEED = 0.4;
+    const double MIN_RANG_BOX = -300;
+    const double MAX_RANG_BOX = 300;
+    const double MIN_FORW_SPEED = 0.0;
+    const double MAX_FORW_SPEED = 0.3;
+    const double MIN_FORW_DIST = 1;
+    const double MAX_FORW_DIST = 2.5;
+    const double MIN_BACKW_DIST = 0.1;
+    const double MAX_BACKW_DIST = 1;
+
+    const float MIN_TURNING_SPEED = 0.05;
+    const float MAX_TURNING_SPEED = 0.45;
 
     ros::NodeHandle n_;
     ros::Publisher vel_pub_;
-    ros::Subscriber dist_point_person;
-    ros::Subscriber px_point_person;
 
-    float dist;
-    int point;*/
+    float dist, pos;
+    PIDController turn_pid_, forw_pid_;
+    int point;
     int counter_;
 };
 
 }  // namespace robocup_nocom_pila
 
 #endif  // ROBOCUP_NOCOM_PILA_FOLLOW_PERSON_H
+
