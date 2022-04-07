@@ -54,7 +54,7 @@ include_directories(
   ${ZMQ_INCLUDE_DIRS}
 )
 
-add_library(pid SHARED src/PIDController.cpp)
+add_library(pid SHARED src/robocup_nocom_pila/PIDController.cpp)
 
 add_library(nc_go_operator SHARED src/robocup_nocom_pila/Go_operator.cpp)
 add_library(nc_speak_person SHARED src/robocup_nocom_pila/Speak_person.cpp)
@@ -91,5 +91,5 @@ roslint_cpp(
   include/robocup_nocom_pila/Follow_person.h src/robocup_nocom_pila/Follow_person.cpp
   include/robocup_nocom_pila/Go_home.h src/robocup_nocom_pila/Go_home.cpp
   
-  include/PIDController.hpp src/PIDController.cpp
+  include/robocup_nocom_pila/PIDController.hpp src/robocup_nocom_pila/PIDController.cpp
 )

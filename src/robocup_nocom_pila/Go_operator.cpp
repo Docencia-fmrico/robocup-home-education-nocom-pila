@@ -22,8 +22,8 @@
 namespace robocup_nocom_pila
 {
 
-Go_operator::Go_operator(const std::string& name, const BT::NodeConfiguration & config)
-: BT::ActionNodeBase(name,  config), counter_(0)
+Go_operator::Go_operator(const std::string& name/*, const BT::NodeConfiguration & config*/)
+: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
 {
    //dist_sub = nh_.subscribe("/dist_person", 1, &Go_operator::PerceivePersonCallback, this);
 }

@@ -14,7 +14,7 @@
 
 #include <algorithm>
 
-#include "PIDController.hpp"
+#include "robocup_nocom_pila/PIDController.hpp"
 
 namespace robocup_nocom_pila
 {
