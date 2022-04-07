@@ -35,17 +35,17 @@ namespace robocup_nocom_pila
 class Follow_person : public BT::ActionNodeBase
 {
 public:
-    explicit Follow_person(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Follow_person(const std::string& name/*, const BT::NodeConfiguration& config*/);
 
     void halt();
 
     BT::NodeStatus tick();
-
+/*
     static BT::PortsList providedPorts()
     {
         return { BT::InputPort<float>("dist_r")};
     }
-
+*/
 private:
     /*const float ADVANCE_SPEED = 0.1;
     const float TURNING_SPEED = 0.35;*/

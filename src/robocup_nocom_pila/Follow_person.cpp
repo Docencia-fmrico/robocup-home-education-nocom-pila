@@ -23,8 +23,8 @@
 namespace robocup_nocom_pila
 {
 
-Follow_person::Follow_person(const std::string& name, const BT::NodeConfiguration & config)
-: BT::ActionNodeBase(name, config), counter_(0), turn_pid_(MIN_RANG_BOX, MAX_RANG_BOX, MIN_TURN_SPEED, MAX_TURN_SPEED), forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
+Follow_person::Follow_person(const std::string& name/*, const BT::NodeConfiguration & config*/)
+: BT::ActionNodeBase(name, {} /*config*/), counter_(0), turn_pid_(MIN_RANG_BOX, MAX_RANG_BOX, MIN_TURN_SPEED, MAX_TURN_SPEED), forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
 {
   // dist_sub = nh_.subscribe("/dist_person", 1, &Follow_person::PerceivePersonCallback, this);
   vel_pub_ = n_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
@@ -43,10 +43,10 @@ Follow_person::tick()
   ROS_INFO("Follow_person tick");
   double veloc = forw_pid_.get_output(dist);
   double ang = turn_pid_.get_output(dist); // La distancia para forw y para turn podría no ser el mismo parámetros
-
+/*
   float object = getInput<float>("dist_r").value();
   std::cerr << object << std::endl;
-
+*/
   geometry_msgs::Twist msg;
 
   ROS_INFO("vel x= ");
