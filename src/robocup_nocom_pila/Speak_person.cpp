@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "robocup_nocom_pila/Listen_person.h"
+#include "robocup_nocom_pila/Speak_person.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
 #include <string>
@@ -22,22 +22,22 @@
 namespace robocup_nocom_pila
 {
 
-Listen_person::Listen_person(const std::string& name/*, const BT::NodeConfiguration & config*/)
+Speak_person::Speak_person(const std::string& name/*, const BT::NodeConfiguration & config*/)
 : BT::ActionNodeBase(name, {} /*config*/), counter_(0)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Listen_person::PerceivePersonCallback, this);
+  // dist_sub = nh_.subscribe("/dist_person", 1, &Speak_person::PerceivePersonCallback, this);
 }
 
 void
-Listen_person::halt()
+Speak_person::halt()
 {
-    ROS_INFO("Listen_person halt");
+    ROS_INFO("Speak_person halt");
 }
 
 BT::NodeStatus
-Listen_person::tick()
+Speak_person::tick()
 {
-    ROS_INFO("Listen_person tick");
+    ROS_INFO("Speak_person tick");
     /*
     setOutput<std::string>("person", "hola");
 
@@ -51,5 +51,5 @@ Listen_person::tick()
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<robocup_nocom_pila::Listen_person>("Listen_person");
+  factory.registerNodeType<robocup_nocom_pila::Speak_person>("Speak_person");
 }

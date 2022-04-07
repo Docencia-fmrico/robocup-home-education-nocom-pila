@@ -32,13 +32,11 @@ int main(int argc, char **argv)
   BT::BehaviorTreeFactory factory;
   BT::SharedLibrary loader;
 
-  factory.registerFromPlugin(loader.getOSName("nc_bag_taken"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_operator"));
+  factory.registerFromPlugin(loader.getOSName("nc_speak_person"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_bag"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_person"));
   factory.registerFromPlugin(loader.getOSName("nc_follow_person_"));
-  factory.registerFromPlugin(loader.getOSName("nc_listen_person"));
-  factory.registerFromPlugin(loader.getOSName("nc_search_person"));
-  factory.registerFromPlugin(loader.getOSName("nc_take_bag"));
   factory.registerFromPlugin(loader.getOSName("nc_go_home"));
 
   auto blackboard = BT::Blackboard::create();
