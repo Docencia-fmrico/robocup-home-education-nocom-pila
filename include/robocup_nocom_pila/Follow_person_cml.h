@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_SPEAK_PERSON_FMM_H
-#define ROBOCUP_NOCOM_PILA_SPEAK_PERSON_FMM_H
+#ifndef ROBOCUP_NOCOM_PILA_FOLLOW_PERSON_CML_H
+#define ROBOCUP_NOCOM_PILA_FOLLOW_PERSON_CML_H
 
 #include "ros/ros.h"
 
@@ -24,15 +24,18 @@
 #include "std_msgs/Float64.h"
 #include "std_msgs/Int64.h"
 
+#include "robocup_nocom_pila/PIDController.hpp"
+
 #include <string>
+
 
 namespace robocup_nocom_pila
 {
 
-class Speak_person_fmm : public BT::ActionNodeBase
+class Follow_person_cml : public BT::ActionNodeBase
 {
 public:
-    explicit Speak_person_fmm(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Follow_person_cml(const std::string& name/*, const BT::NodeConfiguration& config*/);
 
     void halt();
 
@@ -40,23 +43,36 @@ public:
 /*
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<float>("dist_w")};
+        return { BT::InputPort<float>("dist_r")};
     }
 */
 private:
     /*const float ADVANCE_SPEED = 0.1;
-    const float TURNING_SPEED = 0.35;
+    const float TURNING_SPEED = 0.35;*/
+    const double MIN_TURN_SPEED = 0.0;
+    const double MAX_TURN_SPEED = 0.4;
+    const double MIN_RANG_BOX = -300;
+    const double MAX_RANG_BOX = 300;
+    const double MIN_FORW_SPEED = 0.0;
+    const double MAX_FORW_SPEED = 0.3;
+    const double MIN_FORW_DIST = 1;
+    const double MAX_FORW_DIST = 2.5;
+    const double MIN_BACKW_DIST = 0.1;
+    const double MAX_BACKW_DIST = 1;
+
+    const float MIN_TURNING_SPEED = 0.05;
+    const float MAX_TURNING_SPEED = 0.45;
 
     ros::NodeHandle n_;
     ros::Publisher vel_pub_;
-    ros::Subscriber dist_point_person;
-    ros::Subscriber px_point_person;
-*/
-    float dist;
-    
+
+    float dist, pos;
+    PIDController turn_pid_, forw_pid_;
+    int point;
     int counter_;
 };
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_SPEAK_PERSON_FMM_H
+#endif  // ROBOCUP_NOCOM_PILA_FOLLOW_PERSON_CML_H
+

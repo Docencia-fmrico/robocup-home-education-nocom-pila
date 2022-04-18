@@ -1,14 +1,14 @@
 <root main_tree_to_execute = "MainTree" >
     <BehaviorTree ID="MainTree">
         <Sequence>
-            <Go_operator name="go_operator"/>
-            <Speak_person name="speak_person"/>
-            <Detect_bag name="detect_bag"/>
+            <Go_operator_cml name="go_operator"/>
+            <Speak_person_cml name="speak_person"/>
+            <Detect_bag_cml name="detect_bag"/>
             <ReactiveSequence>
-                <Detect_person name="detect_person"/>
-                <Follow_person name="follow_person"/>
+                <Detect_person_cml name="detect_person"/>
+                <Follow_person_cml name="follow_person"/>
             </ReactiveSequence>
-            <Go_home name="go_home"/>
+            <Go_home_cml name="go_home"/>
         </Sequence>
     </BehaviorTree>
 </root>

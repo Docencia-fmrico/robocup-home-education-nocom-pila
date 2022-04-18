@@ -56,19 +56,34 @@ include_directories(
 
 add_library(pid SHARED src/robocup_nocom_pila/PIDController.cpp)
 
-add_library(nc_go_operator SHARED src/robocup_nocom_pila/Go_operator.cpp)
-add_library(nc_speak_person SHARED src/robocup_nocom_pila/Speak_person.cpp)
-add_library(nc_detect_bag SHARED src/robocup_nocom_pila/Detect_bag.cpp)
-add_library(nc_detect_person SHARED src/robocup_nocom_pila/Detect_person.cpp)
-add_library(nc_follow_person_ SHARED src/robocup_nocom_pila/Follow_person.cpp)
-add_library(nc_go_home SHARED src/robocup_nocom_pila/Go_home.cpp)
+add_library(nc_go_operator_cml SHARED src/robocup_nocom_pila/Go_operator_cml.cpp)
+add_library(nc_speak_person_cml SHARED src/robocup_nocom_pila/Speak_person_cml.cpp)
+add_library(nc_detect_bag_cml SHARED src/robocup_nocom_pila/Detect_bag_cml.cpp)
+add_library(nc_detect_person_cml SHARED src/robocup_nocom_pila/Detect_person_cml.cpp)
+add_library(nc_follow_person_cml SHARED src/robocup_nocom_pila/Follow_person_cml.cpp)
+add_library(nc_go_home_cml SHARED src/robocup_nocom_pila/Go_home_cml.cpp)
+
+add_library(nc_describe_person_fmm SHARED src/robocup_nocom_pila/Describe_person_fmm.cpp)
+add_library(nc_detect_person_fmm SHARED src/robocup_nocom_pila/Detect_person_fmm.cpp)
+add_library(nc_go_home_fmm SHARED src/robocup_nocom_pila/Go_home_fmm.cpp)
+add_library(nc_go_operator_fmm SHARED src/robocup_nocom_pila/Go_operator_fmm.cpp)
+add_library(nc_go_person_fmm SHARED src/robocup_nocom_pila/Go_person_fmm.cpp)
+add_library(nc_speak_person_fmm SHARED src/robocup_nocom_pila/Speak_person_fmm.cpp)
+
 list(APPEND plugin_libs
-  nc_go_operator
-  nc_speak_person
-  nc_detect_bag
-  nc_detect_person
-  nc_follow_person_
-  nc_go_home
+  nc_go_operator_cml
+  nc_speak_person_cml
+  nc_detect_bag_cml
+  nc_detect_person_cml
+  nc_follow_person_cml
+  nc_go_home_cml
+
+  nc_describe_person_fmm
+  nc_detect_person_fmm
+  nc_go_home_fmm
+  nc_go_operator_fmm
+  nc_go_person_fmm
+  nc_speak_person_fmm
 )
 
 foreach(bt_plugin ${plugin_libs})
@@ -81,15 +96,28 @@ add_executable(nodo_cml
 )
 target_link_libraries(nodo_cml ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
 
+add_executable(nodo_fmm 
+  src/nodo_fmm.cpp
+)
+target_link_libraries(nodo_fmm ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
+
 roslint_cpp(
   src/nodo_cml.cpp
+  src/nodo_fmm.cpp
 
-  include/robocup_nocom_pila/Go_operator.h src/robocup_nocom_pila/Go_operator.cpp
-  include/robocup_nocom_pila/Speak_person.h src/robocup_nocom_pila/Speak_person.cpp
-  include/robocup_nocom_pila/Detect_bag.h src/robocup_nocom_pila/Detect_bag.cpp
-  include/robocup_nocom_pila/Detect_person.h src/robocup_nocom_pila/Detect_person.cpp
-  include/robocup_nocom_pila/Follow_person.h src/robocup_nocom_pila/Follow_person.cpp
-  include/robocup_nocom_pila/Go_home.h src/robocup_nocom_pila/Go_home.cpp
+  include/robocup_nocom_pila/Go_operator_cml.h src/robocup_nocom_pila/Go_operator_cml.cpp
+  include/robocup_nocom_pila/Speak_person_cml.h src/robocup_nocom_pila/Speak_person_cml.cpp
+  include/robocup_nocom_pila/Detect_bag_cml.h src/robocup_nocom_pila/Detect_bag_cml.cpp
+  include/robocup_nocom_pila/Detect_person_cml.h src/robocup_nocom_pila/Detect_person_cml.cpp
+  include/robocup_nocom_pila/Follow_person_cml.h src/robocup_nocom_pila/Follow_person_cml.cpp
+  include/robocup_nocom_pila/Go_home_cml.h src/robocup_nocom_pila/Go_home_cml.cpp
+  
+  include/robocup_nocom_pila/Describe_person_fmm.h src/robocup_nocom_pila/Describe_person_fmm.cpp
+  include/robocup_nocom_pila/Detect_person_fmm.h src/robocup_nocom_pila/Detect_person_fmm.cpp
+  include/robocup_nocom_pila/Go_home_fmm.h src/robocup_nocom_pila/Go_home_fmm.cpp
+  include/robocup_nocom_pila/Go_operator_fmm.h src/robocup_nocom_pila/Go_operator_fmm.cpp
+  include/robocup_nocom_pila/Go_person_fmm.h src/robocup_nocom_pila/Go_person_fmm.cpp
+  include/robocup_nocom_pila/Speak_person_fmm.h src/robocup_nocom_pila/Speak_person_fmm.cpp
   
   include/robocup_nocom_pila/PIDController.hpp src/robocup_nocom_pila/PIDController.cpp
 )

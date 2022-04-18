@@ -1,27 +1,14 @@
-<?xml version="1.0"?>
-<root main_tree_to_execute="BehaviorTree">
-    <!-- ////////// -->
-    <BehaviorTree ID="BehaviorTree">
+<root main_tree_to_execute = "MainTree" >
+    <BehaviorTree ID="MainTree">
         <Sequence>
             <ReactiveSequence>
-                <Action ID="Goto_person"/>
-                <Action ID="Detect_person"/>
-                <Action ID="Speak_person"/>
-                <Action ID="Goto_operator"/>
-                <Action ID="Tell_something"/>
+                <Go_person_fmm name="Go_person"/>
+                <Detect_person_fmm name="Detect_person"/>
+                <Speak_person_fmm name="Speak_person"/>
+                <Go_operator_fmm name="Go_operator"/>
+                <Describe_person_fmm name="Describe_person"/>
             </ReactiveSequence>
-            <Action ID="Go_home"/>
+            <Go_home_fmm name="Go_home"/>
         </Sequence>
     </BehaviorTree>
-    <!-- ////////// -->
-    <TreeNodesModel>
-        <Action ID="Detect_person"/>
-        <Action ID="Go_home"/>
-        <Action ID="Goto_operator"/>
-        <Action ID="Goto_person"/>
-        <Action ID="Speak_person"/>
-        <Action ID="Tell_something"/>
-    </TreeNodesModel>
-    <!-- ////////// -->
 </root>
-
