@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <ReactiveSequence>
+                <Action ID="Goto_person"/>
+                <Action ID="Detect_person"/>
+                <Action ID="Speak_person"/>
+                <Action ID="Goto_operator"/>
+                <Action ID="Tell_something"/>
+            </ReactiveSequence>
+            <Action ID="Go_home"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="Detect_person"/>
+        <Action ID="Go_home"/>
+        <Action ID="Goto_operator"/>
+        <Action ID="Goto_person"/>
+        <Action ID="Speak_person"/>
+        <Action ID="Tell_something"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+
