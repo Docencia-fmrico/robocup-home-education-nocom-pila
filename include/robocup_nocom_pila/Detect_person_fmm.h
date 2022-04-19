@@ -17,10 +17,6 @@
 
 #include "ros/ros.h"
 
-#include <message_filters/subscriber.h>
-#include <message_filters/time_synchronizer.h>
-#include <message_filters/sync_policies/approximate_time.h>
-
 #include <cv_bridge/cv_bridge.h>
 
 #include "behaviortree_cpp_v3/behavior_tree.h"
