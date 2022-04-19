@@ -32,19 +32,19 @@ int main(int argc, char **argv)
   BT::BehaviorTreeFactory factory;
   BT::SharedLibrary loader;
 
-  factory.registerFromPlugin(loader.getOSName("nc_go_operator_cml"));
-  factory.registerFromPlugin(loader.getOSName("nc_speak_person_cml"));
-  factory.registerFromPlugin(loader.getOSName("nc_detect_bag_cml"));
-  factory.registerFromPlugin(loader.getOSName("nc_detect_person_cml"));
-  factory.registerFromPlugin(loader.getOSName("nc_follow_person_cml"));
-  factory.registerFromPlugin(loader.getOSName("nc_go_home_cml"));
+  factory.registerFromPlugin(loader.getOSName("nc_describe_person_fmm"));
+  factory.registerFromPlugin(loader.getOSName("nc_detect_person_fmm"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_home_fmm"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_operator_fmm"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_person_fmm"));
+  factory.registerFromPlugin(loader.getOSName("nc_speak_person_fmm"));
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("data", "no");
   blackboard->set("data", 1);
 
   std::string pkgpath = ros::package::getPath("robocup_nocom_pila");
-  std::string xml_file = pkgpath + "/behavior_trees_xml/cml.xml";
+  std::string xml_file = pkgpath + "/behavior_trees_xml/fmm.xml";
 
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);
   auto publisher_zmq = std::make_shared<BT::PublisherZMQ>(tree, 10, 1666, 1667);

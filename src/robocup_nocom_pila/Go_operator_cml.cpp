@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "robocup_nocom_pila/Go_home_fmm.h"
+#include "robocup_nocom_pila/Go_operator_cml.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
 #include <string>
@@ -22,31 +22,32 @@
 namespace robocup_nocom_pila
 {
 
-Go_home_fmm::Go_home_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
+Go_operator_cml::Go_operator_cml(const std::string& name/*, const BT::NodeConfiguration & config*/)
 : BT::ActionNodeBase(name, {} /*config*/), counter_(0)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Go_home_fmm::PerceivePersonCallback, this);
+   //dist_sub = nh_.subscribe("/dist_person", 1, &Go_operator_cml::PerceivePersonCallback, this);
 }
 
 void
-Go_home_fmm::halt()
+Go_operator_cml::halt()
 {
-    ROS_INFO("Go_home_fmm halt");
+    ROS_INFO("Go_operator_cml halt");
 }
 
 BT::NodeStatus
-Go_home_fmm::tick()
+Go_operator_cml::tick()
 {
-    ROS_INFO("Go_home_fmm tick");
-
+    ROS_INFO("Go_operator_cml tick");
 
     return BT::NodeStatus::SUCCESS;
 }
+
+
 
 }  // namespace robocup_nocom_pila
 
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<robocup_nocom_pila::Go_home_fmm>("Go_home_fmm");
+  factory.registerNodeType<robocup_nocom_pila::Go_operator_cml>("Go_operator_cml");
 }

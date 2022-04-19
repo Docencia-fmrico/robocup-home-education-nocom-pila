@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "robocup_nocom_pila/Go_home_fmm.h"
+#include "robocup_nocom_pila/Detect_person_cml.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
 #include <string>
@@ -22,23 +22,26 @@
 namespace robocup_nocom_pila
 {
 
-Go_home_fmm::Go_home_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
+Detect_person_cml::Detect_person_cml(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config), counter_(0)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Go_home_fmm::PerceivePersonCallback, this);
+  // dist_sub = nh_.subscribe("/dist_person", 1, &Detect_person_cml::PerceivePersonCallback, this);
 }
 
 void
-Go_home_fmm::halt()
+Detect_person_cml::halt()
 {
-    ROS_INFO("Go_home_fmm halt");
+    ROS_INFO("Detect_person_cml halt");
 }
 
 BT::NodeStatus
-Go_home_fmm::tick()
+Detect_person_cml::tick()
 {
-    ROS_INFO("Go_home_fmm tick");
+    ROS_INFO("Detect_person_cml tick");
 
+    setOutput<float>("dist_w", 1);   // El valor debería ser el que devuelva el funcionamiento real de Detect_person_cml (1 es un valor provisional)
+
+    std::cerr << dist << std::endl;
 
     return BT::NodeStatus::SUCCESS;
 }
@@ -48,5 +51,5 @@ Go_home_fmm::tick()
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<robocup_nocom_pila::Go_home_fmm>("Go_home_fmm");
+  factory.registerNodeType<robocup_nocom_pila::Detect_person_cml>("Detect_person_cml");
 }
