@@ -17,12 +17,18 @@
 
 #include "ros/ros.h"
 
+#include <message_filters/subscriber.h>
+#include <message_filters/time_synchronizer.h>
+#include <message_filters/sync_policies/approximate_time.h>
+
+#include <cv_bridge/cv_bridge.h>
+
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
+
 #include <sensor_msgs/Image.h>
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int64.h"
+#include <darknet_ros_msgs/BoundingBoxes.h>
 
 #include <string>
 
@@ -32,28 +38,26 @@ namespace robocup_nocom_pila
 class Detect_person_fmm : public BT::ActionNodeBase
 {
 public:
-    explicit Detect_person_fmm(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Detect_person_fmm(const std::string& name);
 
     void halt();
 
-    BT::NodeStatus tick();
-/*
-    static BT::PortsList providedPorts()
-    {
-        return { BT::OutputPort<float>("dist_w")};
-    }
-*/
-private:
-    /*const float ADVANCE_SPEED = 0.1;
-    const float TURNING_SPEED = 0.35;
+    void DetectPersonBBXCallback(const darknet_ros_msgs::BoundingBoxes::ConstPtr& obj);
+    void DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image);
 
-    ros::NodeHandle n_;
-    ros::Publisher vel_pub_;
-    ros::Subscriber dist_point_person;
-    ros::Subscriber px_point_person;
-*/
+    BT::NodeStatus tick();
+
+private:
+    ros::NodeHandle nh;
+    ros::Subscriber objects_bbx;
+    ros::Subscriber objects_image;
+
+    cv_bridge::CvImagePtr img_ptr_depth;
+
+    bool person = false;
     float dist;
-    
+    int px;
+    int py;
     int counter_;
 };
 
