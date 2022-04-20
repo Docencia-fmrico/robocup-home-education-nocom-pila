@@ -62,7 +62,7 @@ Go_operator_fmm::tick()
       action = false;
     }
     
-    if (finish = my_node.checkstatus())
+    if (my_node.checkstatus())
     {
       action = true;
       return BT::NodeStatus::SUCCESS;
