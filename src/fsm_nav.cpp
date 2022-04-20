@@ -12,63 +12,66 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "ros/ros.h"
-//#include "fsm_bump_go/BumpGo.h"
+#include <ros/ros.h>
+#include <actionlib/client/simple_action_client.h>
+#include <move_base_msgs/MoveBaseAction.h>
 
-namespace robocup-home-education-nocom-pila
+typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> Client;
+
+class MyNode
 {
-BumpGo::BumpGo(): state_(GOING_FORWARD), pressed_(false)
-{
-  sub_bumber_ = n_.subscribe("/mobile_base/events/bumper", 1, &BumpGo::bumperCallback, this);
-  pub_vel_ = n_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
-  pub_led1_ = n_.advertise<kobuki_msgs::Led>("/mobile_base/commands/led1", 1);
-}
+public:
+	MyNode()
+	: ac("move_base", true)
+	{
+		ROS_INFO("Waiting for action server to start.");
+		ac.waitForServer();
+		ROS_INFO("Action server started, sending goal.");
+	}
 
-void BumpGo::bumperCallback(const kobuki_msgs::BumperEvent::ConstPtr& msg)
-{
-  pressed_ = msg->state == kobuki_msgs::BumperEvent::PRESSED; // Updates the variable "pressed_"
-}
+	
+	void doWork(int px, long int until)
+	{
+		move_base_msgs::MoveBaseGoal goal;
+		goal.target_pose.header.frame_id = "map";
+		goal.target_pose.header.stamp = ros::Time::now();
+		goal.target_pose.pose.position.x = -1.4613;
+		goal.target_pose.pose.position.y = 5.6371;
+		goal.target_pose.pose.position.z = 0.01017;
+		goal.target_pose.pose.orientation.x = 0.0;
+		goal.target_pose.pose.orientation.y = 0.0;
+		goal.target_pose.pose.orientation.z = 0.0;
+		goal.target_pose.pose.orientation.w = 1.0;
 
-void BumpGo::step()
-{
-  geometry_msgs::Twist cmd;
-  kobuki_msgs::Led led;
+		ROS_INFO("Sending action");
+			ac.sendGoal(goal,
+					boost::bind(&MyNode::doneCb, this, _1, _2),
+					Client::SimpleActiveCallback(),
+					boost::bind(&MyNode::feedbackCb, this, _1));
 
-  switch (state_)
-  {
-  case GOING_FORWARD:  // first state of the state machine. Kobuki turn off leds and go forward
-    cmd.linear.x = LINEAR_SPEED;
-    led.value = LED_APAGADO;
-    pub_led1_.publish(led);
-    if (pressed_)
-    {
-      press_ts_ = ros::Time::now();
-      state_ = GOING_BACK;
-      ROS_INFO("GOING_FORWARD -> GOING_BACK");
-    }
-    break;
+		ROS_INFO("Action sent");
 
-  case GOING_BACK:  // second state of the state machine. Kobuki go backwards
-    cmd.linear.x = -LINEAR_SPEED;
-    if ((ros::Time::now() - press_ts_).toSec() > BACKING_TIME )
-    {
-      turn_ts_ = ros::Time::now();
-      state_ = TURNING_LEFT;
-      ROS_INFO("GOING_BACK -> TURNING");
-    }
-    break;
+	}
 
-  case TURNING_LEFT:  // third state of the state machine. Kobuki turn on led and turn
-    cmd.angular.z = TURNING_SPEED;
-    led.value = LED_ROJO;
-    pub_led1_.publish(led);
-    if ((ros::Time::now()-turn_ts_).toSec() > TURNING_TIME )
-    {
-      state_ = GOING_FORWARD;
-      ROS_INFO("TURNING_LEFT -> GOING_FORWARD");
-    }
-    break;
-  }
-  pub_vel_.publish(cmd);
-}
-}
+	void feedbackCb(const move_base_msgs::MoveBaseFeedbackConstPtr& feedback)
+	{
+		ROS_INFO("Current count %lf", feedback->base_position.pose.position.x);
+	}
+
+	void doneCb(const actionlib::SimpleClientGoalState& state,
+			const move_base_msgs::MoveBaseResultConstPtr& result)
+	{
+		ROS_INFO("Finished in state [%s]", state.toString().c_str());
+		finish = true;
+		ros::shutdown();
+	}
+
+	bool checkstatus()
+	{
+		return finish;
+	}
+
+private:
+	bool finish = false; 
+	Client ac;
+};
