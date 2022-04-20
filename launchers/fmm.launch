@@ -1,0 +1,6 @@
+<launch>
+
+	<node pkg="robocup_nocom_pila" type="nodo_fmm" name="fmm" output="screen">
+		<rosparam command="load" file="$(find robocup_nocom_pila)/config/fmm.yaml"/>
+	</node>
+</launch>

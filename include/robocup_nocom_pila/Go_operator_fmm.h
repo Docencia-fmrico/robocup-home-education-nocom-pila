@@ -21,8 +21,8 @@
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
 #include <sensor_msgs/Image.h>
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int64.h"
+
+#include "../src/fsm_nav.cpp"
 
 #include <string>
 
@@ -37,6 +37,7 @@ public:
     void halt();
 
     BT::NodeStatus tick();
+
 /*
     static BT::PortsList providedPorts()
     {
@@ -44,17 +45,23 @@ public:
     }
 */
 private:
-    /*const float ADVANCE_SPEED = 0.1;
-    const float TURNING_SPEED = 0.35;
+    MyNode my_node;
 
-    ros::NodeHandle n_;
-    ros::Publisher vel_pub_;
-    ros::Subscriber dist_point_person;
-    ros::Subscriber px_point_person;
-*/
+    ros::NodeHandle nh;
+    float px;
+    float py;
+    float pz;
+    float ox;
+    float oy;
+    float oz;
+    float ow;
+
+    int action = true;
     float dist;
+    bool finish = false;
     
     int counter_;
+    
 };
 
 }  // namespace robocup_nocom_pila

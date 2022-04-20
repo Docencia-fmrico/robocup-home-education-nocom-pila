@@ -1,13 +1,15 @@
 <root main_tree_to_execute = "MainTree" >
     <BehaviorTree ID="MainTree">
         <Sequence>
-            <ReactiveSequence>
-                <Go_person_fmm name="Go_person"/>
-                <Detect_person_fmm name="Detect_person"/>
+            <Sequence>
+                <ReactiveSequence>
+                    <Go_person_fmm name="Go_person"/>
+                    <Detect_person_fmm name="Detect_person"/>
+                </ReactiveSequence>
                 <Speak_person_fmm name="Speak_person"/>
                 <Go_operator_fmm name="Go_operator"/>
                 <Describe_person_fmm name="Describe_person"/>
-            </ReactiveSequence>
+            </Sequence>
             <Go_home_fmm name="Go_home"/>
         </Sequence>
     </BehaviorTree>

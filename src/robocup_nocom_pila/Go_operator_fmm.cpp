@@ -15,17 +15,26 @@
 #include "robocup_nocom_pila/Go_operator_fmm.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
+
 #include <string>
 #include "ros/ros.h"
 #include "std_msgs/Float64.h"
+
 
 namespace robocup_nocom_pila
 {
 
 Go_operator_fmm::Go_operator_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
+: BT::ActionNodeBase(name, {} /*config*/), counter_(0), nh("~")
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Go_operator_fmm::PerceivePersonCallback, this);
+  nh.getParam("px", px);
+  nh.getParam("py", py);
+  nh.getParam("pz", pz);
+  nh.getParam("ox", ox);
+  nh.getParam("oy", oy);
+  nh.getParam("oz", oz);
+  nh.getParam("ow", ow);
+ 
 }
 
 void
@@ -35,11 +44,33 @@ Go_operator_fmm::halt()
 }
 
 BT::NodeStatus
-Go_operator_fmm::tick()
+Go_operator_fmm::tick() 
 {
     ROS_INFO("Go_operator_fmm tick");
 
-    return BT::NodeStatus::SUCCESS;
+    /*std::cerr << px << std::endl;
+    std::cerr << py << std::endl;
+    std::cerr << pz << std::endl;
+    std::cerr << ox << std::endl;
+    std::cerr << oy << std::endl;
+    std::cerr << oz << std::endl;
+    std::cerr << ow << std::endl;*/
+
+    if(action)
+    {
+      my_node.doWork(px, 200);
+      action = false;
+    }
+    
+    if (finish = my_node.checkstatus())
+    {
+      action = true;
+      return BT::NodeStatus::SUCCESS;
+    }
+    else 
+    {
+      return BT::NodeStatus::RUNNING;
+    }
 }
 
 }  // namespace robocup_nocom_pila

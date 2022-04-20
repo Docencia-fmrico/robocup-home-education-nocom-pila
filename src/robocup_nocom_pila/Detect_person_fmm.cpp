@@ -42,7 +42,7 @@ Detect_person_fmm::tick()
     if(person == true && dist <= 2.5 && dist != 0)
     {
       std::cerr << "HAY PERSONA" << std::endl;
-      std::cerr << dist << std::endl;
+      //std::cerr << dist << std::endl;
       return BT::NodeStatus::SUCCESS;
     }
     else
