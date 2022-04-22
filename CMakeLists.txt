@@ -21,7 +21,6 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   behaviortree_cpp_v3
   roslint
-
   sensor_msgs
   tf
   cv_bridge
@@ -29,6 +28,7 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
   pcl_ros
   darknet_ros_msgs
+  gb_dialog
 )
 
 find_package(OpenCV)
@@ -46,6 +46,7 @@ CATKIN_DEPENDS
   image_transport
   pcl_conversions
   pcl_ros
+  gb_dialog
 )
 
 include_directories(
@@ -101,6 +102,11 @@ add_executable(nodo_fmm
 )
 target_link_libraries(nodo_fmm ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
 
+add_executable(chatbot 
+  src/chatbot.cpp
+)
+target_link_libraries(chatbot ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
+
 roslint_cpp(
   src/nodo_cml.cpp
   src/nodo_fmm.cpp
@@ -120,4 +126,5 @@ roslint_cpp(
   include/robocup_nocom_pila/Speak_person_fmm.h src/robocup_nocom_pila/Speak_person_fmm.cpp
   
   include/robocup_nocom_pila/PIDController.hpp src/robocup_nocom_pila/PIDController.cpp
+  src/chatbot.cpp
 )
