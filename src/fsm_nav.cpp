@@ -30,18 +30,18 @@ public:
 	}
 
 	
-	void doWork(int px, long int until)
+	void doWork(int px,int py,int pz,int ox,int oy,int oz,int ow, long int until)
 	{
 		move_base_msgs::MoveBaseGoal goal;
 		goal.target_pose.header.frame_id = "map";
 		goal.target_pose.header.stamp = ros::Time::now();
-		goal.target_pose.pose.position.x = -1.4613;
-		goal.target_pose.pose.position.y = 5.6371;
-		goal.target_pose.pose.position.z = 0.01017;
-		goal.target_pose.pose.orientation.x = 0.0;
-		goal.target_pose.pose.orientation.y = 0.0;
-		goal.target_pose.pose.orientation.z = 0.0;
-		goal.target_pose.pose.orientation.w = 1.0;
+		goal.target_pose.pose.position.x = px;
+		goal.target_pose.pose.position.y = py;
+		goal.target_pose.pose.position.z = pz;
+		goal.target_pose.pose.orientation.x = ox;
+		goal.target_pose.pose.orientation.y = oy;
+		goal.target_pose.pose.orientation.z = oz;
+		goal.target_pose.pose.orientation.w = ow;
 
 		ROS_INFO("Sending action");
 			ac.sendGoal(goal,

@@ -46,6 +46,7 @@ public:
 private:
     
     int counter_;
+    int count = 1;
 };
 
 }  // namespace robocup_nocom_pila

@@ -43,7 +43,13 @@ Describe_person_fmm::tick()
 
     std::cerr << dist << std::endl;
 */
+  if (count >= 3)
+  {
     return BT::NodeStatus::SUCCESS;
+  }
+  else
+    count = count + 1;
+    return BT::NodeStatus::FAILURE;
 }
 
 }  // namespace robocup_nocom_pila

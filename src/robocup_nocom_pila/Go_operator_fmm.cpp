@@ -47,18 +47,18 @@ BT::NodeStatus
 Go_operator_fmm::tick() 
 {
     ROS_INFO("Go_operator_fmm tick");
-
-    /*std::cerr << px << std::endl;
+/*
+    std::cerr << px << std::endl;
     std::cerr << py << std::endl;
     std::cerr << pz << std::endl;
     std::cerr << ox << std::endl;
     std::cerr << oy << std::endl;
     std::cerr << oz << std::endl;
-    std::cerr << ow << std::endl;*/
-
+    std::cerr << ow << std::endl;
+*/
     if(action)
     {
-      my_node.doWork(px, 200);
+      my_node.doWork(px, py, pz, ox, oy ,oz ,ow, 200);
       action = false;
     }
     

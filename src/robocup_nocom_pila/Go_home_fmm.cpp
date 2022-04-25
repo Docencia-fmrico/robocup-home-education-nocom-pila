@@ -23,10 +23,15 @@ namespace robocup_nocom_pila
 {
 
 Go_home_fmm::Go_home_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
+: BT::ActionNodeBase(name, {}), counter_(0),  nh("~")
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Go_home_fmm::PerceivePersonCallback, this);
-}
+  nh.getParam("px", px);
+  nh.getParam("py", py);
+  nh.getParam("pz", pz);
+  nh.getParam("ox", ox);
+  nh.getParam("oy", oy);
+  nh.getParam("oz", oz);
+  nh.getParam("ow", ow);}
 
 void
 Go_home_fmm::halt()
@@ -37,10 +42,23 @@ Go_home_fmm::halt()
 BT::NodeStatus
 Go_home_fmm::tick()
 {
-    ROS_INFO("Go_home_fmm tick");
+  ROS_INFO("Go_home_fmm tick");
 
-
+  if(action)
+  {
+    my_node.doWork(px, py, pz, ox, oy ,oz ,ow, 200);
+    action = false;
+  }
+  
+  if (my_node.checkstatus())
+  {
+    action = true;
     return BT::NodeStatus::SUCCESS;
+  }
+  else 
+  {
+    return BT::NodeStatus::RUNNING;
+  }
 }
 
 }  // namespace robocup_nocom_pila
