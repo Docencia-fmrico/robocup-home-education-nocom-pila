@@ -22,7 +22,7 @@
 #include "geometry_msgs/Twist.h"
 #include <sensor_msgs/Image.h>
 
-#include "../src/fsm_nav.cpp"
+#include "../src/nav.cpp"
 
 #include <string>
 
@@ -57,11 +57,9 @@ private:
     float ow;
 
     int action = true;
+    int counter_;
     float dist;
     bool finish = false;
-    
-    int counter_;
-    
 };
 
 }  // namespace robocup_nocom_pila

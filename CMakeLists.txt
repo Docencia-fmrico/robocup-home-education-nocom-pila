@@ -127,4 +127,5 @@ roslint_cpp(
   
   include/robocup_nocom_pila/PIDController.hpp src/robocup_nocom_pila/PIDController.cpp
   src/chatbot.cpp
+  src/nav.cpp
 )

@@ -43,10 +43,11 @@ public:
     {
         return { BT::OutputPort<float>("dist_w")};
     }
-    //void SpeakPersonCallback(const std_msgs::String BOOST_PP_FRAME_START);
+    // void SpeakPersonCallback(const std_msgs::String BOOST_PP_FRAME_START);
 
 private:
-    /*const float ADVANCE_SPEED = 0.1;
+    /*
+    const float ADVANCE_SPEED = 0.1;
     const float TURNING_SPEED = 0.35;
 
     ros::NodeHandle n_;
@@ -54,7 +55,7 @@ private:
     ros::Subscriber dist_point_person;
     */
     ros::NodeHandle nh;
-    ros::Subscriber ear_sub; // subscriptor al chatbot.
+    ros::Subscriber ear_sub;  // subscriptor al chatbot.
     float dist;
     gb_dialog::ExampleDF forwarder;
     int counter_;

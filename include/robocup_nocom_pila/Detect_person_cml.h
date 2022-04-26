@@ -53,7 +53,7 @@ private:
     ros::Subscriber px_point_person;
 */
     float dist;
-    
+
     int counter_;
 };
 

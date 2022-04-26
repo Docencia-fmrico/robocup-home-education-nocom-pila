@@ -42,10 +42,10 @@ public:
     void DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image);
 
     BT::NodeStatus tick();
-    
+
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<int>("w_person")}; 
+        return { BT::OutputPort<int>("w_person")};
     }
 
 private:

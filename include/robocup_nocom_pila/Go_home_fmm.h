@@ -22,7 +22,7 @@
 #include "geometry_msgs/Twist.h"
 #include <sensor_msgs/Image.h>
 
-#include "../src/fsm_nav.cpp"
+#include "../src/nav.cpp"
 
 #include <string>
 
@@ -58,7 +58,7 @@ private:
     int action = true;
     float dist;
     bool finish = false;
-    
+
     int counter_;
 };
 
