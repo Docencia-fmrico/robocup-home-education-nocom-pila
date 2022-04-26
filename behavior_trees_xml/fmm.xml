@@ -4,8 +4,8 @@
             <RetryUntilSuccessful num_attempts="1">
                 <Sequence>
                     <ReactiveSequence>
-                        <Go_person_fmm name="Go_person"/>
-                        <Detect_person_fmm name="Detect_person"/>
+                        <Go_person_fmm name="Go_person" r_person="{person}"/>
+                        <Detect_person_fmm name="Detect_person" w_person="{person}"/>
                     </ReactiveSequence>
                     <Speak_person_fmm name="Speak_person"/>
                     <Go_operator_fmm name="Go_operator"/>

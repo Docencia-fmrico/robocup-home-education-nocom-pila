@@ -32,6 +32,7 @@ public:
 	
 	void doWork(int px,int py,int pz,int ox,int oy,int oz,int ow, long int until)
 	{
+		finish = false;
 		move_base_msgs::MoveBaseGoal goal;
 		goal.target_pose.header.frame_id = "map";
 		goal.target_pose.header.stamp = ros::Time::now();
@@ -63,7 +64,7 @@ public:
 	{
 		ROS_INFO("Finished in state [%s]", state.toString().c_str());
 		finish = true;
-		ros::shutdown();
+		
 	}
 
 	bool checkstatus()

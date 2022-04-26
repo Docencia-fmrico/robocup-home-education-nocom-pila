@@ -34,7 +34,7 @@ namespace robocup_nocom_pila
 class Detect_person_fmm : public BT::ActionNodeBase
 {
 public:
-    explicit Detect_person_fmm(const std::string& name);
+    explicit Detect_person_fmm(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
@@ -42,6 +42,11 @@ public:
     void DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image);
 
     BT::NodeStatus tick();
+    
+    static BT::PortsList providedPorts()
+    {
+        return { BT::OutputPort<int>("w_person")}; 
+    }
 
 private:
     ros::NodeHandle nh;
@@ -50,7 +55,9 @@ private:
 
     cv_bridge::CvImagePtr img_ptr_depth;
 
-    bool person = false;
+    int repeticiones = 0;
+    int person = 2;
+    bool is_person = false;
     float dist;
     int px;
     int py;

@@ -22,11 +22,11 @@
 namespace robocup_nocom_pila
 {
 
-Detect_person_fmm::Detect_person_fmm(const std::string& name)
-: BT::ActionNodeBase(name, {} ), counter_(0)
+Detect_person_fmm::Detect_person_fmm(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config ), counter_(0)
 {
   objects_bbx = nh.subscribe("/darknet_ros/bounding_boxes", 1, &Detect_person_fmm::DetectPersonBBXCallback, this);
-  objects_image = nh.subscribe("/camera/depth/image_raw", 1, &Detect_person_fmm::DetectPersonImageCallback, this);
+  objects_image = nh.subscribe("/camera/depth/image_raw", 1, &Detect_person_fmm::DetectPersonImageCallback, this);  
 }
 
 void
@@ -38,19 +38,43 @@ Detect_person_fmm::halt()
 BT::NodeStatus
 Detect_person_fmm::tick()
 {
-    ROS_INFO("Detect_person_fmm tick");
-    if(person == true && dist <= 2.5 && dist != 0)
-    {
-      std::cerr << "HAY PERSONA" << std::endl;
-      //std::cerr << dist << std::endl;
-      return BT::NodeStatus::SUCCESS;
-    }
-    else
-    {
-      std::cerr << "NO HAY PERSONA" << std::endl;
+  ROS_INFO("Detect_person_fmm tick");
 
-      return BT::NodeStatus::RUNNING;
+  sleep(0.5);
+
+  if(is_person == true && dist <= 2.5 && dist != 0)
+  {
+    std::cerr << "HAY PERSONA" << std::endl;
+    std::cerr << dist << std::endl;
+    setOutput<int>("w_person", person);
+    repeticiones = 0;
+    person++;
+    px = 0;
+    py = 0;
+    is_person = false;
+    dist = 0;
+    return BT::NodeStatus::SUCCESS;
+
+  }
+  else
+  {
+    std::cerr << "NO HAY PERSONA" << std::endl;
+    std::cerr << dist << std::endl;
+    if(repeticiones >= 30)
+    {
+      setOutput<int>("w_person", person);
+      repeticiones = 0;
+      person++;
+
     }
+    std::cerr << repeticiones << std::endl;
+    
+    repeticiones++;
+
+    return BT::NodeStatus::RUNNING;
+  }
+
+  
 }
 
 void Detect_person_fmm::DetectPersonBBXCallback(const darknet_ros_msgs::BoundingBoxesConstPtr& boxes)
@@ -62,21 +86,16 @@ void Detect_person_fmm::DetectPersonBBXCallback(const darknet_ros_msgs::Bounding
     {
       px = (box.xmax + box.xmin) / 2;
       py = (box.ymax + box.ymin) / 2;
-      person = true;
+      is_person = true;
       //std::cerr << "yes, " << px << " , " << py << std::endl;
     }
-    else
-    {
-      px = 0;
-      py = 0;
-      person = false;
-      //std::cerr << "no, " << px << " , " << py << std::endl;
-    }
+    
   } 
 }
 
 void Detect_person_fmm::DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image)
 {
+  sleep(0.1);
   try
   {
     img_ptr_depth = cv_bridge::toCvCopy(*image, sensor_msgs::image_encodings::TYPE_32FC1);
@@ -88,8 +107,7 @@ void Detect_person_fmm::DetectPersonImageCallback(const sensor_msgs::ImageConstP
   }
 
   dist = img_ptr_depth->image.at<float>(cv::Point(px, py)) * 0.001f;
-  //std::cerr << "dist, " << px << " , " << py << " , " << dist << std::endl;
-  
+  std::cerr << "dist, " << px << " , " << py << " , " << dist << std::endl;
 }
 
 }  // namespace robocup_nocom_pila

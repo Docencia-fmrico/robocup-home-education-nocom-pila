@@ -25,13 +25,13 @@ namespace robocup_nocom_pila
 Go_home_fmm::Go_home_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
 : BT::ActionNodeBase(name, {}), counter_(0),  nh("~")
 {
-  nh.getParam("px", px);
-  nh.getParam("py", py);
-  nh.getParam("pz", pz);
-  nh.getParam("ox", ox);
-  nh.getParam("oy", oy);
-  nh.getParam("oz", oz);
-  nh.getParam("ow", ow);}
+  nh.getParam("hpx", px);
+  nh.getParam("hpy", py);
+  nh.getParam("hpz", pz);
+  nh.getParam("hox", ox);
+  nh.getParam("hoy", oy);
+  nh.getParam("hoz", oz);
+  nh.getParam("how", ow);}
 
 void
 Go_home_fmm::halt()
