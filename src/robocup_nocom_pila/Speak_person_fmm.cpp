@@ -19,13 +19,16 @@
 #include "ros/ros.h"
 #include "std_msgs/Float64.h"
 
+
 namespace robocup_nocom_pila
 {
 
-Speak_person_fmm::Speak_person_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
+Speak_person_fmm::Speak_person_fmm(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config), counter_(0)
 {
   // dist_sub = nh_.subscribe("/dist_person", 1, &Speak_person_fmm::PerceivePersonCallback, this);
+  //ear_sub = n_.subscribe("/sound/word", 1, &Speak_person_fmm::SpeakPersonCallback, this);
+
 }
 
 void
@@ -39,7 +42,11 @@ Speak_person_fmm::tick()
 {
     ROS_INFO("Speak_person_fmm tick");
 
-    return BT::NodeStatus::SUCCESS;
+    forwarder.listen();
+
+    
+
+    return BT::NodeStatus::RUNNING;
 }
 
 }  // namespace robocup_nocom_pila

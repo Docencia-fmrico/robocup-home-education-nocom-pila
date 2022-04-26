@@ -23,6 +23,7 @@
 #include <sensor_msgs/Image.h>
 #include "std_msgs/Float64.h"
 #include "std_msgs/Int64.h"
+#include "../src/chatbot.cpp"
 
 #include <string>
 
@@ -32,17 +33,18 @@ namespace robocup_nocom_pila
 class Speak_person_fmm : public BT::ActionNodeBase
 {
 public:
-    explicit Speak_person_fmm(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Speak_person_fmm(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
-/*
+
     static BT::PortsList providedPorts()
     {
         return { BT::OutputPort<float>("dist_w")};
     }
-*/
+    //void SpeakPersonCallback(const std_msgs::String BOOST_PP_FRAME_START);
+
 private:
     /*const float ADVANCE_SPEED = 0.1;
     const float TURNING_SPEED = 0.35;
@@ -50,10 +52,11 @@ private:
     ros::NodeHandle n_;
     ros::Publisher vel_pub_;
     ros::Subscriber dist_point_person;
-    ros::Subscriber px_point_person;
-*/
+    */
+    ros::NodeHandle nh;
+    ros::Subscriber ear_sub; // subscriptor al chatbot.
     float dist;
-    
+    gb_dialog::ExampleDF forwarder;
     int counter_;
 };
 
