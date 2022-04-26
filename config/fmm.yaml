@@ -1,7 +1,55 @@
-px: 0
-py: 0  
-pz: 0  
-ox: 0  
-oy: 0  
-oz: 0  
-ow: 1
+px1: 1
+py1: 1  
+pz1: 0 
+ox1: 0  
+oy1: 0  
+oz1: 0  
+ow1: 1
+
+px2: 2
+py2: 1  
+pz2: 0  
+ox2: 0  
+oy2: 0  
+oz2: 0  
+ow2: 1
+
+px3: 1
+py3: 1  
+pz3: 0  
+ox3: 0  
+oy3: 0  
+oz3: 0  
+ow3: 1
+
+px4: 2
+py4: 1  
+pz4: 0  
+ox4: 0  
+oy4: 0  
+oz4: 0  
+ow4: 1
+
+px5: 1
+py5: 1  
+pz5: 0  
+ox5: 0  
+oy5: 0  
+oz5: 0  
+ow5: 1
+
+opx: 3
+opy: 1  
+opz: 0  
+oox: 0  
+ooy: 0  
+ooz: 0  
+oow: 1
+
+hpx: 0
+hpy: 0  
+hpz: 0  
+hox: 0  
+hoy: 0  
+hoz: 0  
+how: 1

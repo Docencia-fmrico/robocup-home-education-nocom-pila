@@ -24,53 +24,44 @@
 namespace robocup_nocom_pila
 {
 
-Go_operator_fmm::Go_operator_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0), nh("~")
+Go_operator_fmm::Go_operator_fmm(const std::string& name)
+: BT::ActionNodeBase(name, {}), counter_(0), nh("~")
 {
-  nh.getParam("px", px);
-  nh.getParam("py", py);
-  nh.getParam("pz", pz);
-  nh.getParam("ox", ox);
-  nh.getParam("oy", oy);
-  nh.getParam("oz", oz);
-  nh.getParam("ow", ow);
- 
+  nh.getParam("opx", px);
+  nh.getParam("opy", py);
+  nh.getParam("opz", pz);
+  nh.getParam("oox", ox);
+  nh.getParam("ooy", oy);
+  nh.getParam("ooz", oz);
+  nh.getParam("oow", ow);
 }
 
 void
 Go_operator_fmm::halt()
 {
-    ROS_INFO("Go_operator_fmm halt");
+  ROS_INFO("Go_operator_fmm halt");
 }
 
 BT::NodeStatus
 Go_operator_fmm::tick() 
 {
-    ROS_INFO("Go_operator_fmm tick");
-/*
-    std::cerr << px << std::endl;
-    std::cerr << py << std::endl;
-    std::cerr << pz << std::endl;
-    std::cerr << ox << std::endl;
-    std::cerr << oy << std::endl;
-    std::cerr << oz << std::endl;
-    std::cerr << ow << std::endl;
-*/
-    if(action)
-    {
-      my_node.doWork(px, py, pz, ox, oy ,oz ,ow, 200);
-      action = false;
-    }
-    
-    if (my_node.checkstatus())
-    {
-      action = true;
-      return BT::NodeStatus::SUCCESS;
-    }
-    else 
-    {
-      return BT::NodeStatus::RUNNING;
-    }
+  ROS_INFO("Go_operator_fmm tick");
+
+  if(action)
+  {
+    my_node.doWork(px, py, pz, ox, oy ,oz ,ow, 200);
+    action = false;
+  }
+  
+  if (my_node.checkstatus())
+  {
+    action = true;
+    return BT::NodeStatus::SUCCESS;
+  }
+  else 
+  {
+    return BT::NodeStatus::RUNNING;
+  }
 }
 
 }  // namespace robocup_nocom_pila
