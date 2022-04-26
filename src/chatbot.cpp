@@ -1,42 +1,7 @@
-/*********************************************************************
-*  Software License Agreement (BSD License)
-*
-*   Copyright (c) 2018, Intelligent Robotics Labs
-*   All rights reserved.
-*
-*   Redistribution and use in source and binary forms, with or without
-*   modification, are permitted provided that the following conditions
-*   are met:
-
-*    * Redistributions of source code must retain the above copyright
-*      notice, this list of conditions and the following disclaimer.
-*    * Redistributions in binary form must reproduce the above
-*      copyright notice, this list of conditions and the following
-*      disclaimer in the documentation and/or other materials provided
-*      with the distribution.
-*    * Neither the name of Intelligent Robotics nor the names of its
-*      contributors may be used to endorse or promote products derived
-*      from this software without specific prior written permission.
-
-*   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-*   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-*   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-*   FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-*   COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-*   INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-*   BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-*   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-*   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-*   LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-*   ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-*   POSSIBILITY OF SUCH DAMAGE.
-*********************************************************************/
-
-/* Author: Jonatan Gines jginesclavero@gmail.com */
-
-/* Mantainer: Jonatan Gines jginesclavero@gmail.com */
 #include <gb_dialog/DialogInterface.h>
 #include <string>
+#include "std_msgs/String.h"
+
 
 namespace ph = std::placeholders;
 
@@ -47,10 +12,11 @@ class ExampleDF: public DialogInterface
   public:
     ExampleDF(): nh_()
     {
+      sound_pub = nh_.advertise<std_msgs::String>("/sound/word", 1);
       this->registerCallback(std::bind(&ExampleDF::noIntentCB, this, ph::_1));
       this->registerCallback(
         std::bind(&ExampleDF::welcomeIntentCB, this, ph::_1),
-        "Default Welcome Intent");
+        "FMM");
     }
 
     void noIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -60,12 +26,17 @@ class ExampleDF: public DialogInterface
 
     void welcomeIntentCB(dialogflow_ros_msgs::DialogflowResult result)
     {
+      std_msgs::String msg;
+      msg.data = "alone";
       ROS_INFO("[ExampleDF] welcomeIntentCB: intent [%s]", result.intent.c_str());
+      sound_pub.publish(msg);
       speak(result.fulfillment_text);
     }
 
   private:
     ros::NodeHandle nh_;
+    ros::Publisher sound_pub;
+    
 };
 }  // namespace gb_dialog
 
