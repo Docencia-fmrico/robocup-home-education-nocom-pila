@@ -31,7 +31,8 @@ Go_home_fmm::Go_home_fmm(const std::string& name/*, const BT::NodeConfiguration 
   nh.getParam("hox", ox);
   nh.getParam("hoy", oy);
   nh.getParam("hoz", oz);
-  nh.getParam("how", ow);}
+  nh.getParam("how", ow);
+}
 
 void
 Go_home_fmm::halt()
@@ -44,18 +45,18 @@ Go_home_fmm::tick()
 {
   ROS_INFO("Go_home_fmm tick");
 
-  if(action)
+  if (action)
   {
-    my_node.doWork(px, py, pz, ox, oy ,oz ,ow, 200);
+    my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
     action = false;
   }
-  
+
   if (my_node.checkstatus())
   {
     action = true;
     return BT::NodeStatus::SUCCESS;
   }
-  else 
+  else
   {
     return BT::NodeStatus::RUNNING;
   }

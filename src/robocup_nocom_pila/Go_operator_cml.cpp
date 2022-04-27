@@ -25,7 +25,7 @@ namespace robocup_nocom_pila
 Go_operator_cml::Go_operator_cml(const std::string& name/*, const BT::NodeConfiguration & config*/)
 : BT::ActionNodeBase(name, {} /*config*/), counter_(0)
 {
-   //dist_sub = nh_.subscribe("/dist_person", 1, &Go_operator_cml::PerceivePersonCallback, this);
+  // dist_sub = nh_.subscribe("/dist_person", 1, &Go_operator_cml::PerceivePersonCallback, this);
 }
 
 void
@@ -41,8 +41,6 @@ Go_operator_cml::tick()
 
     return BT::NodeStatus::SUCCESS;
 }
-
-
 
 }  // namespace robocup_nocom_pila
 

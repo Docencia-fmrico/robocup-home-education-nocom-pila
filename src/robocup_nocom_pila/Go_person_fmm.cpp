@@ -39,10 +39,10 @@ Go_person_fmm::tick()
   ROS_INFO("Go_person_fmm tick");
   person = getInput<int>("r_person").value();
   std::cerr << person << std::endl;
-  
-  switch(person) 
+
+  switch (person)
   {
-    case 1: 
+    case 1:
       nh.getParam("px1", px);
       nh.getParam("py1", py);
       nh.getParam("pz1", pz);
@@ -51,7 +51,7 @@ Go_person_fmm::tick()
       nh.getParam("oz1", oz);
       nh.getParam("ow1", ow);
     break;
-    case 2: 
+    case 2:
       nh.getParam("px2", px);
       nh.getParam("py2", py);
       nh.getParam("pz2", pz);
@@ -60,7 +60,7 @@ Go_person_fmm::tick()
       nh.getParam("oz2", oz);
       nh.getParam("ow2", ow);
     break;
-    case 3: 
+    case 3:
       nh.getParam("px3", px);
       nh.getParam("py3", py);
       nh.getParam("pz3", pz);
@@ -69,7 +69,7 @@ Go_person_fmm::tick()
       nh.getParam("oz3", oz);
       nh.getParam("ow3", ow);
     break;
-    case 4: 
+    case 4:
       nh.getParam("px4", px);
       nh.getParam("py4", py);
       nh.getParam("pz4", pz);
@@ -78,7 +78,7 @@ Go_person_fmm::tick()
       nh.getParam("oz4", oz);
       nh.getParam("ow4", ow);
     break;
-    case 5: 
+    case 5:
       nh.getParam("px5", px);
       nh.getParam("py5", py);
       nh.getParam("pz5", pz);
@@ -87,7 +87,6 @@ Go_person_fmm::tick()
       nh.getParam("oz5", oz);
       nh.getParam("ow5", ow);
     break;
-    
   }
 /*
   std::cerr << px << std::endl;
@@ -98,25 +97,22 @@ Go_person_fmm::tick()
   std::cerr << oz << std::endl;
   std::cerr << ow << std::endl;
 */
-  if(action)
-  { 
-    my_node.doWork(px, py, pz, ox, oy ,oz ,ow, 200);
+  if (action)
+  {
+    my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
     action = false;
   }
-  
+
   if (my_node.checkstatus())
   {
     action = true;
     return BT::NodeStatus::SUCCESS;
   }
-  else 
+  else
   {
     return BT::NodeStatus::RUNNING;
   }
-
 }
-
-
 
 }  // namespace robocup_nocom_pila
 

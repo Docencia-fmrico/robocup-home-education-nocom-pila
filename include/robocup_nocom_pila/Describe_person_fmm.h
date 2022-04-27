@@ -44,7 +44,6 @@ public:
     }
 */
 private:
-    
     int counter_;
     int count = 1;
 };

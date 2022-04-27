@@ -13,8 +13,8 @@
 // limitations under the License.
 
 
-#ifndef ROBOCUP_NOCOM_PILA__PIDCONTROLLER_HPP_
-#define ROBOCUP_NOCOM_PILA__PIDCONTROLLER_HPP_
+#ifndef ROBOCUP_NOCOM_PILA_PIDCONTROLLER_HPP_
+#define ROBOCUP_NOCOM_PILA_PIDCONTROLLER_HPP_
 
 #include <cmath>
 
@@ -39,4 +39,4 @@ private:
 
 }  // namespace robocup_nocom_pila
 
-#endif  // BR2_TRACKING__PIDCONTROLLER_HPP_
+#endif  // BR2_TRACKING_PIDCONTROLLER_HPP_

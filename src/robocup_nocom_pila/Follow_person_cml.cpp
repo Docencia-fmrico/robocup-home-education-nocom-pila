@@ -24,7 +24,9 @@ namespace robocup_nocom_pila
 {
 
 Follow_person_cml::Follow_person_cml(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0), turn_pid_(MIN_RANG_BOX, MAX_RANG_BOX, MIN_TURN_SPEED, MAX_TURN_SPEED), forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
+: BT::ActionNodeBase(name, {} /*config*/), counter_(0),
+turn_pid_(MIN_RANG_BOX, MAX_RANG_BOX, MIN_TURN_SPEED, MAX_TURN_SPEED),
+forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
 {
   // dist_sub = nh_.subscribe("/dist_person", 1, &Follow_person_cml::PerceivePersonCallback, this);
   vel_pub_ = n_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
@@ -42,7 +44,7 @@ Follow_person_cml::tick()
 {
   ROS_INFO("Follow_person_cml tick");
   double veloc = forw_pid_.get_output(dist);
-  double ang = turn_pid_.get_output(dist); // La distancia para forw y para turn podría no ser el mismo parámetros
+  double ang = turn_pid_.get_output(dist);  // La distancia para forw y para turn podría no ser el mismo parámetros
 /*
   float object = getInput<float>("dist_r").value();
   std::cerr << object << std::endl;
@@ -50,8 +52,8 @@ Follow_person_cml::tick()
   geometry_msgs::Twist msg;
 
   ROS_INFO("vel x= ");
-  std::cerr << veloc << std::endl; 
-  /*------------------------------------------------------------
+  std::cerr << veloc << std::endl;
+/*
   if(0.5 < dist < 2.5)
   {
     if(point < 250)
@@ -69,13 +71,13 @@ Follow_person_cml::tick()
       msg.linear.x = ADVANCE_SPEED;
       msg.angular.z = -TURNING_SPEED;
     }
-    -------------------------------------------------------------
-  }*/   // Ajustar linear y angular segun el PID (aun por implementar)
+  } Ajustar linear y angular segun el PID (aun por implementar)
+*/  
 
   vel_pub_.publish(msg);
 
-  return BT::NodeStatus::RUNNING; // Mirar según vaya el BT
-}
+  return BT::NodeStatus::RUNNING;
+};
 
 }  // namespace robocup_nocom_pila
 
@@ -84,16 +86,3 @@ BT_REGISTER_NODES(factory)
 {
   factory.registerNodeType<robocup_nocom_pila::Follow_person_cml>("Follow_person_cml");
 }
-
-
-/*
-
-Follow_person_cml::Follow_person_cml(const std::string& name, const BT::NodeConfiguration & config)
-: BT::ActionNodeBase(name, config), counter_(0)
-{
-  vel_pub_ = n_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
-  dist_point_person = n_.subscribe("/dist_person", 1, &Follow_person_cml::PointCallbackPerson, this);
-  px_point_person = n_.subscribe("/px_person", 1, &Follow_person_cml::PointPxCallbackPerson, this);
-}
-
-*/

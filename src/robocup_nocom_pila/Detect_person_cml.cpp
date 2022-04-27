@@ -37,13 +37,13 @@ Detect_person_cml::halt()
 BT::NodeStatus
 Detect_person_cml::tick()
 {
-    ROS_INFO("Detect_person_cml tick");
+  ROS_INFO("Detect_person_cml tick");
 
-    setOutput<float>("dist_w", 1);   // El valor debería ser el que devuelva el funcionamiento real de Detect_person_cml (1 es un valor provisional)
+  setOutput<float>("dist_w", 1);
+  // El valor debería ser el que devuelva el funcionamiento real de Detect_person_cml (1 es un valor provisional)
+  std::cerr << dist << std::endl;
 
-    std::cerr << dist << std::endl;
-
-    return BT::NodeStatus::SUCCESS;
+  return BT::NodeStatus::SUCCESS;
 }
 
 }  // namespace robocup_nocom_pila

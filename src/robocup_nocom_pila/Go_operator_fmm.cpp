@@ -43,22 +43,22 @@ Go_operator_fmm::halt()
 }
 
 BT::NodeStatus
-Go_operator_fmm::tick() 
+Go_operator_fmm::tick()
 {
   ROS_INFO("Go_operator_fmm tick");
 
-  if(action)
+  if (action)
   {
-    my_node.doWork(px, py, pz, ox, oy ,oz ,ow, 200);
+    my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
     action = false;
   }
-  
+
   if (my_node.checkstatus())
   {
     action = true;
     return BT::NodeStatus::SUCCESS;
   }
-  else 
+  else
   {
     return BT::NodeStatus::RUNNING;
   }
