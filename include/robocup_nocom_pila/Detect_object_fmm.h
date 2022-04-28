@@ -67,6 +67,7 @@ private:
 
     bool is_object = false;
     float dist = 10;
+    int repeticiones = 0;
     int px = 0;
     int py = 0;
     int counter_;

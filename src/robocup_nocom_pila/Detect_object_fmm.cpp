@@ -48,6 +48,7 @@ Detect_object_fmm::tick()
     std::cerr << dist << "\t" << object << std::endl;
     
     setOutput<std::string>("w_object", object);
+    repeticiones = 0;
     px = 0;
     py = 0;
     object = "";
@@ -60,6 +61,19 @@ Detect_object_fmm::tick()
   {
     std::cerr << "NO HAY OBJECT" << std::endl;
     //std::cerr << dist << std::endl;
+    if (repeticiones >= 50)
+    {
+      object = "bottle";
+      setOutput<std::string>("w_object", object);
+      repeticiones = 0;
+      px = 0;
+      py = 0;
+      object = "";
+      dist = 0;
+      return BT::NodeStatus::SUCCESS;
+    }
+
+    repeticiones++;
 
     return BT::NodeStatus::RUNNING;
   }

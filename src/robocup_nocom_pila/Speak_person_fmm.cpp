@@ -75,29 +75,45 @@ BT::NodeStatus
 Speak_person_fmm::tick()
 {
   ROS_INFO("Speak_person_fmm tick");
-
-  std::cerr << name << "\t" << color << std::endl;
   
-  switch(num)
+  std::cerr << name << "\t" << color << std::endl;
+
+  if(name != "")
   {
-    case 0:
-      get_name();
-      num = 1;
-      return BT::NodeStatus::RUNNING;
-    break;
-    case 1:
-      get_color();
-      num = 2;
-      return BT::NodeStatus::RUNNING;
-    break;
-    case 2:
-      num = 0; 
-      //setOutput<std::string>("w_color", color);
-      //std::cerr<< name << "\t"<<color << std::endl;
-      return BT::NodeStatus::SUCCESS;
-    break;
+    num = 1;
   }
-  //return BT::NodeStatus::RUNNING;
+  if(name != "" && color != "")
+  {
+    num = 2;
+  }
+
+  if (repeticiones == 0)
+  {
+    switch(num)
+    {
+      case 0:
+        get_name();
+        repeticiones = 1;
+        return BT::NodeStatus::RUNNING;
+      break;
+      case 1:
+        get_color();
+        repeticiones = 1;
+        return BT::NodeStatus::RUNNING;
+      break;
+      case 2:
+        num = 0; 
+        //setOutput<std::string>("w_color", color);
+        //std::cerr<< name << "\t"<<color << std::endl;
+        return BT::NodeStatus::SUCCESS;
+      break;
+    }
+  }
+  else
+  {
+    repeticiones = 0;
+    return BT::NodeStatus::RUNNING;
+  }
   
 }
 

@@ -46,7 +46,7 @@ Describe_person_fmm::tick()
 
     sleep(1);
 
-    switch(num)
+    /*switch(num)
       {
         case 0:
           if(name_r != "")
@@ -67,14 +67,14 @@ Describe_person_fmm::tick()
             return BT::NodeStatus::RUNNING;
         break;
         case 3:
-          num = 0; 
+          num = 0; */
           forwarder.speak(name_r + " tishirt is " + color_r + " and have a " + object_r);
           sleep(1);
           return BT::NodeStatus::SUCCESS;
-        break;
+       /* break;
       }
       return BT::NodeStatus::RUNNING;
-
+*/
 }  // namespace robocup_nocom_pila
 
 #include "behaviortree_cpp_v3/bt_factory.h"

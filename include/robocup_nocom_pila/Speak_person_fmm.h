@@ -48,6 +48,7 @@ public:
     {
         return { BT::OutputPort<std::string>("w_name"), BT::OutputPort<std::string>("w_color")};
     }
+    
     void nameCallback(const std_msgs::String::ConstPtr& msg);
     void colorCallback(const std_msgs::String::ConstPtr& msg);
 
@@ -55,9 +56,11 @@ private:
     ros::NodeHandle nh;
     ros::Subscriber name_sub;  // subscriptor al chatbot.
     ros::Subscriber color_sub;  // subscriptor al chatbot.
+    gb_dialog::ExampleDF forwarder;
+
     float dist;
     int num = 0;
-    gb_dialog::ExampleDF forwarder;
+    int repeticiones = 0;
     int counter_;
     std::string color;
     std::string name;
