@@ -26,8 +26,8 @@ namespace robocup_nocom_pila
 Speak_person_fmm::Speak_person_fmm(const std::string& name, const BT::NodeConfiguration & config)
 : BT::ActionNodeBase(name, config), counter_(0)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Speak_person_fmm::PerceivePersonCallback, this);
-  // ear_sub = n_.subscribe("/sound/word", 1, &Speak_person_fmm::SpeakPersonCallback, this);
+   color_sub = nh.subscribe("/sound/color", 1, &Speak_person_fmm::colorCallback, this);
+   name_sub = nh.subscribe("/sound/name", 1, &Speak_person_fmm::nameCallback, this);
 }
 
 void
@@ -36,14 +36,67 @@ Speak_person_fmm::halt()
   ROS_INFO("Speak_person_fmm halt");
 }
 
+void Speak_person_fmm::nameCallback(const std_msgs::String::ConstPtr& msg)
+{
+  name = msg->data;
+}
+
+
+void Speak_person_fmm::colorCallback(const std_msgs::String::ConstPtr& msg)
+{
+  color = msg->data;
+}
+
+void
+Speak_person_fmm::get_name()
+{
+  ROS_INFO("Speak_person_fmm get name");
+  sleep(1);
+  forwarder.speak("What is your name?");
+  sleep(1);
+  forwarder.listen();
+  setOutput<std::string>("w_name", name);
+  sleep(1);
+}
+
+void
+Speak_person_fmm::get_color()
+{
+  ROS_INFO("Speak_person_fmm get color");
+  sleep(1); 
+  forwarder.speak("Which is your t-shirt color?");
+  sleep(1);
+  forwarder.listen();
+  setOutput<std::string>("w_color", color);
+  sleep(1);
+}
+
 BT::NodeStatus
 Speak_person_fmm::tick()
 {
   ROS_INFO("Speak_person_fmm tick");
 
-  forwarder.listen();
-
+  std::cerr << name << "\t" << color << std::endl;
+  
+  switch(num)
+  {
+    case 0:
+      get_name();
+      num = 1;
+      return BT::NodeStatus::RUNNING;
+    break;
+    case 1:
+      get_color();
+      num = 2;
+      return BT::NodeStatus::RUNNING;
+    break;
+    case 2:
+      num = 0; 
+      return BT::NodeStatus::RUNNING;
+    break;
+  }
   return BT::NodeStatus::RUNNING;
+  
 }
 
 }  // namespace robocup_nocom_pila

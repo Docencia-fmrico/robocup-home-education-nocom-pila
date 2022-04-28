@@ -26,11 +26,17 @@ class ExampleDF: public DialogInterface
   public:
     ExampleDF(): nh_()
     {
-      sound_pub = nh_.advertise<std_msgs::String>("/sound/word", 1);
+      sound_pub_name = nh_.advertise<std_msgs::String>("/sound/name", 1);
+      sound_pub_color = nh_.advertise<std_msgs::String>("/sound/color", 1);
+      //sound_pub_obj = nh_.advertise<std_msgs::String>("/sound/object", 1);
+
       this->registerCallback(std::bind(&ExampleDF::noIntentCB, this, ph::_1));
       this->registerCallback(
-        std::bind(&ExampleDF::welcomeIntentCB, this, ph::_1),
-        "FMM");
+        std::bind(&ExampleDF::nameIntentCB, this, ph::_1),
+        "FMM_name");
+      this->registerCallback(
+        std::bind(&ExampleDF::colorIntentCB, this, ph::_1),
+        "FMM_color");
     }
 
     void noIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -38,18 +44,59 @@ class ExampleDF: public DialogInterface
       ROS_INFO("[ExampleDF] noIntentCB: intent [%s]", result.intent.c_str());
     }
 
-    void welcomeIntentCB(dialogflow_ros_msgs::DialogflowResult result)
+    void nameIntentCB(dialogflow_ros_msgs::DialogflowResult result)
     {
-      std_msgs::String msg;
-      msg.data = "alone";
-      ROS_INFO("[ExampleDF] welcomeIntentCB: intent [%s]", result.intent.c_str());
-      sound_pub.publish(msg);
+      std_msgs::String msg_name;
+      
+      ROS_INFO("[ExampleDF] nameIntentCB: intent [%s]", result.intent.c_str());
+
+      for(const auto & param : result.parameters)
+      {
+        std::cerr << "Param: "<< param << std::endl;
+        for(const auto &value : param.value)
+        {
+          std::cerr << "\t" << value << std::endl;
+          msg_name.data = value;
+        }
+
+      }
+      if ( msg_name.data != "")
+      {
+        sound_pub_name.publish(msg_name);
+        
+      }
+      speak(result.fulfillment_text);
+    }
+
+    void colorIntentCB(dialogflow_ros_msgs::DialogflowResult result)
+    {
+      std_msgs::String msg_color;
+      
+      ROS_INFO("[ExampleDF] colorIntentCB: intent [%s]", result.intent.c_str());
+
+      for(const auto & param : result.parameters)
+      {
+        std::cerr << "Param: "<< param << std::endl;
+        for(const auto &value : param.value)
+        {
+          std::cerr << "\t" << value << std::endl;
+          msg_color.data = value;
+        }
+
+      }
+      if ( msg_color.data != "")
+      {
+        sound_pub_color.publish(msg_color);
+        
+      }
       speak(result.fulfillment_text);
     }
 
   private:
     ros::NodeHandle nh_;
-    ros::Publisher sound_pub;
+    ros::Publisher sound_pub_name;
+    ros::Publisher sound_pub_color;
+    //ros::Publisher sound_pub_obj;
 };
 
 }  // namespace gb_dialog

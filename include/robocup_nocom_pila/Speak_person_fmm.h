@@ -26,6 +26,7 @@
 #include "../src/chatbot.cpp"
 
 #include <string>
+#include "std_msgs/String.h"
 
 namespace robocup_nocom_pila
 {
@@ -37,28 +38,29 @@ public:
 
     void halt();
 
+    void get_name();
+
+    void get_color();
+
     BT::NodeStatus tick();
 
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<float>("dist_w")};
+        return { BT::OutputPort<std::string>("w_name"), BT::OutputPort<std::string>("w_color")};
     }
-    // void SpeakPersonCallback(const std_msgs::String BOOST_PP_FRAME_START);
+    void nameCallback(const std_msgs::String::ConstPtr& msg);
+    void colorCallback(const std_msgs::String::ConstPtr& msg);
 
 private:
-    /*
-    const float ADVANCE_SPEED = 0.1;
-    const float TURNING_SPEED = 0.35;
-
-    ros::NodeHandle n_;
-    ros::Publisher vel_pub_;
-    ros::Subscriber dist_point_person;
-    */
     ros::NodeHandle nh;
-    ros::Subscriber ear_sub;  // subscriptor al chatbot.
+    ros::Subscriber name_sub;  // subscriptor al chatbot.
+    ros::Subscriber color_sub;  // subscriptor al chatbot.
     float dist;
+    int num = 0;
     gb_dialog::ExampleDF forwarder;
     int counter_;
+    std::string color;
+    std::string name;
 };
 
 }  // namespace robocup_nocom_pila
