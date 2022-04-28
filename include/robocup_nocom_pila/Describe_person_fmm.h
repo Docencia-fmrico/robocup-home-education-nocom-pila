@@ -23,8 +23,9 @@
 #include <sensor_msgs/Image.h>
 #include "std_msgs/Float64.h"
 #include "std_msgs/Int64.h"
-
+#include "std_msgs/String.h"
 #include <string>
+#include "../src/chatbot.cpp"
 
 namespace robocup_nocom_pila
 {
@@ -32,20 +33,24 @@ namespace robocup_nocom_pila
 class Describe_person_fmm : public BT::ActionNodeBase
 {
 public:
-    explicit Describe_person_fmm(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Describe_person_fmm(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
-/*
+
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<float>("dist_w")};
+        return { BT::InputPort<std::string>("r_name"), BT::InputPort<std::string>("r_color")};
     }
-*/
+
 private:
     int counter_;
     int count = 1;
+    int num = 0;
+    std::string color_r;
+    std::string name_r;
+    gb_dialog::ExampleDF forwarder;
 };
 
 }  // namespace robocup_nocom_pila

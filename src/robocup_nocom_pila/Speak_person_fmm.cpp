@@ -39,12 +39,14 @@ Speak_person_fmm::halt()
 void Speak_person_fmm::nameCallback(const std_msgs::String::ConstPtr& msg)
 {
   name = msg->data;
+  setOutput<std::string>("w_name", name);
 }
 
 
 void Speak_person_fmm::colorCallback(const std_msgs::String::ConstPtr& msg)
 {
   color = msg->data;
+  setOutput<std::string>("w_color", color);
 }
 
 void
@@ -55,7 +57,6 @@ Speak_person_fmm::get_name()
   forwarder.speak("What is your name?");
   sleep(1);
   forwarder.listen();
-  setOutput<std::string>("w_name", name);
   sleep(1);
 }
 
@@ -67,7 +68,6 @@ Speak_person_fmm::get_color()
   forwarder.speak("Which is your t-shirt color?");
   sleep(1);
   forwarder.listen();
-  setOutput<std::string>("w_color", color);
   sleep(1);
 }
 
@@ -92,10 +92,12 @@ Speak_person_fmm::tick()
     break;
     case 2:
       num = 0; 
-      return BT::NodeStatus::RUNNING;
+      //setOutput<std::string>("w_color", color);
+      //std::cerr<< name << "\t"<<color << std::endl;
+      return BT::NodeStatus::SUCCESS;
     break;
   }
-  return BT::NodeStatus::RUNNING;
+  //return BT::NodeStatus::RUNNING;
   
 }
 

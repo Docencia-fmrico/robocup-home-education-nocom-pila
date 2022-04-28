@@ -63,7 +63,7 @@ class ExampleDF: public DialogInterface
       if ( msg_name.data != "")
       {
         sound_pub_name.publish(msg_name);
-        
+        name_ = msg_name.data;
       }
       speak(result.fulfillment_text);
     }
@@ -87,9 +87,14 @@ class ExampleDF: public DialogInterface
       if ( msg_color.data != "")
       {
         sound_pub_color.publish(msg_color);
-        
       }
       speak(result.fulfillment_text);
+    }
+
+    std::string
+    checkname()
+    {
+      return name_;
     }
 
   private:
@@ -97,6 +102,7 @@ class ExampleDF: public DialogInterface
     ros::Publisher sound_pub_name;
     ros::Publisher sound_pub_color;
     //ros::Publisher sound_pub_obj;
+    std::string name_;
 };
 
 }  // namespace gb_dialog

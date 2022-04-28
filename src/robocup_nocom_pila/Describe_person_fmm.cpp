@@ -22,8 +22,8 @@
 namespace robocup_nocom_pila
 {
 
-Describe_person_fmm::Describe_person_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0)
+Describe_person_fmm::Describe_person_fmm(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config), counter_(0)
 {
   // dist_sub = nh_.subscribe("/dist_person", 1, &Describe_person_fmm::PerceivePersonCallback, this);
 }
@@ -38,19 +38,35 @@ BT::NodeStatus
 Describe_person_fmm::tick()
 {
     ROS_INFO("Describe_person_fmm tick");
-/*
-    setOutput<std::string>("person", "hola");
+    
 
-    std::cerr << dist << std::endl;
-*/
-  if (count >= 3)
-  {
-    return BT::NodeStatus::SUCCESS;
-  }
-  else
-    count = count + 1;
-    return BT::NodeStatus::FAILURE;
-}
+    name_r = getInput<std::string>("r_name").value();
+    color_r = getInput<std::string>("r_color").value();
+
+    sleep(1);
+
+    switch(num)
+      {
+        case 0:
+          if(name_r != "")
+            num = 1;
+            std:: cerr << name_r<< std::endl;
+            return BT::NodeStatus::RUNNING;
+        break;
+        case 1:
+          if(color_r != "")
+            num = 2;
+            std:: cerr << "\t" << color_r<< std::endl;
+            return BT::NodeStatus::RUNNING;
+        break;
+        case 2:
+          num = 0; 
+          forwarder.speak(name_r + "tishirt is"+ color_r);
+          sleep(1);
+          return BT::NodeStatus::SUCCESS;
+        break;
+      }
+      return BT::NodeStatus::RUNNING;
 
 }  // namespace robocup_nocom_pila
 
@@ -58,4 +74,5 @@ Describe_person_fmm::tick()
 BT_REGISTER_NODES(factory)
 {
   factory.registerNodeType<robocup_nocom_pila::Describe_person_fmm>("Describe_person_fmm");
+}
 }

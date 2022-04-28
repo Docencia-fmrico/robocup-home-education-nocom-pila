@@ -41,6 +41,8 @@ int main(int argc, char **argv)
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("person", 1);
+  blackboard->set("name", "");
+  blackboard->set("color", "");
 
   std::string pkgpath = ros::package::getPath("robocup_nocom_pila");
   std::string xml_file = pkgpath + "/behavior_trees_xml/fmm.xml";

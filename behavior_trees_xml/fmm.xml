@@ -8,8 +8,8 @@
                         <Detect_person_fmm name="Detect_person" w_person="{person}"/>
                     </ReactiveSequence>-->
                     <Speak_person_fmm name="Speak_person" w_name="{name}" w_color="{color}"/>
-                    <!--<Go_operator_fmm name="Go_operator"/>
-                    <Describe_person_fmm name="Describe_person"/> -->
+                    <!--<Go_operator_fmm name="Go_operator"/>-->
+                    <Describe_person_fmm name="Describe_person" r_name="{name}" r_color="{color}"/> 
                 </Sequence>
             </RetryUntilSuccessful>
             <!--<Go_home_fmm name="Go_home"/>-->
