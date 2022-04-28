@@ -41,7 +41,7 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("r_name"), BT::InputPort<std::string>("r_color")};
+        return { BT::InputPort<std::string>("r_name"), BT::InputPort<std::string>("r_color"), BT::InputPort<std::string>("r_object")};
     }
 
 private:
@@ -50,6 +50,7 @@ private:
     int num = 0;
     std::string color_r;
     std::string name_r;
+    std::string object_r;
     gb_dialog::ExampleDF forwarder;
 };
 

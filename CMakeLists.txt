@@ -70,6 +70,7 @@ add_library(nc_go_home_fmm SHARED src/robocup_nocom_pila/Go_home_fmm.cpp)
 add_library(nc_go_operator_fmm SHARED src/robocup_nocom_pila/Go_operator_fmm.cpp)
 add_library(nc_go_person_fmm SHARED src/robocup_nocom_pila/Go_person_fmm.cpp)
 add_library(nc_speak_person_fmm SHARED src/robocup_nocom_pila/Speak_person_fmm.cpp)
+add_library(nc_detect_object_fmm SHARED src/robocup_nocom_pila/Detect_object_fmm.cpp)
 
 list(APPEND plugin_libs
   nc_go_operator_cml
@@ -85,6 +86,7 @@ list(APPEND plugin_libs
   nc_go_operator_fmm
   nc_go_person_fmm
   nc_speak_person_fmm
+  nc_detect_object_fmm
 )
 
 foreach(bt_plugin ${plugin_libs})
@@ -117,15 +119,17 @@ roslint_cpp(
   include/robocup_nocom_pila/Detect_person_cml.h src/robocup_nocom_pila/Detect_person_cml.cpp
   include/robocup_nocom_pila/Follow_person_cml.h src/robocup_nocom_pila/Follow_person_cml.cpp
   include/robocup_nocom_pila/Go_home_cml.h src/robocup_nocom_pila/Go_home_cml.cpp
-  
+
   include/robocup_nocom_pila/Describe_person_fmm.h src/robocup_nocom_pila/Describe_person_fmm.cpp
   include/robocup_nocom_pila/Detect_person_fmm.h src/robocup_nocom_pila/Detect_person_fmm.cpp
   include/robocup_nocom_pila/Go_home_fmm.h src/robocup_nocom_pila/Go_home_fmm.cpp
   include/robocup_nocom_pila/Go_operator_fmm.h src/robocup_nocom_pila/Go_operator_fmm.cpp
   include/robocup_nocom_pila/Go_person_fmm.h src/robocup_nocom_pila/Go_person_fmm.cpp
   include/robocup_nocom_pila/Speak_person_fmm.h src/robocup_nocom_pila/Speak_person_fmm.cpp
+  include/robocup_nocom_pila/Detect_object_fmm.h src/robocup_nocom_pila/Detect_object_fmm.cpp
   
   include/robocup_nocom_pila/PIDController.hpp src/robocup_nocom_pila/PIDController.cpp
   src/chatbot.cpp
   src/nav.cpp
+
 )
