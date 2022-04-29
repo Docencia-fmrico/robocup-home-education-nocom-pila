@@ -35,7 +35,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_describe_person_fmm"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_person_fmm"));
   factory.registerFromPlugin(loader.getOSName("nc_go_home_"));
-  factory.registerFromPlugin(loader.getOSName("nc_go_operator_fmm"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_operator_"));
   factory.registerFromPlugin(loader.getOSName("nc_go_person_fmm"));
   factory.registerFromPlugin(loader.getOSName("nc_speak_person_fmm"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_object_fmm"));

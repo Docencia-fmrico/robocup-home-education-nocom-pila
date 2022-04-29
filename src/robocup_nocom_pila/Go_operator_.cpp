@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "robocup_nocom_pila/Go_operator_fmm.h"
+#include "robocup_nocom_pila/Go_operator_.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
 
@@ -24,7 +24,7 @@
 namespace robocup_nocom_pila
 {
 
-Go_operator_fmm::Go_operator_fmm(const std::string& name)
+Go_operator_::Go_operator_(const std::string& name)
 : BT::ActionNodeBase(name, {}), counter_(0), nh("~")
 {
   nh.getParam("opx", px);
@@ -37,15 +37,15 @@ Go_operator_fmm::Go_operator_fmm(const std::string& name)
 }
 
 void
-Go_operator_fmm::halt()
+Go_operator_::halt()
 {
-  ROS_INFO("Go_operator_fmm halt");
+  ROS_INFO("Go_operator_ halt");
 }
 
 BT::NodeStatus
-Go_operator_fmm::tick()
+Go_operator_::tick()
 {
-  ROS_INFO("Go_operator_fmm tick");
+  ROS_INFO("Go_operator_ tick");
 
   if (action)
   {
@@ -69,5 +69,5 @@ Go_operator_fmm::tick()
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<robocup_nocom_pila::Go_operator_fmm>("Go_operator_fmm");
+  factory.registerNodeType<robocup_nocom_pila::Go_operator_>("Go_operator_");
 }
