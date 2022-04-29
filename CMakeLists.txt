@@ -62,15 +62,15 @@ add_library(nc_speak_person_cml SHARED src/robocup_nocom_pila/Speak_person_cml.c
 add_library(nc_detect_bag_cml SHARED src/robocup_nocom_pila/Detect_bag_cml.cpp)
 add_library(nc_detect_person_cml SHARED src/robocup_nocom_pila/Detect_person_cml.cpp)
 add_library(nc_follow_person_cml SHARED src/robocup_nocom_pila/Follow_person_cml.cpp)
-add_library(nc_go_home_cml SHARED src/robocup_nocom_pila/Go_home_cml.cpp)
 
 add_library(nc_describe_person_fmm SHARED src/robocup_nocom_pila/Describe_person_fmm.cpp)
 add_library(nc_detect_person_fmm SHARED src/robocup_nocom_pila/Detect_person_fmm.cpp)
-add_library(nc_go_home_fmm SHARED src/robocup_nocom_pila/Go_home_fmm.cpp)
 add_library(nc_go_operator_fmm SHARED src/robocup_nocom_pila/Go_operator_fmm.cpp)
 add_library(nc_go_person_fmm SHARED src/robocup_nocom_pila/Go_person_fmm.cpp)
 add_library(nc_speak_person_fmm SHARED src/robocup_nocom_pila/Speak_person_fmm.cpp)
 add_library(nc_detect_object_fmm SHARED src/robocup_nocom_pila/Detect_object_fmm.cpp)
+
+add_library(nc_go_home_ SHARED src/robocup_nocom_pila/Go_home_.cpp)
 
 list(APPEND plugin_libs
   nc_go_operator_cml
@@ -78,15 +78,15 @@ list(APPEND plugin_libs
   nc_detect_bag_cml
   nc_detect_person_cml
   nc_follow_person_cml
-  nc_go_home_cml
 
   nc_describe_person_fmm
   nc_detect_person_fmm
-  nc_go_home_fmm
   nc_go_operator_fmm
   nc_go_person_fmm
   nc_speak_person_fmm
   nc_detect_object_fmm
+
+  nc_go_home_
 )
 
 foreach(bt_plugin ${plugin_libs})
@@ -118,16 +118,16 @@ roslint_cpp(
   include/robocup_nocom_pila/Detect_bag_cml.h src/robocup_nocom_pila/Detect_bag_cml.cpp
   include/robocup_nocom_pila/Detect_person_cml.h src/robocup_nocom_pila/Detect_person_cml.cpp
   include/robocup_nocom_pila/Follow_person_cml.h src/robocup_nocom_pila/Follow_person_cml.cpp
-  include/robocup_nocom_pila/Go_home_cml.h src/robocup_nocom_pila/Go_home_cml.cpp
+  
 
   include/robocup_nocom_pila/Describe_person_fmm.h src/robocup_nocom_pila/Describe_person_fmm.cpp
   include/robocup_nocom_pila/Detect_person_fmm.h src/robocup_nocom_pila/Detect_person_fmm.cpp
-  include/robocup_nocom_pila/Go_home_fmm.h src/robocup_nocom_pila/Go_home_fmm.cpp
   include/robocup_nocom_pila/Go_operator_fmm.h src/robocup_nocom_pila/Go_operator_fmm.cpp
   include/robocup_nocom_pila/Go_person_fmm.h src/robocup_nocom_pila/Go_person_fmm.cpp
   include/robocup_nocom_pila/Speak_person_fmm.h src/robocup_nocom_pila/Speak_person_fmm.cpp
   include/robocup_nocom_pila/Detect_object_fmm.h src/robocup_nocom_pila/Detect_object_fmm.cpp
   
+  include/robocup_nocom_pila/Go_home_.h src/robocup_nocom_pila/Go_home_.cpp
   include/robocup_nocom_pila/PIDController.hpp src/robocup_nocom_pila/PIDController.cpp
   src/chatbot.cpp
   src/nav.cpp

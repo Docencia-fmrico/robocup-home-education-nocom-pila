@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "robocup_nocom_pila/Go_home_fmm.h"
+#include "robocup_nocom_pila/Go_home_.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
 #include <string>
@@ -22,7 +22,7 @@
 namespace robocup_nocom_pila
 {
 
-Go_home_fmm::Go_home_fmm(const std::string& name/*, const BT::NodeConfiguration & config*/)
+Go_home_::Go_home_(const std::string& name)
 : BT::ActionNodeBase(name, {}), counter_(0),  nh("~")
 {
   nh.getParam("hpx", px);
@@ -35,15 +35,15 @@ Go_home_fmm::Go_home_fmm(const std::string& name/*, const BT::NodeConfiguration 
 }
 
 void
-Go_home_fmm::halt()
+Go_home_::halt()
 {
-    ROS_INFO("Go_home_fmm halt");
+    ROS_INFO("Go_home_ halt");
 }
 
 BT::NodeStatus
-Go_home_fmm::tick()
+Go_home_::tick()
 {
-  ROS_INFO("Go_home_fmm tick");
+  ROS_INFO("Go_home_ tick");
 
   if (action)
   {
@@ -67,5 +67,5 @@ Go_home_fmm::tick()
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<robocup_nocom_pila::Go_home_fmm>("Go_home_fmm");
+  factory.registerNodeType<robocup_nocom_pila::Go_home_>("Go_home_");
 }
