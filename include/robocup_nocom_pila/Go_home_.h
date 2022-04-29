@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_GO_HOME_CML_H
-#define ROBOCUP_NOCOM_PILA_GO_HOME_CML_H
+#ifndef ROBOCUP_NOCOM_PILA_GO_HOME_H
+#define ROBOCUP_NOCOM_PILA_GO_HOME_H
 
 #include "ros/ros.h"
 
@@ -21,32 +21,42 @@
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
 #include <sensor_msgs/Image.h>
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int64.h"
+
+#include "../src/nav.cpp"
 
 #include <string>
 
 namespace robocup_nocom_pila
 {
 
-class Go_home_cml : public BT::ActionNodeBase
+class Go_home_ : public BT::ActionNodeBase
 {
 public:
-    explicit Go_home_cml(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Go_home_(const std::string& name);
 
     void halt();
 
     BT::NodeStatus tick();
 
-   /*static BT::PortsList providedPorts()
-    {
-        return { BT::InputPort<std::string>("point")};
-    }*/
-
 private:
+    MyNode my_node;
+
+    ros::NodeHandle nh;
+    float px;
+    float py;
+    float pz;
+    float ox;
+    float oy;
+    float oz;
+    float ow;
+
+    int action = true;
+    float dist;
+    bool finish = false;
+
     int counter_;
 };
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_GO_HOME_CML_H
+#endif  // ROBOCUP_NOCOM_PILA_GO_HOME_H
