@@ -32,7 +32,7 @@ int main(int argc, char **argv)
   BT::BehaviorTreeFactory factory;
   BT::SharedLibrary loader;
 
-  factory.registerFromPlugin(loader.getOSName("nc_go_operator_cml"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_operator_"));
   factory.registerFromPlugin(loader.getOSName("nc_speak_person_cml"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_bag_cml"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_person_cml"));

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_GO_OPERATOR_FMM_H
-#define ROBOCUP_NOCOM_PILA_GO_OPERATOR_FMM_H
+#ifndef ROBOCUP_NOCOM_PILA_GO_OPERATOR_H
+#define ROBOCUP_NOCOM_PILA_GO_OPERATOR_H
 
 #include "ros/ros.h"
 
@@ -29,21 +29,15 @@
 namespace robocup_nocom_pila
 {
 
-class Go_operator_fmm : public BT::ActionNodeBase
+class Go_operator_ : public BT::ActionNodeBase
 {
 public:
-    explicit Go_operator_fmm(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Go_operator_(const std::string& name);
 
     void halt();
 
     BT::NodeStatus tick();
 
-/*
-    static BT::PortsList providedPorts()
-    {
-        return { BT::OutputPort<float>("dist_w")};
-    }
-*/
 private:
     MyNode my_node;
 
@@ -64,4 +58,4 @@ private:
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_GO_OPERATOR_FMM_H
+#endif  // ROBOCUP_NOCOM_PILA_GO_OPERATOR_H

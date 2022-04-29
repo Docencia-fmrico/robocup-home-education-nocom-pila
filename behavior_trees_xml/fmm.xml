@@ -9,7 +9,7 @@
                     </ReactiveSequence>-->
                     <Speak_person_fmm name="Speak_person" w_name="{name}" w_color="{color}"/>
                     <Detect_object_fmm name="Detect_object" w_object="{object}"/>
-                    <!--<Go_operator_fmm name="Go_operator"/>-->
+                    <!--<Go_operator_ name="Go_operator"/>-->
                     <Describe_person_fmm name="Describe_person" r_name="{name}" r_color="{color}" r_object="{object}"/> 
                 </Sequence>
             </RetryUntilSuccessful>
