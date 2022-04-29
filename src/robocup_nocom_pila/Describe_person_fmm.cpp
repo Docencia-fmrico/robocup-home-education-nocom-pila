@@ -39,34 +39,23 @@ Describe_person_fmm::tick()
 {
     ROS_INFO("Describe_person_fmm tick");
     
-
     name_r = getInput<std::string>("r_name").value();
     color_r = getInput<std::string>("r_color").value();
+    object_r = getInput<std::string>("r_object").value();
 
     sleep(1);
-
-    switch(num)
-      {
-        case 0:
-          if(name_r != "")
-            num = 1;
-            std:: cerr << name_r<< std::endl;
-            return BT::NodeStatus::RUNNING;
-        break;
-        case 1:
-          if(color_r != "")
-            num = 2;
-            std:: cerr << "\t" << color_r<< std::endl;
-            return BT::NodeStatus::RUNNING;
-        break;
-        case 2:
-          num = 0; 
-          forwarder.speak(name_r + "tishirt is"+ color_r);
-          sleep(1);
-          return BT::NodeStatus::SUCCESS;
-        break;
-      }
-      return BT::NodeStatus::RUNNING;
+    
+    forwarder.speak(name_r + " tishirt is " + color_r + " and have a " + object_r);
+    
+    if (count >= 3)
+    {
+      return BT::NodeStatus::SUCCESS;
+    }
+    else
+    {
+      count = count + 1;
+      return BT::NodeStatus::FAILURE;
+    }
 
 }  // namespace robocup_nocom_pila
 
