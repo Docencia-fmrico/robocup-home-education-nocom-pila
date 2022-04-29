@@ -103,8 +103,8 @@ Speak_person_fmm::tick()
       break;
       case 2:
         num = 0; 
-        //setOutput<std::string>("w_color", color);
-        //std::cerr<< name << "\t"<<color << std::endl;
+        name = "";
+        color = "";
         return BT::NodeStatus::SUCCESS;
       break;
     }
