@@ -28,7 +28,7 @@ class ExampleDF: public DialogInterface
     {
       sound_pub_name = nh_.advertise<std_msgs::String>("/sound/name", 1);
       sound_pub_color = nh_.advertise<std_msgs::String>("/sound/color", 1);
-      //sound_pub_obj = nh_.advertise<std_msgs::String>("/sound/object", 1);
+      sound_pub_order = nh_.advertise<std_msgs::String>("/sound/order", 1);
 
       this->registerCallback(std::bind(&ExampleDF::noIntentCB, this, ph::_1));
       this->registerCallback(
@@ -37,6 +37,9 @@ class ExampleDF: public DialogInterface
       this->registerCallback(
         std::bind(&ExampleDF::colorIntentCB, this, ph::_1),
         "FMM_color");
+      this->registerCallback(
+        std::bind(&ExampleDF::orderIntentCB, this, ph::_1),
+        "FMM_order");
     }
 
     void noIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -88,20 +91,43 @@ class ExampleDF: public DialogInterface
       }
       speak(result.fulfillment_text);
     }
+    void orderIntentCB(dialogflow_ros_msgs::DialogflowResult result)
+    {
+      std_msgs::String msg_order;
+      
+      ROS_INFO("[ExampleDF] orderIntentCB: intent [%s]", result.intent.c_str());
+
+      for(const auto & param : result.parameters)
+      {
+        std::cerr << "Param: "<< param << std::endl;
+        for(const auto &value : param.value)
+        {
+          std::cerr << "\t" << value << std::endl;
+          msg_order.data = value;
+        }
+
+      }
+      if ( msg_order.data != "")
+      {
+        sound_pub_order.publish(msg_order);
+      }
+      speak(result.fulfillment_text);      
+
+    }
 
 
   private:
     ros::NodeHandle nh_;
     ros::Publisher sound_pub_name;
     ros::Publisher sound_pub_color;
-    // ros::Publisher sound_pub_obj;
+    ros::Publisher sound_pub_order;
 };
 
 }  // namespace gb_dialog
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "example_df_node");
+  ros::init(argc, argv, "chatbot_node");
   gb_dialog::ExampleDF forwarder;
   forwarder.listen();
   ros::spin();
