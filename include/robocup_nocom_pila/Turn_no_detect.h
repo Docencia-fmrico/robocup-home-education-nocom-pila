@@ -12,58 +12,48 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_DETECT_PERSON_FMM_H
-#define ROBOCUP_NOCOM_PILA_DETECT_PERSON_FMM_H
+#ifndef ROBOCUP_NOCOM_PILA_TURN_NO_DETECT_H
+#define ROBOCUP_NOCOM_PILA_TURN_NO_DETECT_H
 
 #include "ros/ros.h"
-
-#include <cv_bridge/cv_bridge.h>
 
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
-
 #include <sensor_msgs/Image.h>
-#include <darknet_ros_msgs/BoundingBoxes.h>
 
 #include <string>
 
 namespace robocup_nocom_pila
 {
 
-class Detect_person_fmm : public BT::ActionNodeBase
+class Turn_no_detect : public BT::ActionNodeBase
 {
 public:
-    explicit Detect_person_fmm(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Turn_no_detect(const std::string& name, const BT::NodeConfiguration & config);
 
     void halt();
-
-    void DetectPersonBBXCallback(const darknet_ros_msgs::BoundingBoxes::ConstPtr& obj);
-    void DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image);
 
     BT::NodeStatus tick();
 
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<int>("w_person"), BT::OutputPort<int>("w_state")};
+        return { BT::InputPort<int>("r_state")};
     }
 
 private:
+
     ros::NodeHandle nh;
-    ros::Subscriber objects_bbx;
-    ros::Subscriber objects_image;
+    double TURNING_TIME;
+    double TURNING_SPEED;
+    ros::Time turn_ts_;
 
-    cv_bridge::CvImagePtr img_ptr_depth;
-
-    int repeticiones = 0;
-    int person = 2;
-    bool is_person = false;
-    float dist;
-    int px;
-    int py;
+    ros::Publisher pub_vel_;
+    int time = 0;
+    int state = 0;
     int counter_;
 };
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_DETECT_PERSON_FMM_H
+#endif  // ROBOCUP_NOCOM_PILA_TURN_NO_DETECT_H

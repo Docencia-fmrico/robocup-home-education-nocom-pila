@@ -87,6 +87,16 @@ Go_person_fmm::tick()
       nh.getParam("oz5", oz);
       nh.getParam("ow5", ow);
     break;
+    case 6:
+      nh.getParam("px6", px);
+      nh.getParam("py6", py);
+      nh.getParam("pz6", pz);
+      nh.getParam("ox6", ox);
+      nh.getParam("oy6", oy);
+      nh.getParam("oz6", oz);
+      nh.getParam("ow6", ow);
+    break;
+    
   }
 /*
   std::cerr << px << std::endl;

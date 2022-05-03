@@ -1,6 +1,7 @@
 <root main_tree_to_execute = "MainTree" >
     <BehaviorTree ID="MainTree">
         <Sequence>
+            <Start name="Start"/>
             <!--<Go_operator_ name="go_operator"/> 
             <Speak_person_cml name="speak_person"/>-->
             <Detect_bag_cml name="detect_bag" r_order="{order}"/>

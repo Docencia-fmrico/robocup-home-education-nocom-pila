@@ -38,6 +38,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_detect_person_cml"));
   factory.registerFromPlugin(loader.getOSName("nc_follow_person_cml"));
   factory.registerFromPlugin(loader.getOSName("nc_go_home_"));
+  factory.registerFromPlugin(loader.getOSName("nc_start_"));
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("data", "no");

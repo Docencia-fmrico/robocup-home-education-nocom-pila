@@ -1,45 +1,53 @@
-px1: 1
-py1: 1  
-pz1: 0 
-ox1: 0  
-oy1: 0  
-oz1: 0  
+px1: 2.0193
+py1: 7.4409 
+pz1: 0
+ox1: 0 
+oy1: 0
+oz1: 1.5
 ow1: 1
 
-px2: 2
-py2: 1  
+px2: 0
+py2: 7
 pz2: 0  
 ox2: 0  
 oy2: 0  
-oz2: 0  
+oz2: 1.5
 ow2: 1
 
-px3: 1
-py3: 1  
+px3: 0
+py3: 7  
 pz3: 0  
 ox3: 0  
-oy3: 0  
-oz3: 0  
+oy3: 0
+oz3: 7.5
 ow3: 1
 
-px4: 2
-py4: 1  
+px4: 0
+py4: 3.5939
 pz4: 0  
 ox4: 0  
 oy4: 0  
-oz4: 0  
+oz4: -7.5  
 ow4: 1
 
-px5: 1
-py5: 1  
+px5: 1.0739
+py5: 2.8951
 pz5: 0  
 ox5: 0  
 oy5: 0  
-oz5: 0  
+oz5: -3.5
 ow5: 1
 
-opx: 3
-opy: 1  
+px6: 2.3336
+py6: 2.976 
+pz6: 0  
+ox6: 0  
+oy6: 0  
+oz6: -1.5
+ow6: 1
+
+opx: 5
+opy: 0  
 opz: 0  
 oox: 0  
 ooy: 0  
@@ -53,3 +61,6 @@ hox: 0
 hoy: 0  
 hoz: 0  
 how: 1
+
+TURNING_SPEED: 0.9
+TURNING_TIME: 5.0
