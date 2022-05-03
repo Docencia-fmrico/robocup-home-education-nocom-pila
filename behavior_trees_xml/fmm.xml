@@ -3,6 +3,7 @@
         <Sequence>
             <RetryUntilSuccessful num_attempts="1">
                 <Sequence>
+                    <Start name="Start"/>
                     <!--<ReactiveSequence>
                         <Go_person_fmm name="Go_person" r_person="{person}"/>
                         <Detect_person_fmm name="Detect_person" w_person="{person}"/>

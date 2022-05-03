@@ -57,11 +57,11 @@ Describe_person_fmm::tick()
       return BT::NodeStatus::FAILURE;
     }
 
+}
 }  // namespace robocup_nocom_pila
 
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
   factory.registerNodeType<robocup_nocom_pila::Describe_person_fmm>("Describe_person_fmm");
-}
 }

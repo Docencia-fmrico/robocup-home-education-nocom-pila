@@ -39,6 +39,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_go_person_fmm"));
   factory.registerFromPlugin(loader.getOSName("nc_speak_person_fmm"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_object_fmm"));
+  factory.registerFromPlugin(loader.getOSName("nc_start_"));
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("person", 1);
