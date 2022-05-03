@@ -74,9 +74,9 @@ Detect_bag_cml::tick()
 {
   ROS_INFO("Detect_bag_cml tick");
 
-  ROS_INFO("Speak_person_fmm tick");
-
   std::cerr << order << std::endl;
+
+  //forwarder.speak("Which bag baby?");
 
   if( order != "" )
   {
@@ -91,16 +91,19 @@ Detect_bag_cml::tick()
         get_order();
         if(px_max >= 500 || order == "left")
         {
-            repeticiones = 1;
+          //order = "left";
+          repeticiones = 1;
         }
-        else if(px_min <= 100 || order == "right")
+        else if(px_min <= 100 || order == "right" )
         {
-            repeticiones = 1;
+          //order == "right";
+          repeticiones = 1;
         }
         
         return BT::NodeStatus::RUNNING;
       break;
       case 1:
+        //forwarder.speak("The bag is on"+order+"side");
         num = 0; 
         order = "";
         return BT::NodeStatus::SUCCESS;

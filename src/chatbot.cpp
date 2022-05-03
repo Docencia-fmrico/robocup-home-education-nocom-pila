@@ -29,6 +29,7 @@ class ExampleDF: public DialogInterface
       sound_pub_name = nh_.advertise<std_msgs::String>("/sound/name", 1);
       sound_pub_color = nh_.advertise<std_msgs::String>("/sound/color", 1);
       sound_pub_order = nh_.advertise<std_msgs::String>("/sound/order", 1);
+      sound_pub_start = nh_.advertise<std_msgs::String>("/sound/start", 1);
 
       this->registerCallback(std::bind(&ExampleDF::noIntentCB, this, ph::_1));
       this->registerCallback(
@@ -39,7 +40,10 @@ class ExampleDF: public DialogInterface
         "FMM_color");
       this->registerCallback(
         std::bind(&ExampleDF::orderIntentCB, this, ph::_1),
-        "FMM_order");
+        "CML_order");
+      this->registerCallback(
+        std::bind(&ExampleDF::startIntentCB, this, ph::_1),
+        "Start_");
     }
 
     void noIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -92,7 +96,7 @@ class ExampleDF: public DialogInterface
       speak(result.fulfillment_text);
     }
     void orderIntentCB(dialogflow_ros_msgs::DialogflowResult result)
-    {
+    {// Metodo para pedir que maleta coger.
       std_msgs::String msg_order;
       
       ROS_INFO("[ExampleDF] orderIntentCB: intent [%s]", result.intent.c_str());
@@ -112,7 +116,28 @@ class ExampleDF: public DialogInterface
         sound_pub_order.publish(msg_order);
       }
       speak(result.fulfillment_text);      
+    }
 
+    void startIntentCB(dialogflow_ros_msgs::DialogflowResult result)
+    {// Metodo para comenzar a funcionar.
+      std_msgs::String msg_start;
+      
+      ROS_INFO("[ExampleDF] startIntentCB: intent [%s]", result.intent.c_str());
+
+      for(const auto & param : result.parameters)
+      {
+        std::cerr << "Param: "<< param << std::endl;
+        for(const auto &value : param.value)
+        {
+          std::cerr << "\t" << value << std::endl;
+          msg_start.data = value;
+        }
+      }
+      if ( msg_start.data != "")
+      {
+        sound_pub_start.publish(msg_start);
+      }
+      speak(result.fulfillment_text);
     }
 
 
@@ -121,6 +146,7 @@ class ExampleDF: public DialogInterface
     ros::Publisher sound_pub_name;
     ros::Publisher sound_pub_color;
     ros::Publisher sound_pub_order;
+    ros::Publisher sound_pub_start;
 };
 
 }  // namespace gb_dialog
