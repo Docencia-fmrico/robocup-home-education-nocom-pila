@@ -42,12 +42,12 @@ Detect_person_fmm::tick()
 
   sleep(0.5);
 
-  if (is_person == true && dist <= 2.5 && dist != 0)
+  if (is_person == true && dist <= 1.5 && dist != 0)
   {
     std::cerr << "HAY PERSONA" << std::endl;
     std::cerr << dist << std::endl;
     setOutput<int>("w_person", person);
-
+    setOutput<int>("w_state", 0);
     repeticiones = 0;
     person++;
     px = 0;
@@ -64,8 +64,10 @@ Detect_person_fmm::tick()
     if (repeticiones >= 30)
     {
       setOutput<int>("w_person", person);
+      setOutput<int>("w_state", 1);
       repeticiones = 0;
       person++;
+      return BT::NodeStatus::SUCCESS;
     }
     std::cerr << repeticiones << std::endl;
 

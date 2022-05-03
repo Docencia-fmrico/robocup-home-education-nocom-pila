@@ -1,20 +1,26 @@
 <root main_tree_to_execute = "MainTree" >
     <BehaviorTree ID="MainTree">
         <Sequence>
+            <Start name="Start"/>
             <RetryUntilSuccessful num_attempts="1">
                 <Sequence>
-                    <Start name="Start"/>
-                    <!--<ReactiveSequence>
+                    <ReactiveSequence>
                         <Go_person_fmm name="Go_person" r_person="{person}"/>
-                        <Detect_person_fmm name="Detect_person" w_person="{person}"/>
-                    </ReactiveSequence>-->
+                        <Detect_person_fmm name="Detect_person" w_person="{person}" w_state="{peson_state}"/>
+                        <!--<Sequence>
+                            <Turn_no_detect name="Turn_no_detect" r_state="{peson_state}"/>
+                        </Sequence> 
+                        <State name="State" r_state_="{peson_state}" w_state_="{peson_state}"/>-->
+                    </ReactiveSequence>
                     <Speak_person_fmm name="Speak_person" w_name="{name}" w_color="{color}"/>
                     <Detect_object_fmm name="Detect_object" w_object="{object}"/>
-                    <!--<Go_operator_ name="Go_operator"/>-->
+                    <Turn_ name="Turn_"/>
+                    <Go_operator_ name="Go_operator"/>
                     <Describe_person_fmm name="Describe_person" r_name="{name}" r_color="{color}" r_object="{object}"/> 
+                    <Turn_ name="Turn_"/>
                 </Sequence>
             </RetryUntilSuccessful>
-            <!--<Go_home_ name="Go_home"/>-->
+            <Go_home_ name="Go_home"/>
         </Sequence>
     </BehaviorTree>
 </root>

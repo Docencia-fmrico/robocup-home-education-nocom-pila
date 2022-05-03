@@ -54,7 +54,6 @@ Detect_object_fmm::tick()
     object = "";
     dist = 0;
 
-
     return BT::NodeStatus::SUCCESS;
   }
   else
