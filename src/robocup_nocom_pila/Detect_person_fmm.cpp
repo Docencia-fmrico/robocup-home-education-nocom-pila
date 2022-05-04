@@ -44,8 +44,8 @@ Detect_person_fmm::tick()
 
   if (is_person == true && dist <= 1.5 && dist != 0)
   {
-    std::cerr << "HAY PERSONA" << std::endl;
-    std::cerr << dist << std::endl;
+    // std::cerr << "HAY PERSONA" << std::endl;
+    // std::cerr << dist << std::endl;
     setOutput<int>("w_person", person);
     setOutput<int>("w_state", 0);
     repeticiones = 0;
@@ -59,8 +59,8 @@ Detect_person_fmm::tick()
   }
   else
   {
-    std::cerr << "NO HAY PERSONA" << std::endl;
-    std::cerr << dist << std::endl;
+    // std::cerr << "NO HAY PERSONA" << std::endl;
+    // std::cerr << dist << std::endl;
     if (repeticiones >= 30)
     {
       setOutput<int>("w_person", person);
@@ -69,7 +69,7 @@ Detect_person_fmm::tick()
       person++;
       return BT::NodeStatus::SUCCESS;
     }
-    std::cerr << repeticiones << std::endl;
+    // std::cerr << repeticiones << std::endl;
 
     repeticiones++;
 
@@ -105,7 +105,7 @@ void Detect_person_fmm::DetectPersonImageCallback(const sensor_msgs::ImageConstP
   }
 
   dist = img_ptr_depth->image.at<float>(cv::Point(px, py)) * 0.001f;
-  std::cerr << "dist, " << px << " , " << py << " , " << dist << std::endl;
+  // std::cerr << "dist, " << px << " , " << py << " , " << dist << std::endl;
 }
 
 }  // namespace robocup_nocom_pila

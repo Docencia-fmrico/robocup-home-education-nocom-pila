@@ -38,7 +38,7 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<int>("r_state")};
+        return { BT::InputPort<int>("r_state"), BT::OutputPort<int>("w_state"), BT::InputPort<int>("r_person")};
     }
 
 private:
@@ -49,8 +49,9 @@ private:
     ros::Time turn_ts_;
 
     ros::Publisher pub_vel_;
+    int person;
     int time = 0;
-    int state = 0;
+    int state;
     int counter_;
 };
 

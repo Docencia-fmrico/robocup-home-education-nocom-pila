@@ -32,11 +32,16 @@ namespace robocup_nocom_pila
 class Go_operator_ : public BT::ActionNodeBase
 {
 public:
-    explicit Go_operator_(const std::string& name);
+    explicit Go_operator_(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
+
+    static BT::PortsList providedPorts()
+    {
+        return { BT::InputPort<int>("r_person")};
+    }
 
 private:
     MyNode my_node;
@@ -50,6 +55,7 @@ private:
     float oz;
     float ow;
 
+    int person;
     int action = true;
     int counter_;
     float dist;

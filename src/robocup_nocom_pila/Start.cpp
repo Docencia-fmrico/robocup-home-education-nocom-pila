@@ -50,7 +50,7 @@ BT::NodeStatus
 Start::tick()
 {
     ROS_INFO("Start tick");
-    std::cerr << init <<  std::endl;
+    // std::cerr << init <<  std::endl;
 
     if(init != "")
     {

@@ -53,22 +53,20 @@ void
 Speak_person_fmm::get_name()
 {
   ROS_INFO("Speak_person_fmm get name");
-  sleep(1);
+  sleep(0.1);
   forwarder.speak("What is your name?");
-  sleep(1);
+  sleep(0.5);
   forwarder.listen();
-  sleep(1);
 }
 
 void
 Speak_person_fmm::get_color()
 {
   ROS_INFO("Speak_person_fmm get color");
-  sleep(1); 
+  sleep(0.1); 
   forwarder.speak("Which is your t-shirt color?");
-  sleep(1);
+  sleep(0.5);
   forwarder.listen();
-  sleep(1);
 }
 
 BT::NodeStatus
@@ -76,7 +74,12 @@ Speak_person_fmm::tick()
 {
   ROS_INFO("Speak_person_fmm tick");
   
-  std::cerr << name << "\t" << color << std::endl;
+  person = getInput<int>("r_person").value();
+  if( person >= 7)
+  {
+    return BT::NodeStatus::SUCCESS;
+  }
+  // std::cerr << name << "\t" << color << std::endl;
 
   if(name != "")
   {

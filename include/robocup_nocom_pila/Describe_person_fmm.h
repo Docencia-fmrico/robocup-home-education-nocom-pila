@@ -41,10 +41,11 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("r_name"), BT::InputPort<std::string>("r_color"), BT::InputPort<std::string>("r_object")};
+        return { BT::InputPort<std::string>("r_name"), BT::InputPort<std::string>("r_color"), BT::InputPort<std::string>("r_object"), BT::InputPort<int>("r_person")};
     }
 
 private:
+    int person; 
     int counter_;
     int count = 1;
     int num = 0;

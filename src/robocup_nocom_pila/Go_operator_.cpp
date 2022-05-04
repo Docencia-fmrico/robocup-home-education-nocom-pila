@@ -24,8 +24,8 @@
 namespace robocup_nocom_pila
 {
 
-Go_operator_::Go_operator_(const std::string& name)
-: BT::ActionNodeBase(name, {}), counter_(0), nh("~")
+Go_operator_::Go_operator_(const std::string& name,  const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config), counter_(0), nh("~")
 {
   nh.getParam("opx", px);
   nh.getParam("opy", py);
@@ -46,6 +46,11 @@ BT::NodeStatus
 Go_operator_::tick()
 {
   ROS_INFO("Go_operator_ tick");
+  person = getInput<int>("r_person").value();
+  if( person >= 7)
+  {
+    return BT::NodeStatus::SUCCESS;
+  }
 
   if (action)
   {
