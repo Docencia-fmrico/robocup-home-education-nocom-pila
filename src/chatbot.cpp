@@ -59,10 +59,10 @@ class ExampleDF: public DialogInterface
 
       for(const auto & param : result.parameters)
       {
-        std::cerr << "Param: "<< param << std::endl;
+        // std::cerr << "Param: "<< param << std::endl;
         for(const auto &value : param.value)
         {
-          std::cerr << "\t" << value << std::endl;
+          // std::cerr << "\t" << value << std::endl;
           msg_name.data = value;
         }
       }
@@ -70,7 +70,7 @@ class ExampleDF: public DialogInterface
       {
         sound_pub_name.publish(msg_name);
       }
-      speak(result.fulfillment_text);
+      // speak(result.fulfillment_text);
     }
 
     void colorIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -81,10 +81,10 @@ class ExampleDF: public DialogInterface
 
       for(const auto & param : result.parameters)
       {
-        std::cerr << "Param: "<< param << std::endl;
+        // std::cerr << "Param: "<< param << std::endl;
         for(const auto &value : param.value)
         {
-          std::cerr << "\t" << value << std::endl;
+          // std::cerr << "\t" << value << std::endl;
           msg_color.data = value;
         }
 
@@ -93,7 +93,7 @@ class ExampleDF: public DialogInterface
       {
         sound_pub_color.publish(msg_color);
       }
-      speak(result.fulfillment_text);
+      // speak(result.fulfillment_text);
     }
     void orderIntentCB(dialogflow_ros_msgs::DialogflowResult result)
     {// Metodo para pedir que maleta coger.
@@ -103,10 +103,10 @@ class ExampleDF: public DialogInterface
 
       for(const auto & param : result.parameters)
       {
-        std::cerr << "Param: "<< param << std::endl;
+        // std::cerr << "Param: "<< param << std::endl;
         for(const auto &value : param.value)
         {
-          std::cerr << "\t" << value << std::endl;
+          // std::cerr << "\t" << value << std::endl;
           msg_order.data = value;
         }
 
@@ -126,10 +126,10 @@ class ExampleDF: public DialogInterface
 
       for(const auto & param : result.parameters)
       {
-        std::cerr << "Param: "<< param << std::endl;
+        // std::cerr << "Param: "<< param << std::endl;
         for(const auto &value : param.value)
         {
-          std::cerr << "\t" << value << std::endl;
+          // std::cerr << "\t" << value << std::endl;
           msg_start.data = value;
         }
       }

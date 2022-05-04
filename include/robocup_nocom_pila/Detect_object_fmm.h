@@ -55,7 +55,7 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<std::string>("w_object")};
+        return { BT::OutputPort<std::string>("w_object"), BT::InputPort<int>("r_person")};
     }
 
 private:
@@ -65,6 +65,7 @@ private:
 
     cv_bridge::CvImagePtr img_ptr_depth;
 
+    int person;
     bool is_object = false;
     float dist = 10;
     int repeticiones = 0;

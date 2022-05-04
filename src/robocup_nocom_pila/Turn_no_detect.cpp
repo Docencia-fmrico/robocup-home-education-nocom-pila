@@ -40,13 +40,21 @@ BT::NodeStatus
 Turn_no_detect::tick()
 {
   ROS_INFO("Turn_no_detect tick");
+  
+  person = getInput<int>("r_person").value();
+  if( person >= 7)
+  {
+    return BT::NodeStatus::SUCCESS;
+  }
 
   state = getInput<int>("r_state").value();
+  // std::cerr << state << std::endl;
+
   if(state == 0)
   {
     return BT::NodeStatus::SUCCESS;
   }
-  else
+  else if(state == 1)
   {
     geometry_msgs::Twist cmd;
     cmd.angular.z = TURNING_SPEED;
@@ -61,7 +69,8 @@ Turn_no_detect::tick()
     {
       ROS_INFO("FINISED");
       time = 0;
-      return BT::NodeStatus::SUCCESS;
+      setOutput<int>("w_state", 0);
+      return BT::NodeStatus::FAILURE;
     }
 
     pub_vel_.publish(cmd);

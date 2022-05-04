@@ -38,7 +38,7 @@ Go_person_fmm::tick()
 {
   ROS_INFO("Go_person_fmm tick");
   person = getInput<int>("r_person").value();
-  std::cerr << person << std::endl;
+  // std::cerr << person << std::endl;
 
   switch (person)
   {
@@ -98,7 +98,7 @@ Go_person_fmm::tick()
     break;
     
   }
-/*
+
   std::cerr << px << std::endl;
   std::cerr << py << std::endl;
   std::cerr << pz << std::endl;
@@ -106,7 +106,7 @@ Go_person_fmm::tick()
   std::cerr << oy << std::endl;
   std::cerr << oz << std::endl;
   std::cerr << ow << std::endl;
-*/
+
   if (action)
   {
     my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);

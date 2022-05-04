@@ -1,26 +1,21 @@
 <root main_tree_to_execute = "MainTree" >
     <BehaviorTree ID="MainTree">
-        <Sequence>
+        <SequenceStar>
             <Start name="Start"/>
-            <RetryUntilSuccessful num_attempts="1">
+            <RetryUntilSuccessful num_attempts="10">
                 <Sequence>
-                    <ReactiveSequence>
-                        <Go_person_fmm name="Go_person" r_person="{person}"/>
-                        <Detect_person_fmm name="Detect_person" w_person="{person}" w_state="{peson_state}"/>
-                        <!--<Sequence>
-                            <Turn_no_detect name="Turn_no_detect" r_state="{peson_state}"/>
-                        </Sequence> 
-                        <State name="State" r_state_="{peson_state}" w_state_="{peson_state}"/>-->
-                    </ReactiveSequence>
-                    <Speak_person_fmm name="Speak_person" w_name="{name}" w_color="{color}"/>
-                    <Detect_object_fmm name="Detect_object" w_object="{object}"/>
-                    <Turn_ name="Turn_"/>
-                    <Go_operator_ name="Go_operator"/>
-                    <Describe_person_fmm name="Describe_person" r_name="{name}" r_color="{color}" r_object="{object}"/> 
-                    <Turn_ name="Turn_"/>
+                    <Go_person_fmm name="Go_person" r_person="{person}"/>
+                    <Detect_person_fmm name="Detect_person" w_person="{person}" w_state="{peson_state}"/>                    
+                    <Turn_no_detect name="Turn_no_detect" r_state="{peson_state}" w_state="{peson_state}" r_person="{person}"/>                        
+                    <Speak_person_fmm name="Speak_person" w_name="{name}" w_color="{color}" r_person="{person}"/>
+                    <Detect_object_fmm name="Detect_object" w_object="{object}" r_person="{person}"/>
+                    <Turn_ name="Turn_" r_person="{person}"/>
+                    <Go_operator_ name="Go_operator" r_person="{person}"/>
+                    <Turn_ name="Turn_" r_person="{person}"/>
+                    <Describe_person_fmm name="Describe_person" r_name="{name}" r_color="{color}" r_object="{object}" r_person="{person}"/> 
                 </Sequence>
             </RetryUntilSuccessful>
             <Go_home_ name="Go_home"/>
-        </Sequence>
+        </SequenceStar>
     </BehaviorTree>
 </root>

@@ -22,8 +22,8 @@
 namespace robocup_nocom_pila
 {
 
-Turn_::Turn_(const std::string& name)
-: BT::ActionNodeBase(name, {}), counter_(0), nh("~")
+Turn_::Turn_(const std::string& name, const BT::NodeConfiguration& config)
+: BT::ActionNodeBase(name, config), counter_(0), nh("~")
 {
   nh.getParam("TURNING_SPEED", TURNING_SPEED);
   nh.getParam("TURNING_TIME", TURNING_TIME);
@@ -40,6 +40,12 @@ BT::NodeStatus
 Turn_::tick()
 {
   ROS_INFO("Turn_ tick");
+  
+  person = getInput<int>("r_person").value();
+  if( person >= 7)
+  {
+    return BT::NodeStatus::SUCCESS;
+  }
 
   geometry_msgs::Twist cmd;
   cmd.angular.z = TURNING_SPEED;

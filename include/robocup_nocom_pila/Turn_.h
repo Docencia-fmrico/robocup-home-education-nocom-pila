@@ -30,11 +30,16 @@ namespace robocup_nocom_pila
 class Turn_ : public BT::ActionNodeBase
 {
 public:
-    explicit Turn_(const std::string& name);
+    explicit Turn_(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
+
+    static BT::PortsList providedPorts()
+    {
+        return {BT::InputPort<int>("r_person")};
+    }
 
 private:
 
@@ -44,6 +49,7 @@ private:
     ros::Time turn_ts_;
 
     ros::Publisher pub_vel_;
+    int person;
     int time = 0;
     int counter_;
 };

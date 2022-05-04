@@ -46,7 +46,7 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<std::string>("w_name"), BT::OutputPort<std::string>("w_color")};
+        return { BT::OutputPort<std::string>("w_name"), BT::OutputPort<std::string>("w_color"), BT::InputPort<int>("r_person")};
     }
     
     void nameCallback(const std_msgs::String::ConstPtr& msg);
@@ -58,6 +58,7 @@ private:
     ros::Subscriber color_sub;  // subscriptor al chatbot.
     gb_dialog::ExampleDF forwarder;
 
+    int person;
     float dist;
     int num = 0;
     int repeticiones = 0;

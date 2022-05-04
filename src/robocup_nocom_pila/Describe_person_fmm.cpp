@@ -39,13 +39,21 @@ Describe_person_fmm::tick()
 {
     ROS_INFO("Describe_person_fmm tick");
     
+    person = getInput<int>("r_person").value();
+    if( person >= 7)
+    {
+      return BT::NodeStatus::SUCCESS;
+    }
+
     name_r = getInput<std::string>("r_name").value();
     color_r = getInput<std::string>("r_color").value();
     object_r = getInput<std::string>("r_object").value();
 
-    sleep(1);
+    sleep(0.1);
     
     forwarder.speak(name_r + " tishirt is " + color_r + " and have a " + object_r);
+    
+    sleep(1);
     
     if (count >= 3)
     {
