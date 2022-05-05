@@ -58,11 +58,8 @@ private:
     const double MIN_FORW_DIST = 0.0;
     const double MAX_FORW_DIST = 1.0;
 
-    const double MIN_BACKW_DIST = 0.1;
-    const double MAX_BACKW_DIST = 1;
-
-    const float MIN_TURNING_SPEED = 0.05;
-    const float MAX_TURNING_SPEED = 0.45;
+    const int MIN_DISTANCE = 1.5;
+    const int MAX_VEL_DISTANCE = 3.0;    // Distances greater than this one will make the robot go max velocity
 
     ros::NodeHandle n_;
     ros::Publisher pub_vel_;
@@ -71,10 +68,10 @@ private:
     double centre_r;
     bool is_person = false;
     PIDController turn_pid_, forw_pid_;
-    int point;
     int counter_ = 0;
     double ang_vel_, lin_vel_;
     int bbx_counter_ = 0;
+
 };
 
 }  // namespace robocup_nocom_pila

@@ -28,7 +28,6 @@ Follow_person_cml::Follow_person_cml(const std::string& name, const BT::NodeConf
 turn_pid_(MIN_RANG_BOX, MAX_RANG_BOX, MIN_TURN_SPEED, MAX_TURN_SPEED),
 forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Follow_person_cml::PerceivePersonCallback, this);
   pub_vel_ = n_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
 }
 
@@ -48,7 +47,7 @@ Follow_person_cml::tick()
   
   dist_r = getInput<float>("r_dist").value();
   //std::cerr << "Distancia real: " << dist_r << std::endl; 
-  dist_r = (dist_r - 1.5) / 4.0;
+  dist_r = (dist_r - MIN_DISTANCE) / MAX_VEL_DISTANCE;
   centre_r = getInput<double>("r_centre").value();
 
   forw_pid_.set_pid(0.21, 0.06, 0.43);
@@ -62,7 +61,7 @@ Follow_person_cml::tick()
   msg.angular.z = - ang_vel_ * 3.0;
 
   pub_vel_.publish(msg);
-  return BT::NodeStatus::RUNNING; // Mirar según vaya el BT
+  return BT::NodeStatus::RUNNING;
 }
 
 }  // namespace robocup_nocom_pila

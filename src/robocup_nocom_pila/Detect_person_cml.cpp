@@ -34,7 +34,7 @@ Detect_person_cml::tick()
   ROS_INFO("Detect_person_cml tick");
   if(is_person == true && dist_w != 0.0)
   {
-    std::cerr << "HAY PERSONA" << std::endl;
+    //std::cerr << "HAY PERSONA" << std::endl;
     if (dist_w < 5 && dist_w > 0.0)
     {
       setOutput<float>("w_dist", dist_w);
@@ -54,7 +54,7 @@ Detect_person_cml::tick()
   }
   else
   {
-    std::cerr << "NO HAY PERSONA" << std::endl;
+    //std::cerr << "NO HAY PERSONA" << std::endl;
     if (cont >= 20)
     {
       std::cerr << "No encuentro persona, AYUDA "<< std::endl;
