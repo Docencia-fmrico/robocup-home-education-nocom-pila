@@ -16,6 +16,9 @@
 #ifndef ROBOCUP_NOCOM_PILA_PIDCONTROLLER_HPP_
 #define ROBOCUP_NOCOM_PILA_PIDCONTROLLER_HPP_
 
+#include <string>
+#include "ros/ros.h"
+#include "std_msgs/Float64.h"
 #include <cmath>
 
 namespace robocup_nocom_pila
@@ -34,7 +37,9 @@ private:
 
   double min_ref_, max_ref_;
   double min_output_, max_output_;
-  double prev_error_, int_error_;
+  double prev_error_, int_error_;/*
+  double error_, i, d, error_anterior_;
+  double output_;*/
 };
 
 }  // namespace robocup_nocom_pila

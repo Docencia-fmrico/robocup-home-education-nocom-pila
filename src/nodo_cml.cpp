@@ -44,6 +44,9 @@ int main(int argc, char **argv)
   blackboard->set("data", "no");
   blackboard->set("data", 1);
   blackboard->set("r_order", 1);
+  blackboard->set("centre", 0.0);
+  blackboard->set("counter", 0);
+  blackboard->set("person", 1);
 
   std::string pkgpath = ros::package::getPath("robocup_nocom_pila");
   std::string xml_file = pkgpath + "/behavior_trees_xml/cml.xml";

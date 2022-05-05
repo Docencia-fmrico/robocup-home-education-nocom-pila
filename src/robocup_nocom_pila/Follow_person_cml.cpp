@@ -23,13 +23,12 @@
 namespace robocup_nocom_pila
 {
 
-Follow_person_cml::Follow_person_cml(const std::string& name/*, const BT::NodeConfiguration & config*/)
-: BT::ActionNodeBase(name, {} /*config*/), counter_(0),
+Follow_person_cml::Follow_person_cml(const std::string& name, const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config ), counter_(0), 
 turn_pid_(MIN_RANG_BOX, MAX_RANG_BOX, MIN_TURN_SPEED, MAX_TURN_SPEED),
 forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Follow_person_cml::PerceivePersonCallback, this);
-  vel_pub_ = n_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
+  pub_vel_ = n_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
 }
 
 void
@@ -43,41 +42,27 @@ BT::NodeStatus
 Follow_person_cml::tick()
 {
   ROS_INFO("Follow_person_cml tick");
-  double veloc = forw_pid_.get_output(dist);
-  double ang = turn_pid_.get_output(dist);  // La distancia para forw y para turn podría no ser el mismo parámetros
-/*
-  float object = getInput<float>("dist_r").value();
-  std::cerr << object << std::endl;
-*/
+
   geometry_msgs::Twist msg;
+  
+  dist_r = getInput<float>("r_dist").value();
+  //std::cerr << "Distancia real: " << dist_r << std::endl; 
+  dist_r = (dist_r - MIN_DISTANCE) / MAX_VEL_DISTANCE;
+  centre_r = getInput<double>("r_centre").value();
 
-  ROS_INFO("vel x= ");
-  std::cerr << veloc << std::endl;
-/*
-  if(0.5 < dist < 2.5)
-  {
-    if(point < 250)
-    {
-      msg.linear.x = ADVANCE_SPEED;
-      msg.angular.z = TURNING_SPEED;
-    }
-    if( 250 <= point <= 350)
-    {
-      msg.linear.x = ADVANCE_SPEED;
-      //msg.angular.z = TURNING_SPEED;
-    }
-    if(point > 350)
-    {
-      msg.linear.x = ADVANCE_SPEED;
-      msg.angular.z = -TURNING_SPEED;
-    }
-  } Ajustar linear y angular segun el PID (aun por implementar)
-*/  
+  forw_pid_.set_pid(0.21, 0.06, 0.43);
+  lin_vel_ = forw_pid_.get_output(dist_r) *10;
+  lin_vel_ = std::clamp(lin_vel_, MIN_FORW_SPEED, MAX_FORW_SPEED);
 
-  vel_pub_.publish(msg);
+  ang_vel_ = turn_pid_.get_output(centre_r);
+  //std::cerr << "dist_r: " << dist_r << "centre_r: " << centre_r << std::endl; 
+  //std::cerr << "vel x= " << lin_vel_ << " ang z= " << ang_vel_ * 3.0 << std::endl; 
+  msg.linear.x = lin_vel_;
+  msg.angular.z = - ang_vel_ * 3.0;
 
+  pub_vel_.publish(msg);
   return BT::NodeStatus::RUNNING;
-};
+}
 
 }  // namespace robocup_nocom_pila
 

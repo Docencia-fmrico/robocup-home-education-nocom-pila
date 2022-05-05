@@ -25,8 +25,45 @@ namespace robocup_nocom_pila
 Detect_person_cml::Detect_person_cml(const std::string& name, const BT::NodeConfiguration & config)
 : BT::ActionNodeBase(name, config), counter_(0)
 {
-  // dist_sub = nh_.subscribe("/dist_person", 1, &Detect_person_cml::PerceivePersonCallback, this);
+  objects_bbx = nh_.subscribe("/darknet_ros/bounding_boxes", 1, &Detect_person_cml::DetectPersonBBXCallback, this);
+  objects_image = nh_.subscribe("/camera/depth/image_raw", 1, &Detect_person_cml::DetectPersonImageCallback, this);  
 }
+BT::NodeStatus
+Detect_person_cml::tick()
+{
+  ROS_INFO("Detect_person_cml tick");
+  if(is_person == true && dist_w != 0.0)
+  {
+    //std::cerr << "HAY PERSONA" << std::endl;
+    if (dist_w < 5 && dist_w > 0.0)
+    {
+      setOutput<float>("w_dist", dist_w);
+      setOutput<double>("w_centre", centre_w);
+      cont = 0;
+      is_person = false;
+      return BT::NodeStatus::SUCCESS;
+    }
+    else
+    std::cerr << "posible nan         " << dist_w <<std::endl;
+    if (cont >= 20)
+    {
+      std::cerr << "Acércate o cierra las piernas, porfa "<< std::endl;
+    }
+    cont++;
+    return BT::NodeStatus::RUNNING;
+  }
+  else
+  {
+    //std::cerr << "NO HAY PERSONA" << std::endl;
+    if (cont >= 20)
+    {
+      std::cerr << "No encuentro persona, AYUDA "<< std::endl;
+    }
+    cont++;
+    return BT::NodeStatus::RUNNING;
+  }
+}
+
 
 void
 Detect_person_cml::halt()
@@ -34,16 +71,43 @@ Detect_person_cml::halt()
     ROS_INFO("Detect_person_cml halt");
 }
 
-BT::NodeStatus
-Detect_person_cml::tick()
+void Detect_person_cml::DetectPersonBBXCallback(const darknet_ros_msgs::BoundingBoxesConstPtr& boxes)
 {
-  ROS_INFO("Detect_person_cml tick");
+  //ROS_INFO("DetectPersonBBXCallback");
+  for (const auto & box : boxes->bounding_boxes)
+  {
+    if (box.Class == "person")
+    {
+      std::cerr << "CALLBACK PX" << std::endl;
+      px = (box.xmax + box.xmin) / 2;
+      py = (box.ymax + box.ymin) / 2;
+      is_person = true;
+    }
+  } 
+}
 
-  setOutput<float>("dist_w", 1);
-  // El valor debería ser el que devuelva el funcionamiento real de Detect_person_cml (1 es un valor provisional)
-  std::cerr << dist << std::endl;
+void Detect_person_cml::DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image)
+{
+  //ROS_INFO("DetectPersonImageCallback");
+  sleep(0.1);
+  try
+  {
+    img_ptr_depth = cv_bridge::toCvCopy(*image, sensor_msgs::image_encodings::TYPE_32FC1);
+  }
+  catch (cv_bridge::Exception& e)
+  {
+    ROS_ERROR("cv_bridge exception:  %s", e.what());
+    return;
+  }
 
-  return BT::NodeStatus::SUCCESS;
+  dist_w = img_ptr_depth->image.at<float>(cv::Point(px, py)) * 0.001f;
+  //dist_w = dist_w * 1000; //--------------------Para Simulador
+  centre_w = (px - 300) / 300.0;
+  if (&dist_w == NULL)
+  {
+    std::cerr << "CALLBACK == NULL" << std::endl;
+    dist_w = 0.0;
+  }
 }
 
 }  // namespace robocup_nocom_pila
