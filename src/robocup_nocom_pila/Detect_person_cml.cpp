@@ -32,34 +32,53 @@ BT::NodeStatus
 Detect_person_cml::tick()
 {
   ROS_INFO("Detect_person_cml tick");
+  if (prev_dist_ == -1.0 && dist_w < 5 && dist_w > 0.0)
+  {
+    prev_dist_ = dist_w;
+  }
   if(is_person == true && dist_w != 0.0)
   {
-    //std::cerr << "HAY PERSONA" << std::endl;
-    if (dist_w < 5 && dist_w > 0.0)
+    std::cerr << "Distancia Real: " << dist_w <<std::endl;
+    diff_dist_ = prev_dist_- dist_w;
+    if (diff_dist_ < 0.0)
+      {
+        diff_dist_ = -diff_dist_;
+      }
+    std::cerr << prev_dist_ << " - "<< dist_w <<  " = " << prev_dist_- dist_w << " = " << diff_dist_ <<std::endl;
+    if (diff_dist_ < 0.5)
     {
-      setOutput<float>("w_dist", dist_w);
-      setOutput<double>("w_centre", centre_w);
-      cont = 0;
-      is_person = false;
-      return BT::NodeStatus::SUCCESS;
+      if (dist_w < 4.5 && dist_w > 0.0)
+      {
+      //std::cerr << "HAY PERSONA" << std::endl;
+        setOutput<float>("w_dist", dist_w);
+        setOutput<double>("w_centre", centre_w);
+        cont = 0;
+        is_person = false;
+        prev_dist_ = dist_w;
+        return BT::NodeStatus::SUCCESS;
+      }
+      else
+      std::cerr << "posible nan         " << dist_w <<std::endl;
+      if (cont >= 20)
+      {
+        std::cerr << "Acércate o cierra las piernas, porfa "<< std::endl;
+      }
+      cont++;
+      return BT::NodeStatus::RUNNING;
     }
     else
-    std::cerr << "posible nan         " << dist_w <<std::endl;
-    if (cont >= 20)
     {
-      std::cerr << "Acércate o cierra las piernas, porfa "<< std::endl;
-    }
-    cont++;
-    return BT::NodeStatus::RUNNING;
+      if (cont >= 20)
+      {
+        std::cerr << "No encuentro persona, AYUDA "<< std::endl;
+      }
+      cont++;
+      return BT::NodeStatus::RUNNING;
+    }  
   }
-  else
+  else 
   {
-    //std::cerr << "NO HAY PERSONA" << std::endl;
-    if (cont >= 20)
-    {
-      std::cerr << "No encuentro persona, AYUDA "<< std::endl;
-    }
-    cont++;
+    std::cerr << "!! is_person == true && dist_w != 0.0      " << dist_w <<std::endl;
     return BT::NodeStatus::RUNNING;
   }
 }
@@ -78,7 +97,7 @@ void Detect_person_cml::DetectPersonBBXCallback(const darknet_ros_msgs::Bounding
   {
     if (box.Class == "person")
     {
-      std::cerr << "CALLBACK PX" << std::endl;
+      //std::cerr << "CALLBACK PX" << std::endl;
       px = (box.xmax + box.xmin) / 2;
       py = (box.ymax + box.ymin) / 2;
       is_person = true;
@@ -103,9 +122,11 @@ void Detect_person_cml::DetectPersonImageCallback(const sensor_msgs::ImageConstP
   dist_w = img_ptr_depth->image.at<float>(cv::Point(px, py)) * 0.001f;
   //dist_w = dist_w * 1000; //--------------------Para Simulador
   centre_w = (px - 300) / 300.0;
+
+
   if (&dist_w == NULL)
   {
-    std::cerr << "CALLBACK == NULL" << std::endl;
+    std::cerr << "dist_w == NULL" << std::endl;
     dist_w = 0.0;
   }
 }

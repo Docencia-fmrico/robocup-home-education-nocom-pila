@@ -65,8 +65,11 @@ private:
     int cont = 0;
     int bbx_counter_ = 0;
     
+    int prev_dist_ = -1.0;
+    int diff_dist_ = 0.0;
+
     int counter_;
-};
+    };
 
 }  // namespace robocup_nocom_pila
 
