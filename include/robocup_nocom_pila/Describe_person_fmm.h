@@ -52,6 +52,7 @@ private:
     std::string color_r;
     std::string name_r;
     std::string object_r;
+    std::string n_person;
     gb_dialog::ExampleDF forwarder;
 };
 

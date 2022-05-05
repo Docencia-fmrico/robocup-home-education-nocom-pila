@@ -78,7 +78,7 @@ void Detect_person_cml::DetectPersonBBXCallback(const darknet_ros_msgs::Bounding
   {
     if (box.Class == "person")
     {
-      std::cerr << "CALLBACK PX" << std::endl;
+      //std::cerr << "CALLBACK PX" << std::endl;
       px = (box.xmax + box.xmin) / 2;
       py = (box.ymax + box.ymin) / 2;
       is_person = true;

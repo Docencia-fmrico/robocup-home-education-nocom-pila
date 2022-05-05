@@ -112,7 +112,11 @@ Go_person_fmm::tick()
     my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
     action = false;
   }
-
+  if(my_node.aborted())
+  {
+    action = true;
+    return BT::NodeStatus::RUNNING;
+  }
   if (my_node.checkstatus())
   {
     action = true;

@@ -42,7 +42,7 @@ Detect_person_fmm::tick()
 
   sleep(0.5);
 
-  if (is_person == true && dist <= 1.5 && dist != 0)
+  if (is_person == true && dist <= 1.75 && dist != 0)
   {
     // std::cerr << "HAY PERSONA" << std::endl;
     // std::cerr << dist << std::endl;
@@ -61,7 +61,7 @@ Detect_person_fmm::tick()
   {
     // std::cerr << "NO HAY PERSONA" << std::endl;
     // std::cerr << dist << std::endl;
-    if (repeticiones >= 30)
+    if (repeticiones >= 20)
     {
       setOutput<int>("w_person", person);
       setOutput<int>("w_state", 1);

@@ -63,21 +63,21 @@ public:
     }
 
 private:
-    /*const float ADVANCE_SPEED = 0.1;
-    const float TURNING_SPEED = 0.35;
-
     
-    ros::Publisher vel_pub_;
-    ros::Subscriber dist_point_person;
-    ros::Subscriber px_point_person;
-
-    float dist;
-    int point;*/
     int px_max;
     int px_min;
     ros::Subscriber bagDarknet;
     ros::Subscriber orderDiag;
     ros::NodeHandle nh;
+
+    ros::Time turn_ts_;
+    ros::Time turn_ts_2;
+    
+    ros::Publisher pub_vel_;
+    int person;
+    int time = 0;
+    int time2 = 1;
+    
     int counter_;
     int num = 0;
     int repeticiones = 0;

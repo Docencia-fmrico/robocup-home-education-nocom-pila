@@ -40,9 +40,31 @@ Describe_person_fmm::tick()
     ROS_INFO("Describe_person_fmm tick");
     
     person = getInput<int>("r_person").value();
-    if( person >= 6)
+    if( person >= 7)
     {
       return BT::NodeStatus::SUCCESS;
+    }
+
+    switch(person)
+    {
+      case 2:
+        n_person = " 1 ";
+      break;
+      case 3:
+        n_person = " 2 ";
+      break;
+      case 4:
+        n_person = " 3 ";
+      break;
+      case 5:
+        n_person = " 4 ";
+      break;
+      case 6:
+        n_person = " 5 ";
+      break;
+      case 7:
+        n_person = " 6 ";
+      break;
     }
 
     name_r = getInput<std::string>("r_name").value();
@@ -51,7 +73,7 @@ Describe_person_fmm::tick()
 
     sleep(0.1);
     
-    forwarder.speak(name_r + " tishirt is " + color_r + " and have a " + object_r);
+    forwarder.speak("The person number " + n_person + " is " + name_r + " wear a " + color_r + " tishirt and have a " + object_r);
     
     sleep(1);
     

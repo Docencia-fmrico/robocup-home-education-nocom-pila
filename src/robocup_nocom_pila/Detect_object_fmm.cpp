@@ -48,7 +48,7 @@ Detect_object_fmm::tick()
   
   sleep(0.5);
 
-  if (object != "" && dist <= 1.5 && dist != 0)
+  if (object != "" && dist <= 1.75 && dist != 0)
   {
     // std::cerr << "HAY OBJECTO" << std::endl;
     // std::cerr << dist << "\t" << object << std::endl;
@@ -66,7 +66,7 @@ Detect_object_fmm::tick()
   {
     // std::cerr << "NO HAY OBJECT" << std::endl;
     // std::cerr << dist << std::endl;
-    if (repeticiones >= 50)
+    if (repeticiones >= 20)
     {
       object = "bottle";
       setOutput<std::string>("w_object", object);

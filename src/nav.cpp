@@ -60,7 +60,14 @@ void doneCb(const actionlib::SimpleClientGoalState& state,
   const move_base_msgs::MoveBaseResultConstPtr& result)
 {
   ROS_INFO("Finished in state [%s]", state.toString().c_str());
-  finish = true;
+  if(state.toString().c_str() == "ABORTED")
+  {
+    abort = true;
+  }
+  else
+  {
+    finish = true;
+  }
 }
 
 bool checkstatus()
@@ -68,7 +75,14 @@ bool checkstatus()
   return finish;
 }
 
+
+bool aborted()
+{
+  return abort;
+}
+
 private:
   bool finish = false;
+  bool abort = false;
   Client ac;
 };
