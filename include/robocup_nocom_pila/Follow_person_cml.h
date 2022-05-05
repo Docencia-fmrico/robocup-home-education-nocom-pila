@@ -35,28 +35,29 @@ namespace robocup_nocom_pila
 class Follow_person_cml : public BT::ActionNodeBase
 {
 public:
-    explicit Follow_person_cml(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Follow_person_cml(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
-/*
+
     static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<float>("dist_r")};
+        return { BT::InputPort<float>("r_dist"), BT::InputPort<int>("r_centre"), BT::OutputPort<int>("counter"), BT::InputPort<int>("counter")};
     }
-*/
+
 private:
-    /*const float ADVANCE_SPEED = 0.1;
-    const float TURNING_SPEED = 0.35;*/
+
     const double MIN_TURN_SPEED = 0.0;
-    const double MAX_TURN_SPEED = 0.4;
-    const double MIN_RANG_BOX = -300;
-    const double MAX_RANG_BOX = 300;
+    const double MAX_TURN_SPEED = 0.7;
+    const double MIN_RANG_BOX = -1.0;
+    const double MAX_RANG_BOX = 1.0;
+
     const double MIN_FORW_SPEED = 0.0;
-    const double MAX_FORW_SPEED = 0.3;
-    const double MIN_FORW_DIST = 1;
-    const double MAX_FORW_DIST = 2.5;
+    const double MAX_FORW_SPEED = 0.45;
+    const double MIN_FORW_DIST = 0.0;
+    const double MAX_FORW_DIST = 1.0;
+
     const double MIN_BACKW_DIST = 0.1;
     const double MAX_BACKW_DIST = 1;
 
@@ -64,15 +65,18 @@ private:
     const float MAX_TURNING_SPEED = 0.45;
 
     ros::NodeHandle n_;
-    ros::Publisher vel_pub_;
+    ros::Publisher pub_vel_;
 
-    float dist, pos;
+    float dist_r;
+    double centre_r;
+    bool is_person = false;
     PIDController turn_pid_, forw_pid_;
     int point;
-    int counter_;
+    int counter_ = 0;
+    double ang_vel_, lin_vel_;
+    int bbx_counter_ = 0;
 };
 
 }  // namespace robocup_nocom_pila
 
 #endif  // ROBOCUP_NOCOM_PILA_FOLLOW_PERSON_CML_H
-

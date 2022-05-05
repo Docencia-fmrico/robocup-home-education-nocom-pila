@@ -17,12 +17,16 @@
 
 #include "ros/ros.h"
 
+#include <cv_bridge/cv_bridge.h>
+
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
-#include <sensor_msgs/Image.h>
 #include "std_msgs/Float64.h"
 #include "std_msgs/Int64.h"
+
+#include <sensor_msgs/Image.h>
+#include <darknet_ros_msgs/BoundingBoxes.h>
 
 #include <string>
 
@@ -36,24 +40,31 @@ public:
 
     void halt();
 
+    void DetectPersonBBXCallback(const darknet_ros_msgs::BoundingBoxes::ConstPtr& obj);
+    void DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image);
+
     BT::NodeStatus tick();
 
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<float>("dist_w")};
+        return { BT::OutputPort<float>("w_dist"), BT::OutputPort<double>("w_centre"), BT::OutputPort<int>("counter"), BT::InputPort<int>("counter")};
     }
 
 private:
-    /*const float ADVANCE_SPEED = 0.1;
-    const float TURNING_SPEED = 0.35;
+    ros::NodeHandle nh_;
+    ros::Subscriber objects_bbx;
+    ros::Subscriber objects_image;
+    
+    cv_bridge::CvImagePtr img_ptr_depth;
 
-    ros::NodeHandle n_;
-    ros::Publisher vel_pub_;
-    ros::Subscriber dist_point_person;
-    ros::Subscriber px_point_person;
-*/
-    float dist;
-
+    float dist_w = 0;
+    double centre_w = 0;
+    int px = 0;
+    int py = 0;
+    bool is_person = false;
+    int cont = 0;
+    int bbx_counter_ = 0;
+    
     int counter_;
 };
 
