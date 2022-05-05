@@ -120,7 +120,7 @@ void Detect_person_cml::DetectPersonImageCallback(const sensor_msgs::ImageConstP
   }
 
   dist_w = img_ptr_depth->image.at<float>(cv::Point(px, py)) * 0.001f;
-  dist_w = dist_w * 1000; //--------------------Para Simulador
+  //dist_w = dist_w * 1000; //--------------------Para Simulador
   centre_w = (px - 300) / 300.0;
 
 
