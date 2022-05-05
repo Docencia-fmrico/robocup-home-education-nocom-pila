@@ -40,7 +40,7 @@ Describe_person_fmm::tick()
     ROS_INFO("Describe_person_fmm tick");
     
     person = getInput<int>("r_person").value();
-    if( person >= 7)
+    if( person >= 6)
     {
       return BT::NodeStatus::SUCCESS;
     }

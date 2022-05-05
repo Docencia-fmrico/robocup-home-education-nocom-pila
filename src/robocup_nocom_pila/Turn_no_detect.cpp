@@ -42,7 +42,7 @@ Turn_no_detect::tick()
   ROS_INFO("Turn_no_detect tick");
   
   person = getInput<int>("r_person").value();
-  if( person >= 7)
+  if( person >= 8)
   {
     return BT::NodeStatus::SUCCESS;
   }
@@ -70,6 +70,9 @@ Turn_no_detect::tick()
       ROS_INFO("FINISED");
       time = 0;
       setOutput<int>("w_state", 0);
+      if( person == 7){
+        return BT::NodeStatus::SUCCESS;
+      }
       return BT::NodeStatus::FAILURE;
     }
 
