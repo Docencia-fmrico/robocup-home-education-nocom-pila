@@ -46,7 +46,7 @@ Follow_person_cml::tick()
   geometry_msgs::Twist msg;
   
   dist_r = getInput<float>("r_dist").value();
-  //std::cerr << "Distancia real: " << dist_r << std::endl; 
+  std::cerr << "Distancia real: " << dist_r << std::endl; 
   dist_r = (dist_r - MIN_DISTANCE) / MAX_VEL_DISTANCE;
   centre_r = getInput<double>("r_centre").value();
 
