@@ -21,19 +21,12 @@
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
 #include <sensor_msgs/Image.h>
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int64.h"
-#include <message_filters/subscriber.h>
-#include <message_filters/time_synchronizer.h>
-#include <message_filters/sync_policies/approximate_time.h>
 
 #include <cv_bridge/cv_bridge.h>
 
-#include <sensor_msgs/Image.h>
 #include <darknet_ros_msgs/BoundingBoxes.h>
 #include "std_msgs/String.h"
 #include "../src/chatbot.cpp"
-
 
 #include <string>
 
@@ -43,27 +36,17 @@ namespace robocup_nocom_pila
 class Detect_bag_cml : public BT::ActionNodeBase
 {
 public:
-    explicit Detect_bag_cml(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Detect_bag_cml(const std::string& name);
 
     void halt();
 
     BT::NodeStatus tick();
 
-    void 
-    ImageCallback(const darknet_ros_msgs::BoundingBoxesConstPtr& boxes);
-    
-    void 
-    OrderCallback(const std_msgs::String::ConstPtr& msg);
-    void
-    get_order();
-
-    static BT::PortsList providedPorts()
-    {
-        return { BT::OutputPort<std::string>("r_order")};
-    }
+    void ImageCallback(const darknet_ros_msgs::BoundingBoxesConstPtr& boxes);
+    void OrderCallback(const std_msgs::String::ConstPtr& msg);
+    void get_order();
 
 private:
-    
     int px_max;
     int px_min;
     ros::Subscriber bagDarknet;
@@ -72,12 +55,11 @@ private:
 
     ros::Time turn_ts_;
     ros::Time turn_ts_2;
-    
+
     ros::Publisher pub_vel_;
     int person;
     int time = 0;
     int time2 = 1;
-    
     int counter_;
     int num = 0;
     int repeticiones = 0;

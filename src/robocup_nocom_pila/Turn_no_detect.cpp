@@ -17,7 +17,6 @@
 
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
@@ -27,7 +26,7 @@ Turn_no_detect::Turn_no_detect(const std::string& name,  const BT::NodeConfigura
 {
   nh.getParam("TURNING_SPEED", TURNING_SPEED);
   nh.getParam("TURNING_TIME", TURNING_TIME);
-  pub_vel_ = nh.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1); 
+  pub_vel_ = nh.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
 }
 
 void
@@ -40,9 +39,9 @@ BT::NodeStatus
 Turn_no_detect::tick()
 {
   ROS_INFO("Turn_no_detect tick");
-  
+
   person = getInput<int>("r_person").value();
-  if( person >= 8)
+  if ( person >= 8)
   {
     return BT::NodeStatus::SUCCESS;
   }
@@ -50,11 +49,11 @@ Turn_no_detect::tick()
   state = getInput<int>("r_state").value();
   // std::cerr << state << std::endl;
 
-  if(state == 0)
+  if (state == 0)
   {
     return BT::NodeStatus::SUCCESS;
   }
-  else if(state == 1)
+  else if (state == 1)
   {
     geometry_msgs::Twist cmd;
     cmd.angular.z = TURNING_SPEED;
@@ -63,14 +62,14 @@ Turn_no_detect::tick()
       turn_ts_ = ros::Time::now();
       time = 1;
     }
-    
 
     if ((ros::Time::now()-turn_ts_).toSec() > TURNING_TIME )
     {
       ROS_INFO("FINISED");
       time = 0;
       setOutput<int>("w_state", 0);
-      if( person == 7){
+      if (person == 7)
+      {
         return BT::NodeStatus::SUCCESS;
       }
       return BT::NodeStatus::FAILURE;
@@ -80,6 +79,7 @@ Turn_no_detect::tick()
     return BT::NodeStatus::RUNNING;
   }
 }
+
 }  // namespace robocup_nocom_pila
 
 #include "behaviortree_cpp_v3/bt_factory.h"

@@ -17,7 +17,6 @@
 
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
@@ -96,9 +95,8 @@ Go_person_fmm::tick()
       nh.getParam("oz6", oz);
       nh.getParam("ow6", ow);
     break;
-    
   }
-
+/*
   std::cerr << px << std::endl;
   std::cerr << py << std::endl;
   std::cerr << pz << std::endl;
@@ -106,13 +104,13 @@ Go_person_fmm::tick()
   std::cerr << oy << std::endl;
   std::cerr << oz << std::endl;
   std::cerr << ow << std::endl;
-
+*/
   if (action)
   {
     my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
     action = false;
   }
-  if(my_node.aborted())
+  if (my_node.aborted())
   {
     action = true;
     return BT::NodeStatus::RUNNING;

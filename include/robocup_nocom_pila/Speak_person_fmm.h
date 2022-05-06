@@ -20,9 +20,6 @@
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
-#include <sensor_msgs/Image.h>
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int64.h"
 #include "../src/chatbot.cpp"
 
 #include <string>
@@ -46,9 +43,14 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<std::string>("w_name"), BT::OutputPort<std::string>("w_color"), BT::InputPort<int>("r_person")};
+        return
+        {
+            BT::OutputPort<std::string>("w_name"),
+            BT::OutputPort<std::string>("w_color"),
+            BT::InputPort<int>("r_person")
+        };
     }
-    
+
     void nameCallback(const std_msgs::String::ConstPtr& msg);
     void colorCallback(const std_msgs::String::ConstPtr& msg);
 

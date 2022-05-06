@@ -17,8 +17,6 @@
 
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
-
 
 namespace robocup_nocom_pila
 {
@@ -26,8 +24,8 @@ namespace robocup_nocom_pila
 Speak_person_fmm::Speak_person_fmm(const std::string& name, const BT::NodeConfiguration & config)
 : BT::ActionNodeBase(name, config), counter_(0)
 {
-   color_sub = nh.subscribe("/sound/color", 1, &Speak_person_fmm::colorCallback, this);
-   name_sub = nh.subscribe("/sound/name", 1, &Speak_person_fmm::nameCallback, this);
+  color_sub = nh.subscribe("/sound/color", 1, &Speak_person_fmm::colorCallback, this);
+  name_sub = nh.subscribe("/sound/name", 1, &Speak_person_fmm::nameCallback, this);
 }
 
 void
@@ -63,7 +61,7 @@ void
 Speak_person_fmm::get_color()
 {
   ROS_INFO("Speak_person_fmm get color");
-  sleep(0.1); 
+  sleep(0.1);
   forwarder.speak("Which is your t-shirt color?");
   sleep(0.5);
   forwarder.listen();
@@ -73,26 +71,26 @@ BT::NodeStatus
 Speak_person_fmm::tick()
 {
   ROS_INFO("Speak_person_fmm tick");
-  
+
   person = getInput<int>("r_person").value();
-  if( person >= 7)
+  if (person >= 7)
   {
     return BT::NodeStatus::SUCCESS;
   }
   // std::cerr << name << "\t" << color << std::endl;
 
-  if(name != "")
+  if (name != "")
   {
     num = 1;
   }
-  if(name != "" && color != "")
+  if (name != "" && color != "")
   {
     num = 2;
   }
 
   if (repeticiones == 0)
   {
-    switch(num)
+    switch (num)
     {
       case 0:
         get_name();
@@ -105,7 +103,7 @@ Speak_person_fmm::tick()
         return BT::NodeStatus::RUNNING;
       break;
       case 2:
-        num = 0; 
+        num = 0;
         name = "";
         color = "";
         return BT::NodeStatus::SUCCESS;
@@ -117,7 +115,6 @@ Speak_person_fmm::tick()
     repeticiones = 0;
     return BT::NodeStatus::RUNNING;
   }
-  
 }
 
 }  // namespace robocup_nocom_pila

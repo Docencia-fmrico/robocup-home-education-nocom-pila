@@ -14,9 +14,9 @@
 
 #include "robocup_nocom_pila/Start.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
+
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
@@ -40,7 +40,7 @@ Start::get_init()
   forwarder.listen();
 }
 
-void 
+void
 Start::startCallback(const std_msgs::String::ConstPtr& msg)
 {
     init = msg->data;
@@ -52,14 +52,14 @@ Start::tick()
     ROS_INFO("Start tick");
     // std::cerr << init <<  std::endl;
 
-    if(init != "")
+    if (init != "")
     {
         num = 1;
     }
 
     if (repeticiones == 0)
     {
-        switch(num)
+        switch (num)
         {
         case 0:
             get_init();
@@ -67,7 +67,7 @@ Start::tick()
             return BT::NodeStatus::RUNNING;
         break;
         case 1:
-            num = 0; 
+            num = 0;
             init = "";
             return BT::NodeStatus::SUCCESS;
         break;
@@ -78,9 +78,8 @@ Start::tick()
         repeticiones = 0;
         return BT::NodeStatus::RUNNING;
     }
-
-
 }
+
 }  // namespace robocup_nocom_pila
 
 #include "behaviortree_cpp_v3/bt_factory.h"

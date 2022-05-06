@@ -3,8 +3,7 @@
         <Sequence>
             <Start name="Start"/>
             <Go_operator_ name="go_operator" r_person="{person}"/> 
-            <!--<Speak_person_cml name="speak_person"/>-->
-            <Detect_bag_cml name="detect_bag" r_order="{order}"/>
+            <Detect_bag_cml name="detect_bag"/>
             <ReactiveSequence>
                 <Detect_person_cml name="detect_person" w_dist="{distance}" w_centre="{centre}" counter="{counter}"/>
                 <Follow_person_cml name="follow_person" r_dist="{distance}" r_centre="{centre}" counter="{counter}"/>

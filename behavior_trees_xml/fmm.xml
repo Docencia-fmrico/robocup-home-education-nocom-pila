@@ -15,7 +15,7 @@
                     <Describe_person_fmm name="Describe_person" r_name="{name}" r_color="{color}" r_object="{object}" r_person="{person}"/> 
                 </Sequence>
             </RetryUntilSuccessful>
-            <Go_home_ name="Go_home"/>
+            <!--<Go_home_ name="Go_home"/>-->
         </SequenceStar>
     </BehaviorTree>
 </root>

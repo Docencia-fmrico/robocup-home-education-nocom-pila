@@ -29,7 +29,7 @@ public:
     ROS_INFO("Action server started, sending goal.");
   }
 
-void doWork(int px, int py, int pz, int ox, int oy, int oz, int ow, long int until)
+void doWork(int px, int py, int pz, int ox, int oy, int oz, int ow, /*long*/ int until)
 {
 finish = false;
   move_base_msgs::MoveBaseGoal goal;
@@ -60,7 +60,7 @@ void doneCb(const actionlib::SimpleClientGoalState& state,
   const move_base_msgs::MoveBaseResultConstPtr& result)
 {
   ROS_INFO("Finished in state [%s]", state.toString().c_str());
-  if(state.toString().c_str() == "ABORTED")
+  if (state.toString().c_str() == "ABORTED")
   {
     abort = true;
   }

@@ -20,9 +20,7 @@
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
-#include <sensor_msgs/Image.h>
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int64.h"
+
 #include "std_msgs/String.h"
 #include <string>
 #include "../src/chatbot.cpp"
@@ -41,11 +39,17 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("r_name"), BT::InputPort<std::string>("r_color"), BT::InputPort<std::string>("r_object"), BT::InputPort<int>("r_person")};
+        return
+        {
+            BT::InputPort<std::string>("r_name"),
+            BT::InputPort<std::string>("r_color"),
+            BT::InputPort<std::string>("r_object"),
+            BT::InputPort<int>("r_person")
+            };
     }
 
 private:
-    int person; 
+    int person;
     int counter_;
     int count = 1;
     int num = 0;

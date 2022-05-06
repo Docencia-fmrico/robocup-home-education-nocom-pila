@@ -12,15 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_TURN_H
-#define ROBOCUP_NOCOM_PILA_TURN_H
+#ifndef ROBOCUP_NOCOM_PILA_TURN__H
+#define ROBOCUP_NOCOM_PILA_TURN__H
 
 #include "ros/ros.h"
 
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
-#include <sensor_msgs/Image.h>
 
 #include <string>
 
@@ -42,7 +41,6 @@ public:
     }
 
 private:
-
     ros::NodeHandle nh;
     double TURNING_TIME;
     double TURNING_SPEED;
@@ -56,4 +54,4 @@ private:
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_TURN_H
+#endif  // ROBOCUP_NOCOM_PILA_TURN__H

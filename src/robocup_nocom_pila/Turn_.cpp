@@ -17,7 +17,6 @@
 
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
@@ -27,7 +26,7 @@ Turn_::Turn_(const std::string& name, const BT::NodeConfiguration& config)
 {
   nh.getParam("TURNING_SPEED", TURNING_SPEED);
   nh.getParam("TURNING_TIME", TURNING_TIME);
-  pub_vel_ = nh.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1); 
+  pub_vel_ = nh.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
 }
 
 void
@@ -40,22 +39,21 @@ BT::NodeStatus
 Turn_::tick()
 {
   ROS_INFO("Turn_ tick");
-  
+
   person = getInput<int>("r_person").value();
-  if( person >= 7)
+  if ( person >= 7)
   {
     return BT::NodeStatus::SUCCESS;
   }
 
   geometry_msgs::Twist cmd;
   cmd.angular.z = TURNING_SPEED;
-  
-  if ( time == 0)
+
+  if (time == 0)
   {
     turn_ts_ = ros::Time::now();
     time = 1;
   }
-   
 
   if ((ros::Time::now()-turn_ts_).toSec() > TURNING_TIME )
   {
@@ -67,6 +65,7 @@ Turn_::tick()
   pub_vel_.publish(cmd);
   return BT::NodeStatus::RUNNING;
 }
+
 }  // namespace robocup_nocom_pila
 
 #include "behaviortree_cpp_v3/bt_factory.h"

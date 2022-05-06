@@ -57,7 +57,6 @@ include_directories(
 
 add_library(pid SHARED src/robocup_nocom_pila/PIDController.cpp)
 
-add_library(nc_speak_person_cml SHARED src/robocup_nocom_pila/Speak_person_cml.cpp)
 add_library(nc_detect_bag_cml SHARED src/robocup_nocom_pila/Detect_bag_cml.cpp)
 add_library(nc_detect_person_cml SHARED src/robocup_nocom_pila/Detect_person_cml.cpp)
 add_library(nc_follow_person_cml SHARED src/robocup_nocom_pila/Follow_person_cml.cpp)
@@ -75,7 +74,6 @@ add_library(nc_turn_ SHARED src/robocup_nocom_pila/Turn_.cpp)
 add_library(nc_turn_no_detect SHARED src/robocup_nocom_pila/Turn_no_detect.cpp)
 
 list(APPEND plugin_libs
-  nc_speak_person_cml
   nc_detect_bag_cml
   nc_detect_person_cml
   nc_follow_person_cml
@@ -117,7 +115,6 @@ roslint_cpp(
   src/nodo_cml.cpp
   src/nodo_fmm.cpp
 
-  include/robocup_nocom_pila/Speak_person_cml.h src/robocup_nocom_pila/Speak_person_cml.cpp
   include/robocup_nocom_pila/Detect_bag_cml.h src/robocup_nocom_pila/Detect_bag_cml.cpp
   include/robocup_nocom_pila/Detect_person_cml.h src/robocup_nocom_pila/Detect_person_cml.cpp
   include/robocup_nocom_pila/Follow_person_cml.h src/robocup_nocom_pila/Follow_person_cml.cpp

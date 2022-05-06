@@ -26,18 +26,10 @@
 #include <sensor_msgs/Image.h>
 #include <darknet_ros_msgs/BoundingBoxes.h>
 
-#include <message_filters/subscriber.h>
-#include <message_filters/time_synchronizer.h>
-#include <message_filters/sync_policies/approximate_time.h>
-
-
-
 #include <string>
 
 namespace robocup_nocom_pila
 {
-
-
 
 class Detect_object_fmm : public BT::ActionNodeBase
 {
@@ -47,11 +39,11 @@ public:
     void callback_bbx(const sensor_msgs::ImageConstPtr& image, const darknet_ros_msgs::BoundingBoxesConstPtr& boxes);
 
     void halt();
-    
-    void DetectObjectBBXCallback(const darknet_ros_msgs::BoundingBoxes::ConstPtr& obj);
-    void DetectObjectImageCallback(const sensor_msgs::ImageConstPtr& image);
 
     BT::NodeStatus tick();
+
+    void DetectObjectBBXCallback(const darknet_ros_msgs::BoundingBoxes::ConstPtr& obj);
+    void DetectObjectImageCallback(const sensor_msgs::ImageConstPtr& image);
 
     static BT::PortsList providedPorts()
     {

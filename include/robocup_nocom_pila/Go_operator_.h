@@ -12,15 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_GO_OPERATOR_H
-#define ROBOCUP_NOCOM_PILA_GO_OPERATOR_H
+#ifndef ROBOCUP_NOCOM_PILA_GO_OPERATOR__H
+#define ROBOCUP_NOCOM_PILA_GO_OPERATOR__H
 
 #include "ros/ros.h"
 
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
-#include <sensor_msgs/Image.h>
 
 #include "../src/nav.cpp"
 
@@ -64,4 +63,4 @@ private:
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_GO_OPERATOR_H
+#endif  // ROBOCUP_NOCOM_PILA_GO_OPERATOR__H

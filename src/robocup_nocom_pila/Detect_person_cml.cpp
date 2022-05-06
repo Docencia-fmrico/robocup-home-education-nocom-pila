@@ -17,7 +17,6 @@
 
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
@@ -26,15 +25,15 @@ Detect_person_cml::Detect_person_cml(const std::string& name, const BT::NodeConf
 : BT::ActionNodeBase(name, config), counter_(0)
 {
   objects_bbx = nh_.subscribe("/darknet_ros/bounding_boxes", 1, &Detect_person_cml::DetectPersonBBXCallback, this);
-  objects_image = nh_.subscribe("/camera/depth/image_raw", 1, &Detect_person_cml::DetectPersonImageCallback, this);  
+  objects_image = nh_.subscribe("/camera/depth/image_raw", 1, &Detect_person_cml::DetectPersonImageCallback, this);
 }
 BT::NodeStatus
 Detect_person_cml::tick()
 {
   ROS_INFO("Detect_person_cml tick");
-  if(is_person == true && dist_w != 0.0)
+  if (is_person == true && dist_w != 0.0)
   {
-    //std::cerr << "HAY PERSONA" << std::endl;
+    // std::cerr << "HAY PERSONA" << std::endl;
     if (dist_w < 5 && dist_w > 0.0)
     {
       setOutput<float>("w_dist", dist_w);
@@ -54,7 +53,7 @@ Detect_person_cml::tick()
   }
   else
   {
-    //std::cerr << "NO HAY PERSONA" << std::endl;
+    // std::cerr << "NO HAY PERSONA" << std::endl;
     if (cont >= 20)
     {
       std::cerr << "No encuentro persona, AYUDA "<< std::endl;
@@ -64,7 +63,6 @@ Detect_person_cml::tick()
   }
 }
 
-
 void
 Detect_person_cml::halt()
 {
@@ -73,22 +71,22 @@ Detect_person_cml::halt()
 
 void Detect_person_cml::DetectPersonBBXCallback(const darknet_ros_msgs::BoundingBoxesConstPtr& boxes)
 {
-  //ROS_INFO("DetectPersonBBXCallback");
+  // ROS_INFO("DetectPersonBBXCallback");
   for (const auto & box : boxes->bounding_boxes)
   {
     if (box.Class == "person")
     {
-      //std::cerr << "CALLBACK PX" << std::endl;
+      // std::cerr << "CALLBACK PX" << std::endl;
       px = (box.xmax + box.xmin) / 2;
       py = (box.ymax + box.ymin) / 2;
       is_person = true;
     }
-  } 
+  }
 }
 
 void Detect_person_cml::DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image)
 {
-  //ROS_INFO("DetectPersonImageCallback");
+  // ROS_INFO("DetectPersonImageCallback");
   sleep(0.1);
   try
   {
@@ -101,7 +99,7 @@ void Detect_person_cml::DetectPersonImageCallback(const sensor_msgs::ImageConstP
   }
 
   dist_w = img_ptr_depth->image.at<float>(cv::Point(px, py)) * 0.001f;
-  //dist_w = dist_w * 1000; //--------------------Para Simulador
+  // dist_w = dist_w * 1000; //--------------------Para Simulador
   centre_w = (px - 300) / 300.0;
   if (&dist_w == NULL)
   {
