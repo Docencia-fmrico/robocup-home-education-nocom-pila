@@ -43,7 +43,7 @@ py6: 3.2
 pz6: 0  
 ox6: 0  
 oy6: 0  
-oz6: -1.5
+oz6: -1
 ow6: 1
 
 opx: 5.5
@@ -62,5 +62,5 @@ hoy: 0
 hoz: 0  
 how: 1
 
-TURNING_SPEED: 0.9
-TURNING_TIME: 5.0
+TURNING_SPEED: 1.4
+TURNING_TIME: 3.0
