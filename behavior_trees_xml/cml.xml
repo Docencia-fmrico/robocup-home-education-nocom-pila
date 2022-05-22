@@ -1,0 +1,14 @@
+<root main_tree_to_execute = "MainTree" >
+    <BehaviorTree ID="MainTree">
+        <Sequence>
+            <Start name="Start"/>
+            <Go_operator_ name="go_operator" r_person="{person}"/> 
+            <Detect_bag_cml name="detect_bag"/>
+            <ReactiveSequence>
+                <Detect_person_cml name="detect_person" w_dist="{distance}" w_centre="{centre}" counter="{counter}"/>
+                <Follow_person_cml name="follow_person" r_dist="{distance}" r_centre="{centre}" counter="{counter}"/>
+            </ReactiveSequence>
+            <Go_home_ name="go_home"/>
+        </Sequence>
+    </BehaviorTree>
+</root>

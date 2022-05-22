@@ -1,0 +1,7 @@
+<launch>
+    <!-- <include file="$(find robots)/launch/sim.launch"/> -->
+    <!-- <include file="$(find robots)/launch/kobuki_rplidar.launch"/> -->
+
+    <include file="$(find navigation)/launch/slam_mapping.launch"/>
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find robocup_nocom_pila)/rviz_conf/rviz_test.rviz" />
+</launch>
