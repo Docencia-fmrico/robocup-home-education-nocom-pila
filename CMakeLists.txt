@@ -67,6 +67,13 @@ add_library(nc_go_person_fmm SHARED src/robocup_nocom_pila/Go_person_fmm.cpp)
 add_library(nc_speak_person_fmm SHARED src/robocup_nocom_pila/Speak_person_fmm.cpp)
 add_library(nc_detect_object_fmm SHARED src/robocup_nocom_pila/Detect_object_fmm.cpp)
 
+add_library(nc_ask_info_rec SHARED src/robocup_nocom_pila/Ask_info_rec.cpp)
+add_library(nc_goto_chair_rec SHARED src/robocup_nocom_pila/Goto_chair_rec.cpp)
+add_library(nc_goto_guest_rec SHARED src/robocup_nocom_pila/Goto_guest_rec.cpp)
+add_library(nc_introduce_guest_rec SHARED src/robocup_nocom_pila/Introduce_guest_rec.cpp)
+add_library(nc_offer_chair_rec SHARED src/robocup_nocom_pila/Offer_chair_rec.cpp)
+add_library(nc_turn_is_empty_rec SHARED src/robocup_nocom_pila/Turn_is_empty_rec.cpp)
+
 add_library(nc_go_home_ SHARED src/robocup_nocom_pila/Go_home_.cpp)
 add_library(nc_go_operator_ SHARED src/robocup_nocom_pila/Go_operator_.cpp)
 add_library(nc_start_ SHARED src/robocup_nocom_pila/Start.cpp)
@@ -83,6 +90,13 @@ list(APPEND plugin_libs
   nc_go_person_fmm
   nc_speak_person_fmm
   nc_detect_object_fmm
+
+  nc_ask_info_rec
+  nc_goto_chair_rec
+  nc_goto_guest_rec
+  nc_introduce_guest_rec
+  nc_offer_chair_rec
+  nc_turn_is_empty_rec
 
   nc_go_operator_
   nc_go_home_
@@ -106,6 +120,12 @@ add_executable(nodo_fmm
 )
 target_link_libraries(nodo_fmm ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
 
+add_executable(nodo_rec 
+  src/nodo_rec.cpp
+)
+target_link_libraries(nodo_rec ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
+
+
 add_executable(chatbot 
   src/chatbot.cpp
 )
@@ -114,6 +134,7 @@ target_link_libraries(chatbot ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
 roslint_cpp(
   src/nodo_cml.cpp
   src/nodo_fmm.cpp
+  src/nodo_rec.cpp
 
   include/robocup_nocom_pila/Detect_bag_cml.h src/robocup_nocom_pila/Detect_bag_cml.cpp
   include/robocup_nocom_pila/Detect_person_cml.h src/robocup_nocom_pila/Detect_person_cml.cpp
@@ -125,6 +146,13 @@ roslint_cpp(
   include/robocup_nocom_pila/Go_person_fmm.h src/robocup_nocom_pila/Go_person_fmm.cpp
   include/robocup_nocom_pila/Speak_person_fmm.h src/robocup_nocom_pila/Speak_person_fmm.cpp
   include/robocup_nocom_pila/Detect_object_fmm.h src/robocup_nocom_pila/Detect_object_fmm.cpp
+
+  include/robocup_nocom_pila/Ask_info_rec.h src/robocup_nocom_pila/Ask_info_rec.cpp
+  include/robocup_nocom_pila/Goto_chair_rec.h src/robocup_nocom_pila/Goto_chair_rec.cpp
+  include/robocup_nocom_pila/Goto_guest_rec.h src/robocup_nocom_pila/Goto_guest_rec.cpp
+  include/robocup_nocom_pila/Introduce_guest_rec.h src/robocup_nocom_pila/Introduce_guest_rec.cpp
+  include/robocup_nocom_pila/Offer_chair_rec.h src/robocup_nocom_pila/Offer_chair_rec.cpp
+  include/robocup_nocom_pila/Turn_is_empty_rec.h src/robocup_nocom_pila/Turn_is_empty_rec.cpp
   
   include/robocup_nocom_pila/Go_operator_.h src/robocup_nocom_pila/Go_operator_.cpp
   include/robocup_nocom_pila/Go_home_.h src/robocup_nocom_pila/Go_home_.cpp
