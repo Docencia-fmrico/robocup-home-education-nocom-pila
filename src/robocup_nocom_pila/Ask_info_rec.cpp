@@ -21,42 +21,42 @@
 namespace robocup_nocom_pila
 {
 
-Ask_info::Ask_info(const std::string& name, const BT::NodeConfiguration & config)
+Ask_info_rec::Ask_info_rec(const std::string& name, const BT::NodeConfiguration & config)
 : BT::ActionNodeBase(name, config), counter_(0)
 {
-  age_sub = nh.subscribe("/sound/age", 1, &Ask_info::ageCallback, this);
-  name_sub = nh.subscribe("/sound/name", 1, &Ask_info::nameCallback, this);
+  age_sub = nh.subscribe("/sound/age", 1, &Ask_info_rec::ageCallback, this);
+  name_sub = nh.subscribe("/sound/name", 1, &Ask_info_rec::nameCallback, this);
 }
 
 void
-Ask_info::halt()
+Ask_info_rec::halt()
 {
-  ROS_INFO("Ask_info halt");
+  ROS_INFO("Ask_info_rec halt");
 }
 
-void Ask_info::nameCallback(const std_msgs::String::ConstPtr& msg)
+void Ask_info_rec::nameCallback(const std_msgs::String::ConstPtr& msg)
 {
   name = msg->data;
   setOutput<std::string>("w_name", name);
 }
 
 
-void Ask_info::ageCallback(const std_msgs::String::ConstPtr& msg)
+void Ask_info_rec::ageCallback(const std_msgs::String::ConstPtr& msg)
 {
   age = msg->data;
   setOutput<std::string>("w_age", age);
 }
 
-void Ask_info::drinkCallback(const std_msgs::String::ConstPtr& msg)
+void Ask_info_rec::drinkCallback(const std_msgs::String::ConstPtr& msg)
 {
-  age = msg->data;
-  setOutput<std::string>("w_drink", age);
+  drink = msg->data;
+  setOutput<std::string>("w_drink", drink);
 }
 
 void
-Ask_info::get_name()
+Ask_info_rec::get_name()
 {
-  ROS_INFO("Ask_info get name");
+  ROS_INFO("Ask_info_rec get name");
   sleep(0.1);
   forwarder.speak("What is your name?");
   sleep(0.5);
@@ -64,9 +64,9 @@ Ask_info::get_name()
 }
 
 void
-Ask_info::get_age()
+Ask_info_rec::get_age()
 {
-  ROS_INFO("Ask_info get age");
+  ROS_INFO("Ask_info_rec get age");
   sleep(0.1);
   forwarder.speak("How old are you?");
   sleep(0.5);
@@ -74,9 +74,9 @@ Ask_info::get_age()
 }
 
 void
-Ask_info::get_drink()
+Ask_info_rec::get_drink()
 {
-  ROS_INFO("Ask_info get favourite drink");
+  ROS_INFO("Ask_info_rec get favourite drink");
   sleep(0.1);
   forwarder.speak("And what's your favourite drink?");
   sleep(0.5);
@@ -84,9 +84,9 @@ Ask_info::get_drink()
 }
 
 BT::NodeStatus
-Ask_info::tick()
+Ask_info_rec::tick()
 {
-  ROS_INFO("Ask_info tick");
+  ROS_INFO("Ask_info_rec tick");
 
   chair = getInput<int>("r_chair").value();
   if (chair >= 7)
@@ -138,5 +138,5 @@ Ask_info::tick()
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<robocup_nocom_pila::Ask_info>("Ask_info");
+  factory.registerNodeType<robocup_nocom_pila::Ask_info_rec>("Ask_info_rec");
 }

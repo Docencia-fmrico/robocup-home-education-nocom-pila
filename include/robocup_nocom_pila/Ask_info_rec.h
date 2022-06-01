@@ -28,10 +28,10 @@
 namespace robocup_nocom_pila
 {
 
-class Ask_info : public BT::ActionNodeBase
+class Ask_info_rec : public BT::ActionNodeBase
 {
 public:
-    explicit Ask_info(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Ask_info_rec(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
@@ -71,6 +71,7 @@ private:
     int counter_;
     std::string age;
     std::string name;
+    std::string drink;
 };
 
 }  // namespace robocup_nocom_pila

@@ -32,7 +32,13 @@ int main(int argc, char **argv)
   BT::BehaviorTreeFactory factory;
   BT::SharedLibrary loader;
 
-  factory.registerFromPlugin(loader.getOSName("nc_go_home_"));
+  factory.registerFromPlugin(loader.getOSName("nc_goto_guest_rec"));
+  factory.registerFromPlugin(loader.getOSName("nc_ask_info_rec"));
+  factory.registerFromPlugin(loader.getOSName("nc_goto_chair_rec"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_operator_"));
+  factory.registerFromPlugin(loader.getOSName("nc_introduce_guest_rec"));
+  factory.registerFromPlugin(loader.getOSName("nc_offer_chair_rec"));
+  factory.registerFromPlugin(loader.getOSName("nc_start_"));
 
 
   auto blackboard = BT::Blackboard::create();

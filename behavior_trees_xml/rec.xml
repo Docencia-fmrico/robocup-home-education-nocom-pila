@@ -1,14 +1,17 @@
 <root main_tree_to_execute = "MainTree" >
     <BehaviorTree ID="MainTree">
-        <SequenceStar>
-            <Goto_guest_rec name="goto_guest" r_chair="{chair}"/>
-            <Ask_info_rec name="ask_info" w_name="{name}" w_age="{age}" w_drink="{drink}" r_chair="{chair}"/>
-            <ReactiveSequence>
-                <Goto_chair_rec name="goto_chair" r_chair="{chair}"/>
-                <Offer_chair_rec name="offer_chair" r_chair="{chair}"/>
-            <ReactiveSequence/>
-            <Go_Operator_ name="go_operator_" r_person="{person}"/>
-            <Introduce_guest_rec name="introduce_guest" w_name="{name}" w_age="{age}" w_drink="{drink}" r_chair="{chair}"/>
-        </SequenceStar>
+        <Sequence>
+            <Start name="Start"/> 
+            <SequenceStar>
+                <Goto_guest_rec name="goto_guest" r_chair="{chair}"/>
+                <Ask_info_rec name="ask_info" w_name="{name}" w_age="{age}" w_drink="{drink}" r_chair="{chair}"/>
+                <ReactiveSequence>
+                    <Goto_chair_rec name="goto_chair" r_chair="{chair}"/>
+                    <Offer_chair_rec name="offer_chair" r_chair="{chair}"/>
+                </ReactiveSequence>
+                <Go_operator_ name="Go_operator" r_person="{person}"/>
+                <Introduce_guest_rec name="introduce_guest" w_name="{name}" w_age="{age}" w_drink="{drink}" r_chair="{chair}"/>
+            </SequenceStar>
+        </Sequence>
     </BehaviorTree>
 </root>
