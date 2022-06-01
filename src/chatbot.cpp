@@ -15,6 +15,7 @@
 #include <gb_dialog/DialogInterface.h>
 #include <string>
 #include "std_msgs/String.h"
+#include "std_msgs/Char.h"
 
 
 namespace ph = std::placeholders;
@@ -30,6 +31,8 @@ class ExampleDF: public DialogInterface
       sound_pub_color = nh_.advertise<std_msgs::String>("/sound/color", 1);
       sound_pub_order = nh_.advertise<std_msgs::String>("/sound/order", 1);
       sound_pub_start = nh_.advertise<std_msgs::String>("/sound/start", 1);
+      sound_pub_drink = nh_.advertise<std_msgs::String>("/sound/drink", 1);
+      sound_pub_age = nh_.advertise<std_msgs::String>("/sound/age", 1);
 
       this->registerCallback(std::bind(&ExampleDF::noIntentCB, this, ph::_1));
       this->registerCallback(
@@ -44,6 +47,12 @@ class ExampleDF: public DialogInterface
       this->registerCallback(
         std::bind(&ExampleDF::startIntentCB, this, ph::_1),
         "Start_");
+      this->registerCallback(
+        std::bind(&ExampleDF::drinkIntentCB, this, ph::_1),
+        "Drinks");
+      this->registerCallback(
+        std::bind(&ExampleDF::ageIntentCB, this, ph::_1),
+        "Age_rec");
     }
 
     void noIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -141,12 +150,62 @@ class ExampleDF: public DialogInterface
     }
 
 
+    void drinkIntentCB(dialogflow_ros_msgs::DialogflowResult result)
+    {// Metodo para pedir que maleta coger.
+      std_msgs::String msg_drink;
+      
+      ROS_INFO("[ExampleDF] drinkIntentCB: intent [%s]", result.intent.c_str());
+
+      for(const auto & param : result.parameters)
+      {
+        // std::cerr << "Param: "<< param << std::endl;
+        for(const auto &value : param.value)
+        {
+          // std::cerr << "\t" << value << std::endl;
+          msg_drink.data = value;
+        }
+
+      }
+      if ( msg_drink.data != "")
+      {
+        sound_pub_drink.publish(msg_drink);
+      }
+      speak(result.fulfillment_text);      
+    }
+
+    void ageIntentCB(dialogflow_ros_msgs::DialogflowResult result)
+    {// Metodo para pedir que maleta coger.
+      std_msgs::String msg_years;
+      
+      ROS_INFO("[ExampleDF] drinkIntentCB: intent [%s]", result.intent.c_str());
+
+      msg_years.data = result.parameters[0].value[0].c_str();
+      // for(auto & param : result.parameters)
+      // {
+      //   // std::cerr << "Param: "<< param << std::endl;
+      //   for(auto &value : param.value)
+      //   {
+      //     // std::cerr << "\t" << value << std::endl;
+      //     msg_years.data = value;
+      //   }
+
+      // }
+      if ( msg_years.data != "")
+      {
+        sound_pub_age.publish(msg_years);
+      }
+      speak(result.fulfillment_text);      
+    }
+
+
   private:
     ros::NodeHandle nh_;
     ros::Publisher sound_pub_name;
     ros::Publisher sound_pub_color;
     ros::Publisher sound_pub_order;
     ros::Publisher sound_pub_start;
+    ros::Publisher sound_pub_drink;
+    ros::Publisher sound_pub_age;
 };
 
 }  // namespace gb_dialog
