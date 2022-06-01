@@ -15,7 +15,7 @@ Para esta prueba hemos empleado principalmente:
 3. Detecctión de personas por bounding boxes, en el nodo Follow_person del behavior tree
 
 Dicho BT empleado ha sido el siguiente:
-![Image text]()
+![Image text](https://github.com/Docencia-fmrico/robocup-home-education-nocom-pila/blob/main/raw/cml.png)
 
 Finalmente conseguimos hacer que el robot comenzara su funcionamiento por voz, sin necesidad de un botón de inicio. Además, llegó correctamente a la arena, situándose también de forma correcta enfrente del árbitro. A pesar de algunos problemas con las interacciones por diálogo, se orientó hacia la maleta correcta que indicó por voz el árbitro. Tras esto, siguió al árbitro correctamente fuera de la arena y logró salir también de la zona mapeada, aunque con algunos inconvenientes (el PID daba ciertos tirones tal como lo empleamos y tenía leves complicaciones evitando obstáculos). La parte final de volver a la arena no fuimos capaces de terminarla a tiempo.
 
@@ -32,6 +32,6 @@ Para esta prueba hemos utilizado:
 3. Detección de personas y objetos por medio de bounding boxes, en los nodos Detect_person y Detect_object de nuestro behavior tree
 
 Dicho BT implementado lo podemos ver en la siguiente imagen:
-![Image text]()
+![Image text](https://github.com/Docencia-fmrico/robocup-home-education-nocom-pila/blob/main/raw/fmm.png)
 
 Durante la realización de la prueba, logramos hacer que el robot iniciase, de igual modo que antes, sin necesidad de u n botón de comienzo. Tras esto, se desplazó a la arena sufriendo en su primer trayecto algunos problemas con la navegación, pero llegando finalmente a la segunda posición de las posibles en que podía haber ubicadas personas. Detectó de forma correcta el nombre y color de la camiseta de la primera persona por diálogo, además de su localización. Del mismo modo, logramos reportar al árbitro una segunda persona, aunque para la tercera hubo problemas. Dado que la navegación abortó a mitad de camino, el robot no reportó a la persona frente al árbitro pero consiguió emitir la información correcta.

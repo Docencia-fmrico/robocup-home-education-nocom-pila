@@ -17,7 +17,6 @@
 
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
@@ -37,35 +36,57 @@ Describe_person_fmm::halt()
 BT::NodeStatus
 Describe_person_fmm::tick()
 {
-    ROS_INFO("Describe_person_fmm tick");
-    
-    person = getInput<int>("r_person").value();
-    if( person >= 6)
-    {
-      return BT::NodeStatus::SUCCESS;
-    }
+  ROS_INFO("Describe_person_fmm tick");
+  person = getInput<int>("r_person").value();
+  if ( person >= 7)
+  {
+    return BT::NodeStatus::SUCCESS;
+  }
 
-    name_r = getInput<std::string>("r_name").value();
-    color_r = getInput<std::string>("r_color").value();
-    object_r = getInput<std::string>("r_object").value();
+  switch (person)
+  {
+    case 2:
+      n_person = " 1 ";
+    break;
+    case 3:
+      n_person = " 2 ";
+    break;
+    case 4:
+      n_person = " 3 ";
+    break;
+    case 5:
+      n_person = " 4 ";
+    break;
+    case 6:
+      n_person = " 5 ";
+    break;
+    case 7:
+      n_person = " 6 ";
+    break;
+  }
 
-    sleep(0.1);
-    
-    forwarder.speak(name_r + " tishirt is " + color_r + " and have a " + object_r);
-    
-    sleep(1);
-    
-    if (count >= 3)
-    {
-      return BT::NodeStatus::SUCCESS;
-    }
-    else
-    {
-      count = count + 1;
-      return BT::NodeStatus::FAILURE;
-    }
+  name_r = getInput<std::string>("r_name").value();
+  color_r = getInput<std::string>("r_color").value();
+  object_r = getInput<std::string>("r_object").value();
 
+  sleep(0.1);
+
+  forwarder.speak("The person number " + n_person + " is " + name_r +
+    " wear a " + color_r + " tishirt and have a " + object_r);
+
+  sleep(4);
+
+  if (count >= 3)
+  {
+    return BT::NodeStatus::SUCCESS;
+  }
+  else
+  {
+    count = count + 1;
+    return BT::NodeStatus::FAILURE;
+  }
 }
+
 }  // namespace robocup_nocom_pila
 
 #include "behaviortree_cpp_v3/bt_factory.h"

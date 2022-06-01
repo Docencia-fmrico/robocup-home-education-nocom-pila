@@ -18,13 +18,12 @@
 
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
 
 Follow_person_cml::Follow_person_cml(const std::string& name, const BT::NodeConfiguration & config)
-: BT::ActionNodeBase(name, config ), counter_(0), 
+: BT::ActionNodeBase(name, config), counter_(0),
 turn_pid_(MIN_RANG_BOX, MAX_RANG_BOX, MIN_TURN_SPEED, MAX_TURN_SPEED),
 forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
 {
@@ -34,9 +33,8 @@ forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
 void
 Follow_person_cml::halt()
 {
-    ROS_INFO("Follow_person_cml halt");
+  ROS_INFO("Follow_person_cml halt");
 }
-
 
 BT::NodeStatus
 Follow_person_cml::tick()
@@ -44,9 +42,9 @@ Follow_person_cml::tick()
   ROS_INFO("Follow_person_cml tick");
 
   geometry_msgs::Twist msg;
-  
+
   dist_r = getInput<float>("r_dist").value();
-  //std::cerr << "Distancia real: " << dist_r << std::endl; 
+  // std::cerr << "Distancia real: " << dist_r << std::endl;
   dist_r = (dist_r - MIN_DISTANCE) / MAX_VEL_DISTANCE;
   centre_r = getInput<double>("r_centre").value();
 
@@ -55,8 +53,8 @@ Follow_person_cml::tick()
   lin_vel_ = std::clamp(lin_vel_, MIN_FORW_SPEED, MAX_FORW_SPEED);
 
   ang_vel_ = turn_pid_.get_output(centre_r);
-  //std::cerr << "dist_r: " << dist_r << "centre_r: " << centre_r << std::endl; 
-  //std::cerr << "vel x= " << lin_vel_ << " ang z= " << ang_vel_ * 3.0 << std::endl; 
+  // std::cerr << "dist_r: " << dist_r << "centre_r: " << centre_r << std::endl;
+  // std::cerr << "vel x= " << lin_vel_ << " ang z= " << ang_vel_ * 3.0 << std::endl;
   msg.linear.x = lin_vel_;
   msg.angular.z = - ang_vel_ * 3.0;
 

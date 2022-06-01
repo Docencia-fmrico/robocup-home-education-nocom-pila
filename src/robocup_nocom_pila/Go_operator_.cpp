@@ -15,11 +15,8 @@
 #include "robocup_nocom_pila/Go_operator_.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
-
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
-
 
 namespace robocup_nocom_pila
 {
@@ -47,7 +44,8 @@ Go_operator_::tick()
 {
   ROS_INFO("Go_operator_ tick");
   person = getInput<int>("r_person").value();
-  if( person >= 7)
+
+  if ( person >= 7)
   {
     return BT::NodeStatus::SUCCESS;
   }

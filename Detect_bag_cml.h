@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_SPEAK_PERSON_CML_H
-#define ROBOCUP_NOCOM_PILA_SPEAK_PERSON_CML_H
+#ifndef ROBOCUP_NOCOM_PILA_DETECT_BAG_CML_H
+#define ROBOCUP_NOCOM_PILA_DETECT_BAG_CML_H
 
 #include "ros/ros.h"
 
@@ -23,40 +23,68 @@
 #include <sensor_msgs/Image.h>
 #include "std_msgs/Float64.h"
 #include "std_msgs/Int64.h"
+#include <message_filters/subscriber.h>
+#include <message_filters/time_synchronizer.h>
+#include <message_filters/sync_policies/approximate_time.h>
+
+#include <cv_bridge/cv_bridge.h>
+
+#include <sensor_msgs/Image.h>
+#include <darknet_ros_msgs/BoundingBoxes.h>
+#include "std_msgs/String.h"
+#include "../src/chatbot.cpp"
+
 
 #include <string>
 
 namespace robocup_nocom_pila
 {
 
-class Speak_person_cml : public BT::ActionNodeBase
+class Detect_bag_cml : public BT::ActionNodeBase
 {
 public:
-    explicit Speak_person_cml(const std::string& name/*, const BT::NodeConfiguration& config*/);
+    explicit Detect_bag_cml(const std::string& name, const BT::NodeConfiguration& config);
 
     void halt();
 
     BT::NodeStatus tick();
 
-   /*static BT::PortsList providedPorts()
+    void 
+    ImageCallback(const darknet_ros_msgs::BoundingBoxesConstPtr& boxes);
+    
+    void 
+    OrderCallback(const std_msgs::String::ConstPtr& msg);
+    void
+    get_order();
+
+    static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<std::string>("point")};
-    }*/
+        return { BT::OutputPort<std::string>("r_order")};
+    }
 
 private:
     /*const float ADVANCE_SPEED = 0.1;
     const float TURNING_SPEED = 0.35;
 
-    ros::NodeHandle n_;
+    
     ros::Publisher vel_pub_;
     ros::Subscriber dist_point_person;
     ros::Subscriber px_point_person;
 
     float dist;
     int point;*/
+    int px_max;
+    int px_min;
+    ros::Subscriber bagDarknet;
+    ros::Subscriber orderDiag;
+    ros::NodeHandle nh;
     int counter_;
+    int num = 0;
+    int repeticiones = 0;
+    std::string order;
+    gb_dialog::ExampleDF forwarder;
 };
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_SPEAK_PERSON_CML_H
+#endif  // ROBOCUP_NOCOM_PILA_DETECT_BAG_CML_H

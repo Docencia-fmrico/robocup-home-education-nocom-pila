@@ -17,7 +17,6 @@
 
 #include <string>
 #include "ros/ros.h"
-#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
@@ -41,18 +40,18 @@ Detect_object_fmm::tick()
   ROS_INFO("Detect_object_fmm tick");
 
   person = getInput<int>("r_person").value();
-  if( person >= 7)
+  if (person >= 7)
   {
     return BT::NodeStatus::SUCCESS;
   }
-  
+
   sleep(0.5);
 
-  if (object != "" && dist <= 1.5 && dist != 0)
+  if (object != "" && dist <= 1.75 && dist != 0)
   {
     // std::cerr << "HAY OBJECTO" << std::endl;
     // std::cerr << dist << "\t" << object << std::endl;
-    
+
     setOutput<std::string>("w_object", object);
     repeticiones = 0;
     px = 0;
@@ -66,7 +65,7 @@ Detect_object_fmm::tick()
   {
     // std::cerr << "NO HAY OBJECT" << std::endl;
     // std::cerr << dist << std::endl;
-    if (repeticiones >= 50)
+    if (repeticiones >= 20)
     {
       object = "bottle";
       setOutput<std::string>("w_object", object);
@@ -94,14 +93,12 @@ void Detect_object_fmm::DetectObjectBBXCallback(const darknet_ros_msgs::Bounding
       py = (box.ymax + box.ymin) / 2;
       object = box.Class;
       // std::cerr << "yes, " << object << std::endl;
-      
     }
   }
 }
 
 void Detect_object_fmm::DetectObjectImageCallback(const sensor_msgs::ImageConstPtr& image)
 {
-  
   try
   {
     img_ptr_depth = cv_bridge::toCvCopy(*image, sensor_msgs::image_encodings::TYPE_32FC1);
@@ -111,15 +108,16 @@ void Detect_object_fmm::DetectObjectImageCallback(const sensor_msgs::ImageConstP
     ROS_ERROR("cv_bridge exception:  %s", e.what());
     return;
   }
-  if(object != "")
+  if (object != "")
+  {
     dist = img_ptr_depth->image.at<float>(cv::Point(px, py)) * 0.001f;
     // std::cerr << "dist, " << px << " , " << py << " , " << dist << std::endl;
 
-    if(dist >= 1.5)
+    if (dist >= 1.5)
     {
       object != "";
     }
-  
+  }
 }
 
 }  // namespace robocup_nocom_pila

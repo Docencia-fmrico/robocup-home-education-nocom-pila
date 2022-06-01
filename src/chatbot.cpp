@@ -63,19 +63,19 @@ class ExampleDF: public DialogInterface
     void nameIntentCB(dialogflow_ros_msgs::DialogflowResult result)
     {
       std_msgs::String msg_name;
-      
+
       ROS_INFO("[ExampleDF] nameIntentCB: intent [%s]", result.intent.c_str());
 
-      for(const auto & param : result.parameters)
+      for (const auto & param : result.parameters)
       {
         // std::cerr << "Param: "<< param << std::endl;
-        for(const auto &value : param.value)
+        for (const auto &value : param.value)
         {
           // std::cerr << "\t" << value << std::endl;
           msg_name.data = value;
         }
       }
-      if ( msg_name.data != "")
+      if (msg_name.data != "")
       {
         sound_pub_name.publish(msg_name);
       }
@@ -85,64 +85,63 @@ class ExampleDF: public DialogInterface
     void colorIntentCB(dialogflow_ros_msgs::DialogflowResult result)
     {
       std_msgs::String msg_color;
-      
+
       ROS_INFO("[ExampleDF] colorIntentCB: intent [%s]", result.intent.c_str());
 
-      for(const auto & param : result.parameters)
+      for (const auto & param : result.parameters)
       {
         // std::cerr << "Param: "<< param << std::endl;
-        for(const auto &value : param.value)
+        for (const auto &value : param.value)
         {
           // std::cerr << "\t" << value << std::endl;
           msg_color.data = value;
         }
-
       }
-      if ( msg_color.data != "")
+      if (msg_color.data != "")
       {
         sound_pub_color.publish(msg_color);
       }
       // speak(result.fulfillment_text);
     }
+
     void orderIntentCB(dialogflow_ros_msgs::DialogflowResult result)
-    {// Metodo para pedir que maleta coger.
+    {  // Metodo para pedir que maleta coger.
       std_msgs::String msg_order;
-      
+
       ROS_INFO("[ExampleDF] orderIntentCB: intent [%s]", result.intent.c_str());
 
-      for(const auto & param : result.parameters)
+      for (const auto & param : result.parameters)
       {
         // std::cerr << "Param: "<< param << std::endl;
-        for(const auto &value : param.value)
+        for (const auto &value : param.value)
         {
           // std::cerr << "\t" << value << std::endl;
           msg_order.data = value;
         }
-
       }
-      if ( msg_order.data != "")
+      if (msg_order.data != "")
       {
         sound_pub_order.publish(msg_order);
       }
-      speak(result.fulfillment_text);      
+      speak(result.fulfillment_text);
     }
 
     void startIntentCB(dialogflow_ros_msgs::DialogflowResult result)
-    {// Metodo para comenzar a funcionar.
+    {  // Metodo para comenzar a funcionar.
       std_msgs::String msg_start;
-      
+
       ROS_INFO("[ExampleDF] startIntentCB: intent [%s]", result.intent.c_str());
 
-      for(const auto & param : result.parameters)
+      for (const auto & param : result.parameters)
       {
         // std::cerr << "Param: "<< param << std::endl;
-        for(const auto &value : param.value)
+        for (const auto &value : param.value)
         {
           // std::cerr << "\t" << value << std::endl;
           msg_start.data = value;
         }
       }
-      if ( msg_start.data != "")
+      if (msg_start.data != "")
       {
         sound_pub_start.publish(msg_start);
       }

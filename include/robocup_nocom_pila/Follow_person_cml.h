@@ -21,8 +21,6 @@
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
 #include <sensor_msgs/Image.h>
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int64.h"
 
 #include "robocup_nocom_pila/PIDController.hpp"
 
@@ -43,11 +41,16 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<float>("r_dist"), BT::InputPort<int>("r_centre"), BT::OutputPort<int>("counter"), BT::InputPort<int>("counter")};
+        return
+        {
+            BT::InputPort<float>("r_dist"),
+            BT::InputPort<int>("r_centre"),
+            BT::OutputPort<int>("counter"),
+            BT::InputPort<int>("counter")
+            };
     }
 
 private:
-
     const double MIN_TURN_SPEED = 0.0;
     const double MAX_TURN_SPEED = 0.7;
     const double MIN_RANG_BOX = -1.0;
@@ -71,7 +74,6 @@ private:
     int counter_ = 0;
     double ang_vel_, lin_vel_;
     int bbx_counter_ = 0;
-
 };
 
 }  // namespace robocup_nocom_pila

@@ -22,8 +22,6 @@
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int64.h"
 
 #include <sensor_msgs/Image.h>
 #include <darknet_ros_msgs/BoundingBoxes.h>
@@ -47,14 +45,20 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::OutputPort<float>("w_dist"), BT::OutputPort<double>("w_centre"), BT::OutputPort<int>("counter"), BT::InputPort<int>("counter")};
+        return
+        {
+            BT::OutputPort<float>("w_dist"),
+            BT::OutputPort<double>("w_centre"),
+            BT::OutputPort<int>("counter"),
+            BT::InputPort<int>("counter")
+        };
     }
 
 private:
     ros::NodeHandle nh_;
     ros::Subscriber objects_bbx;
     ros::Subscriber objects_image;
-    
+
     cv_bridge::CvImagePtr img_ptr_depth;
 
     float dist_w = 0;
@@ -64,7 +68,6 @@ private:
     bool is_person = false;
     int cont = 0;
     int bbx_counter_ = 0;
-    
     int counter_;
 };
 
