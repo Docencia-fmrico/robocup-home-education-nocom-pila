@@ -33,6 +33,7 @@ class ExampleDF: public DialogInterface
       sound_pub_start = nh_.advertise<std_msgs::String>("/sound/start", 1);
       sound_pub_drink = nh_.advertise<std_msgs::String>("/sound/drink", 1);
       sound_pub_age = nh_.advertise<std_msgs::String>("/sound/age", 1);
+      sound_pub_end = nh_.advertise<std_msgs::String>("/sound/end", 1);
 
       this->registerCallback(std::bind(&ExampleDF::noIntentCB, this, ph::_1));
       this->registerCallback(
@@ -53,6 +54,9 @@ class ExampleDF: public DialogInterface
       this->registerCallback(
         std::bind(&ExampleDF::ageIntentCB, this, ph::_1),
         "Age_rec");
+      this->registerCallback(
+        std::bind(&ExampleDF::endIntentCB, this, ph::_1),
+        "End_");
     }
 
     void noIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -123,7 +127,29 @@ class ExampleDF: public DialogInterface
       {
         sound_pub_order.publish(msg_order);
       }
-      speak(result.fulfillment_text);
+      //speak(result.fulfillment_text);
+    }
+
+    void endIntentCB(dialogflow_ros_msgs::DialogflowResult result)
+    {  // Metodo para pedir que maleta coger.
+      std_msgs::String msg_end;
+
+      ROS_INFO("[ExampleDF] orderIntentCB: intent [%s]", result.intent.c_str());
+
+      for (const auto & param : result.parameters)
+      {
+        // std::cerr << "Param: "<< param << std::endl;
+        for (const auto &value : param.value)
+        {
+          // std::cerr << "\t" << value << std::endl;
+          msg_end.data = value;
+        }
+      }
+      if (msg_end.data != "")
+      {
+        sound_pub_end.publish(msg_end);
+      }
+      //speak(result.fulfillment_text);
     }
 
     void startIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -205,10 +231,11 @@ class ExampleDF: public DialogInterface
     ros::Publisher sound_pub_start;
     ros::Publisher sound_pub_drink;
     ros::Publisher sound_pub_age;
+    ros::Publisher sound_pub_end;
 };
 
 }  // namespace gb_dialog
-
+/*
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "chatbot_node");
@@ -217,3 +244,4 @@ int main(int argc, char** argv)
   ros::spin();
   return 0;
 }
+*/
