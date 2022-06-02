@@ -41,7 +41,7 @@ void
 Follow_person_cml::EndCallback(const std_msgs::String::ConstPtr& msg)
 {
   if (msg->data != "")
-    is_stoped = true;
+    arrived = true;
 }
 
 
@@ -57,7 +57,13 @@ Follow_person_cml::tick()
   dist_r = (dist_r - MIN_DISTANCE) / MAX_VEL_DISTANCE;
   std::cerr << "Distancia FINAL: " << dist_r << std::endl;
   centre_r = getInput<double>("r_centre").value();
+/*
+  if (dist_r >= last_dist + SECURITY_DIST)
+  {
 
+
+  }
+*/
   forw_pid_.set_pid(0.21, 0.06, 0.43);
   lin_vel_ = forw_pid_.get_output(dist_r) *10;
   lin_vel_ = std::clamp(lin_vel_, MIN_FORW_SPEED, MAX_FORW_SPEED);
@@ -70,7 +76,7 @@ Follow_person_cml::tick()
 
   pub_vel_.publish(msg);
 
-  if (is_stoped)
+  if (arrived)
     return BT::NodeStatus::SUCCESS;
   else
     return BT::NodeStatus::RUNNING;
