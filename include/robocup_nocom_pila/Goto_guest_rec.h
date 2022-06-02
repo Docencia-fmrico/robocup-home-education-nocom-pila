@@ -46,9 +46,9 @@ private:
     MyNode my_node;
 
     ros::NodeHandle nh;
-    float px;
-    float py;
-    float pz;
+    float gx;
+    float gy;
+    float gz;
     float ox;
     float oy;
     float oz;

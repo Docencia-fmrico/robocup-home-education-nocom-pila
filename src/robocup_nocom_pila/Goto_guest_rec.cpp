@@ -24,13 +24,13 @@ namespace robocup_nocom_pila
 Goto_guest_rec::Goto_guest_rec(const std::string& name, const BT::NodeConfiguration & config)
 : BT::ActionNodeBase(name, config), counter_(0), nh("~")
 {
-  nh.getParam("hpx", px);
-  nh.getParam("hpy", py);
-  nh.getParam("hpz", pz);
-  nh.getParam("hox", ox);
-  nh.getParam("hoy", oy);
-  nh.getParam("hoz", oz);
-  nh.getParam("how", ow);
+  nh.getParam("gpx", gx);
+  nh.getParam("gpy", gy);
+  nh.getParam("gpz", gz);
+  nh.getParam("gox", ox);
+  nh.getParam("goy", oy);
+  nh.getParam("goz", oz);
+  nh.getParam("gow", ow);
 }
 
 void
@@ -46,7 +46,7 @@ Goto_guest_rec::tick()
 
   if (action)
   {
-    my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
+    my_node.doWork(gx, gy, gz, ox, oy, oz, ow, 200);
     action = false;
   }
 

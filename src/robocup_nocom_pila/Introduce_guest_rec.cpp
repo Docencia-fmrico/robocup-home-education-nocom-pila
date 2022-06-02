@@ -77,7 +77,7 @@ Introduce_guest_rec::tick()
 
   sleep(4);
 
-  if (count >= 3)
+  if (count >= 2)
   {
     return BT::NodeStatus::SUCCESS;
   }

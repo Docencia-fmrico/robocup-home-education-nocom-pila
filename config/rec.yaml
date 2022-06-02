@@ -1,51 +1,52 @@
-px1: 2.5
-py1: 7
-pz1: 0
+#-- Chairs location
+cx1: 2.5
+cy1: 7
+cz1: 0
 ox1: 0 
 oy1: 0
 oz1: 1.5
 ow1: 1
 
-px2: 0.5
-py2: 7
-pz2: 0  
+cx2: 0.5
+cy2: 7
+cz2: 0  
 ox2: 0  
 oy2: 0  
 oz2: 1.5
 ow2: 1
 
-px3: 0.5
-py3: 6.5
-pz3: 0  
+cx3: 0.5
+cy3: 6.5
+cz3: 0  
 ox3: 0  
 oy3: 0
 oz3: -7.5
 ow3: 1
 
-px4: 0.5
-py4: 4
-pz4: 0  
+cx4: 0.5
+cy4: 4
+cz4: 0  
 ox4: 0  
 oy4: 0  
 oz4: -7.5
 ow4: 1
 
-px5: 1.9
-py5: 3.2
-pz5: 0  
+cx5: 1.9
+cy5: 3.2
+cz5: 0  
 ox5: 0  
 oy5: 0  
 oz5: -2
 ow5: 1
 
-px6: 2.9
-py6: 3.2
-pz6: 0  
+cx6: 2.9
+cy6: 3.2
+cz6: 0  
 ox6: 0  
 oy6: 0  
 oz6: -1
 ow6: 1
-
+#-- Operator location
 opx: 5.5
 opy: 0  
 opz: 0  
@@ -53,14 +54,14 @@ oox: 0
 ooy: 0  
 ooz: 0  
 oow: 1
-
-hpx: 0
-hpy: 0  
-hpz: 0  
-hox: 0  
-hoy: 0  
-hoz: 0  
-how: 1
+#-- Guest location
+gpx: 0
+gpy: 0  
+gpz: 0  
+gox: 0  
+goy: 0  
+goz: 0  
+gow: 1
 
 TURNING_SPEED: 1.4
 TURNING_TIME: 3.0

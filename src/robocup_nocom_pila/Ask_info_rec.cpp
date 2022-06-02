@@ -26,6 +26,7 @@ Ask_info_rec::Ask_info_rec(const std::string& name, const BT::NodeConfiguration 
 {
   age_sub = nh.subscribe("/sound/age", 1, &Ask_info_rec::ageCallback, this);
   name_sub = nh.subscribe("/sound/name", 1, &Ask_info_rec::nameCallback, this);
+  drink_sub = nh.subscribe("/sound/drink", 1, &Ask_info_rec::drinkCallback, this);
 }
 
 void
@@ -103,6 +104,10 @@ Ask_info_rec::tick()
   {
     num = 2;
   }
+  if (name != "" && age != "" && drink != "")
+  {
+    num = 3;
+  }
 
   if (repeticiones == 0)
   {
@@ -119,6 +124,11 @@ Ask_info_rec::tick()
         return BT::NodeStatus::RUNNING;
       break;
       case 2:
+        get_drink();
+        repeticiones = 1;
+        return BT::NodeStatus::RUNNING;
+      break;
+      case 3:
         num = 0;
         name = "";
         age = "";

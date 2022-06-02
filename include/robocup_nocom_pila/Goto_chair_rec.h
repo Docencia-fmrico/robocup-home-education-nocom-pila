@@ -39,22 +39,27 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<int>("r_chair")};
+        return 
+        { 
+            BT::InputPort<int>("r_chair"),
+            BT::OutputPort<int>("w_chair"),
+            BT::InputPort<int>("r_age")
+        };
     }
 
 private:
     MyNode my_node;
 
     ros::NodeHandle nh;
-    float px;
-    float py;
-    float pz;
+    float cx;
+    float cy;
+    float cz;
     float ox;
     float oy;
     float oz;
     float ow;
 
-    int chair;
+    int chair, age;
 
     int action = true;
     int counter_;

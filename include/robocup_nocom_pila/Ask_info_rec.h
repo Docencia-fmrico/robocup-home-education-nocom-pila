@@ -62,6 +62,7 @@ private:
     ros::NodeHandle nh;
     ros::Subscriber name_sub;  // subscriptor al chatbot.
     ros::Subscriber age_sub;  // subscriptor al chatbot.
+    ros::Subscriber drink_sub;  // subscriptor al chatbot.
     gb_dialog::ExampleDF forwarder;
 
     int chair;
