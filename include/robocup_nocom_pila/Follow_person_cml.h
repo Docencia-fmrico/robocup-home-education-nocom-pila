@@ -68,13 +68,13 @@ private:
     const int MIN_DISTANCE = 0.9;
     const int MAX_VEL_DISTANCE = 3.0;    // Distances greater than this one will make the robot go max velocity
 
-  //  const int SECURITY_DIST = 0.5;      // Meters from last person's scan to avoid new person
+    const int SECURITY_DIST = 0.5;      // Meters from last person's scan to avoid new person
 
     ros::NodeHandle n_;
     ros::Publisher pub_vel_;
     ros::Subscriber sub_stop;
 
-    float dist_r/*, last_dist = 0*/;
+    float dist_r, last_dist = 0;
 
     double centre_r;
     bool is_person = false;  
