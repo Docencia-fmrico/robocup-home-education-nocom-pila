@@ -28,6 +28,7 @@ turn_pid_(MIN_RANG_BOX, MAX_RANG_BOX, MIN_TURN_SPEED, MAX_TURN_SPEED),
 forw_pid_(MIN_FORW_DIST, MAX_FORW_DIST, MIN_FORW_SPEED, MAX_FORW_SPEED)
 {
   pub_vel_ = n_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
+  sub_stop = n_.subscribe("/sound/end_listener", 1, &Follow_person_cml::EndCallback, this);
 }
 
 void
@@ -35,6 +36,14 @@ Follow_person_cml::halt()
 {
   ROS_INFO("Follow_person_cml halt");
 }
+
+void 
+Follow_person_cml::EndCallback(const std_msgs::String::ConstPtr& msg)
+{
+  if (msg->data != "")
+    is_stoped = true;
+}
+
 
 BT::NodeStatus
 Follow_person_cml::tick()
@@ -60,7 +69,12 @@ Follow_person_cml::tick()
   msg.angular.z = - ang_vel_ * 3.0;
 
   pub_vel_.publish(msg);
-  return BT::NodeStatus::RUNNING;
+
+  if (is_stoped)
+    return BT::NodeStatus::SUCCESS;
+  else
+    return BT::NodeStatus::RUNNING;
+
 }
 
 }  // namespace robocup_nocom_pila
