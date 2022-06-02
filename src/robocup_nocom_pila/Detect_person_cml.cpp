@@ -34,10 +34,11 @@ Detect_person_cml::tick()
   if (is_person == true && dist_w != 0.0)
   {
     // std::cerr << "HAY PERSONA" << std::endl;
-    if (dist_w < 5 && dist_w > 0.0)
+    if (dist_w < 2.5 && dist_w > 0.0)
     {
       setOutput<float>("w_dist", dist_w);
       setOutput<double>("w_centre", centre_w);
+      //std::cerr << "Distancia real: " << dist_w << std::endl;
       cont = 0;
       is_person = false;
       return BT::NodeStatus::SUCCESS;
