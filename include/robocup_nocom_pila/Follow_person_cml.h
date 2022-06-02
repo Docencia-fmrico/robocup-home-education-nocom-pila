@@ -25,7 +25,7 @@
 #include "robocup_nocom_pila/PIDController.hpp"
 
 #include <string>
-
+#include "std_msgs/String.h"
 
 namespace robocup_nocom_pila
 {
@@ -38,6 +38,8 @@ public:
     void halt();
 
     BT::NodeStatus tick();
+    
+    void EndCallback(const std_msgs::String::ConstPtr& msg);
 
     static BT::PortsList providedPorts()
     {
@@ -49,6 +51,8 @@ public:
             BT::InputPort<int>("counter")
             };
     }
+
+
 
 private:
     const double MIN_TURN_SPEED = 0.0;
@@ -66,10 +70,12 @@ private:
 
     ros::NodeHandle n_;
     ros::Publisher pub_vel_;
+    ros::Subscriber sub_stop;
 
     float dist_r;
     double centre_r;
-    bool is_person = false;
+    bool is_person = false;  
+    bool is_stoped = false;
     PIDController turn_pid_, forw_pid_;
     int counter_ = 0;
     double ang_vel_, lin_vel_;
