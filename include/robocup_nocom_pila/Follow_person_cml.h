@@ -57,11 +57,11 @@ private:
     const double MAX_RANG_BOX = 1.0;
 
     const double MIN_FORW_SPEED = 0.0;
-    const double MAX_FORW_SPEED = 0.45;
+    const double MAX_FORW_SPEED = 0.25;
     const double MIN_FORW_DIST = 0.0;
     const double MAX_FORW_DIST = 1.0;
 
-    const int MIN_DISTANCE = 1.5;
+    const int MIN_DISTANCE = 0.9;
     const int MAX_VEL_DISTANCE = 3.0;    // Distances greater than this one will make the robot go max velocity
 
     ros::NodeHandle n_;
