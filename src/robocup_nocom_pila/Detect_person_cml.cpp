@@ -78,11 +78,17 @@ void Detect_person_cml::DetectPersonBBXCallback(const darknet_ros_msgs::Bounding
     if (box.Class == "person")
     {
       // std::cerr << "CALLBACK PX" << std::endl;
-      px = (box.xmax + box.xmin) / 2;
-      py = (box.ymax + box.ymin) / 2;
-      is_person = true;
+
+      if(area < ((box.xmax - box.xmin) * (box.ymax - box.ymin)))
+      {
+        area = (box.xmax - box.xmin) * (box.ymax - box.ymin);
+        px = (box.xmax + box.xmin) / 2;
+        py = (box.ymax + box.ymin) / 2;
+        is_person = true;
+      }
     }
   }
+  area = 0;
 }
 
 void Detect_person_cml::DetectPersonImageCallback(const sensor_msgs::ImageConstPtr& image)
@@ -107,6 +113,7 @@ void Detect_person_cml::DetectPersonImageCallback(const sensor_msgs::ImageConstP
     std::cerr << "CALLBACK == NULL" << std::endl;
     dist_w = 0.0;
   }
+
 }
 
 }  // namespace robocup_nocom_pila

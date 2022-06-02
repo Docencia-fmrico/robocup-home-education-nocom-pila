@@ -65,6 +65,7 @@ private:
     double centre_w = 0;
     int px = 0;
     int py = 0;
+    int area = 0;
     bool is_person = false;
     int cont = 0;
     int bbx_counter_ = 0;

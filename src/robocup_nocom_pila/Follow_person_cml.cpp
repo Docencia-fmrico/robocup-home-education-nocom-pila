@@ -41,7 +41,7 @@ void
 Follow_person_cml::EndCallback(const std_msgs::String::ConstPtr& msg)
 {
   if (msg->data != "")
-    is_stoped = true;
+    arrived = true;
 }
 
 
@@ -70,7 +70,7 @@ Follow_person_cml::tick()
 
   pub_vel_.publish(msg);
 
-  if (is_stoped)
+  if (arrived)
     return BT::NodeStatus::SUCCESS;
   else
     return BT::NodeStatus::RUNNING;
