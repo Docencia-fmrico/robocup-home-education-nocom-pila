@@ -115,6 +115,11 @@ add_executable(nodo_cml
 )
 target_link_libraries(nodo_cml ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
 
+add_executable(listener 
+  src/listener.cpp
+)
+target_link_libraries(listener ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
+
 add_executable(nodo_fmm 
   src/nodo_fmm.cpp
 )
@@ -124,12 +129,6 @@ add_executable(nodo_rec
   src/nodo_rec.cpp
 )
 target_link_libraries(nodo_rec ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
-
-
-add_executable(chatbot 
-  src/chatbot.cpp
-)
-target_link_libraries(chatbot ${catkin_LIBRARIES} ${ZMQ_LIBRARIES})
 
 roslint_cpp(
   src/nodo_cml.cpp
@@ -162,5 +161,5 @@ roslint_cpp(
   include/robocup_nocom_pila/Turn_no_detect.h src/robocup_nocom_pila/Turn_no_detect.cpp
   src/chatbot.cpp
   src/nav.cpp
-
+  src/listener.cpp
 )
