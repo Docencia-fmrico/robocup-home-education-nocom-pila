@@ -149,7 +149,7 @@ class ExampleDF: public DialogInterface
       {
         sound_pub_end.publish(msg_end);
       }
-      //speak(result.fulfillment_text);
+      speak(result.fulfillment_text);
     }
 
     void startIntentCB(dialogflow_ros_msgs::DialogflowResult result)
