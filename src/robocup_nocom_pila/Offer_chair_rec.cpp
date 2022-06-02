@@ -21,11 +21,14 @@
 namespace robocup_nocom_pila
 {
 
-Offer_chair_rec::Offer_chair_rec(const std::string& name, const BT::NodeConfiguration & config)
-: BT::ActionNodeBase(name, config), counter_(0)
+Offer_chair_rec::Offer_chair_rec(const std::string& name /*const BT::NodeConfiguration & config*/)
+: BT::ActionNodeBase(name, {}), counter_(0)
 {
+  /*
   objects_bbx = nh.subscribe("/darknet_ros/bounding_boxes", 1, &Offer_chair_rec::DetectChairBBXCallback, this);
   objects_image = nh.subscribe("/camera/depth/image_raw", 1, &Offer_chair_rec::DetectChairImageCallback, this);
+  */
+  
 }
 
 void
@@ -41,19 +44,24 @@ Offer_chair_rec::tick()
 
   sleep(0.5);
 
+  forwarder.speak("Here is your chair");
+
+  return BT::NodeStatus::SUCCESS;
+
+  /*
   if (is_person == true && dist <= 1.75 && dist != 0)
   {
     // std::cerr << "HAY PERSONA" << std::endl;
     // std::cerr << dist << std::endl;
-    setOutput<int>("w_chair", chair);
     setOutput<int>("w_state", 0);
     repeticiones = 0;
-    chair++;
     px = 0;
     py = 0;
     is_person = false;
     dist = 0;
     // <---------------------------------------------- Say: Here is your chair
+
+    
 
     return BT::NodeStatus::SUCCESS;
   }
@@ -63,10 +71,8 @@ Offer_chair_rec::tick()
     // std::cerr << dist << std::endl;
     if (repeticiones >= 20)
     {
-      setOutput<int>("w_chair", chair);
       setOutput<int>("w_state", 1);
       repeticiones = 0;
-      chair++;
       return BT::NodeStatus::SUCCESS;
     }
     // std::cerr << repeticiones << std::endl;
@@ -75,11 +81,16 @@ Offer_chair_rec::tick()
     
 
     return BT::NodeStatus::RUNNING;
-  }
+  }*/
+
+  // <----- say here is your chair
+  
 }
 
+/*
 void Offer_chair_rec::DetectChairBBXCallback(const darknet_ros_msgs::BoundingBoxesConstPtr& boxes)
 {
+  
   for (const auto & box : boxes->bounding_boxes)
   {
     if (box.Class == "person")
@@ -108,6 +119,7 @@ void Offer_chair_rec::DetectChairImageCallback(const sensor_msgs::ImageConstPtr&
   dist = img_ptr_depth->image.at<float>(cv::Point(px, py)) * 0.001f;
   // std::cerr << "dist, " << px << " , " << py << " , " << dist << std::endl;
 }
+*/
 
 }  // namespace robocup_nocom_pila
 

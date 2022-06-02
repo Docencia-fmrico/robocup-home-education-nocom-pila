@@ -25,6 +25,7 @@
 
 #include <sensor_msgs/Image.h>
 #include <darknet_ros_msgs/BoundingBoxes.h>
+#include "../src/chatbot.cpp"
 
 #include <string>
 
@@ -34,31 +35,33 @@ namespace robocup_nocom_pila
 class Offer_chair_rec : public BT::ActionNodeBase
 {
 public:
-    explicit Offer_chair_rec(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Offer_chair_rec(const std::string& name /*const BT::NodeConfiguration& config*/);
 
     void halt();
-
+/*
     void DetectChairBBXCallback(const darknet_ros_msgs::BoundingBoxes::ConstPtr& obj);
     void DetectChairImageCallback(const sensor_msgs::ImageConstPtr& image);
-
+*/
     BT::NodeStatus tick();
 
-    static BT::PortsList providedPorts()
+   /* static BT::PortsList providedPorts()
     {
         return { BT::OutputPort<int>("w_chair"), BT::OutputPort<int>("w_state")};
-    }
+    }*/
+    gb_dialog::ExampleDF forwarder;
 
 private:
     ros::NodeHandle nh;
+    /*
     ros::Subscriber objects_bbx;
     ros::Subscriber objects_image;
 
-    cv_bridge::CvImagePtr img_ptr_depth;
+    cv_bridge::CvImagePtr img_ptr_depth;*/
 
     int repeticiones = 0;
-    int chair = 2;
-    bool is_person = false;
-    float dist;
+    // int chair = 2;
+    // bool is_person = false;
+    // float dist;
     int px;
     int py;
     int counter_;

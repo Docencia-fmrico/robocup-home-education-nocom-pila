@@ -37,69 +37,83 @@ Goto_chair_rec::tick()
 {
   ROS_INFO("Goto_chair_rec tick");
   chair = getInput<int>("r_chair").value();
+  age = getInput<int>("r_age").value();
   // std::cerr << chair << std::endl;
-
-  switch (chair)
+  if (age >= 55)
   {
-    case 1:
-      nh.getParam("px1", px);
-      nh.getParam("py1", py);
-      nh.getParam("pz1", pz);
-      nh.getParam("ox1", ox);
-      nh.getParam("oy1", oy);
-      nh.getParam("oz1", oz);
-      nh.getParam("ow1", ow);
-    break;
-    case 2:
-      nh.getParam("px2", px);
-      nh.getParam("py2", py);
-      nh.getParam("pz2", pz);
-      nh.getParam("ox2", ox);
-      nh.getParam("oy2", oy);
-      nh.getParam("oz2", oz);
-      nh.getParam("ow2", ow);
-    break;
-    case 3:
-      nh.getParam("px3", px);
-      nh.getParam("py3", py);
-      nh.getParam("pz3", pz);
-      nh.getParam("ox3", ox);
-      nh.getParam("oy3", oy);
-      nh.getParam("oz3", oz);
-      nh.getParam("ow3", ow);
-    break;
-    case 4:
-      nh.getParam("px4", px);
-      nh.getParam("py4", py);
-      nh.getParam("pz4", pz);
-      nh.getParam("ox4", ox);
-      nh.getParam("oy4", oy);
-      nh.getParam("oz4", oz);
-      nh.getParam("ow4", ow);
-    break;
-    case 5:
-      nh.getParam("px5", px);
-      nh.getParam("py5", py);
-      nh.getParam("pz5", pz);
-      nh.getParam("ox5", ox);
-      nh.getParam("oy5", oy);
-      nh.getParam("oz5", oz);
-      nh.getParam("ow5", ow);
-    break;
-    case 6:
-      nh.getParam("px6", px);
-      nh.getParam("py6", py);
-      nh.getParam("pz6", pz);
-      nh.getParam("ox6", ox);
-      nh.getParam("oy6", oy);
-      nh.getParam("oz6", oz);
-      nh.getParam("ow6", ow);
-    break;
+    nh.getParam("cx6", cx);
+    nh.getParam("cy6", cy);
+    nh.getParam("cz6", cz);
+    nh.getParam("ox6", ox);
+    nh.getParam("oy6", oy);
+    nh.getParam("oz6", oz);
+    nh.getParam("ow6", ow);
+  }
+  else
+  {
+    switch (chair)
+    {
+      case 1:
+        nh.getParam("cx1", cx);
+        nh.getParam("cy1", cy);
+        nh.getParam("cz1", cz);
+        nh.getParam("ox1", ox);
+        nh.getParam("oy1", oy);
+        nh.getParam("oz1", oz);
+        nh.getParam("ow1", ow);
+      break;
+      case 2:
+        nh.getParam("cx2", cx);
+        nh.getParam("cy2", cy);
+        nh.getParam("cz2", cz);
+        nh.getParam("ox2", ox);
+        nh.getParam("oy2", oy);
+        nh.getParam("oz2", oz);
+        nh.getParam("ow2", ow);
+      break;
+      case 3:
+        nh.getParam("cx3", cx);
+        nh.getParam("cy3", cy);
+        nh.getParam("cz3", cz);
+        nh.getParam("ox3", ox);
+        nh.getParam("oy3", oy);
+        nh.getParam("oz3", oz);
+        nh.getParam("ow3", ow);
+      break;
+      case 4:
+        nh.getParam("cx4", cx);
+        nh.getParam("cy4", cy);
+        nh.getParam("cz4", cz);
+        nh.getParam("ox4", ox);
+        nh.getParam("oy4", oy);
+        nh.getParam("oz4", oz);
+        nh.getParam("ow4", ow);
+      break;
+      case 5:
+        nh.getParam("cx5", cx);
+        nh.getParam("cy5", cy);
+        nh.getParam("cz5", cz);
+        nh.getParam("ox5", ox);
+        nh.getParam("oy5", oy);
+        nh.getParam("oz5", oz);
+        nh.getParam("ow5", ow);
+      break;
+      case 6:
+        nh.getParam("cx6", cx);
+        nh.getParam("cy6", cy);
+        nh.getParam("cz6", cz);
+        nh.getParam("ox6", ox);
+        nh.getParam("oy6", oy);
+        nh.getParam("oz6", oz);
+        nh.getParam("ow6", ow);
+      break;
+    }
+
   }
 /*
-  std::cerr << px << std::endl;
-  std::cerr << py << std::endl;
-  std::cerr << pz << std::endl;
+  std::cerr << cx << std::endl;
+  std::cerr << cy << std::endl;
+  std::cerr << cz << std::endl;
   std::cerr << ox << std::endl;
   std::cerr << oy << std::endl;
   std::cerr << oz << std::endl;
@@ -107,7 +121,7 @@ Goto_chair_rec::tick()
 */
   if (action)
   {
-    my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
+    my_node.doWork(cx, cy, cz, ox, oy, oz, ow, 200);
     action = false;
   }
   if (my_node.aborted())
@@ -118,6 +132,7 @@ Goto_chair_rec::tick()
   if (my_node.checkstatus())
   {
     action = true;
+    chair++;  //-- Cambia a la siguiente silla
     return BT::NodeStatus::SUCCESS;
   }
   else

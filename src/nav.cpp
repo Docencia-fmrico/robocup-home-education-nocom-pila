@@ -29,7 +29,7 @@ public:
     ROS_INFO("Action server started, sending goal.");
   }
 
-void doWork(int px, int py, int pz, int ox, int oy, int oz, int ow, /*long*/ int until)
+void doWork(float px, float py, float pz, float ox, float oy, float oz, float ow, /*long*/ float until)
 {
 finish = false;
   move_base_msgs::MoveBaseGoal goal;
