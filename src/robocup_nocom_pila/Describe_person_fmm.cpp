@@ -71,8 +71,9 @@ Describe_person_fmm::tick()
 
   sleep(0.1);
 
-  forwarder.speak("The person number " + n_person + " is " + name_r +
-    " wear a " + color_r + " tishirt and have a " + object_r);
+  // forwarder.speak("The person number " + n_person + " is " + name_r +
+  //  " wear a " + color_r + " tishirt and have a " + object_r);
+  forwarder.speak("The person number " + n_person + " is " + name_r + " and have a " + object_r);  // sin color
 
   sleep(4);
 

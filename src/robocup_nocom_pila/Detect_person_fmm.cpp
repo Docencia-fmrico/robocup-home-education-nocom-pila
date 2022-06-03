@@ -41,7 +41,7 @@ Detect_person_fmm::tick()
 
   sleep(0.5);
 
-  if (is_person == true && dist <= 1.75 && dist != 0)
+  if (is_person == true && dist <= 1.2 && dist != 0)
   {
     // std::cerr << "HAY PERSONA" << std::endl;
     // std::cerr << dist << std::endl;

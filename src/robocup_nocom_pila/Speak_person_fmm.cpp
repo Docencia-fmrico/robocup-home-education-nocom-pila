@@ -81,7 +81,7 @@ Speak_person_fmm::tick()
 
   if (name != "")
   {
-    num = 1;
+    num = 2;  // cambiar a 1 para tener color por voz
   }
   if (name != "" && color != "")
   {
