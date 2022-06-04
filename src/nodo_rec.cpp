@@ -42,8 +42,8 @@ int main(int argc, char **argv)
 
 
   auto blackboard = BT::Blackboard::create();
-  blackboard->set("chair", 1);
-  blackboard->set("person", 1);
+  blackboard->set("chair", 2);
+  blackboard->set("person", 2);
   blackboard->set("name", "");
   blackboard->set("age", "");
   blackboard->set("drink", "");

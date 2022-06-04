@@ -133,6 +133,7 @@ Goto_chair_rec::tick()
   {
     action = true;
     chair++;  //-- Cambia a la siguiente silla
+    setOutput<int>("w_chair", chair);
     return BT::NodeStatus::SUCCESS;
   }
   else
