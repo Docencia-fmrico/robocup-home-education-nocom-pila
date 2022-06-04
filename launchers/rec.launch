@@ -1,0 +1,6 @@
+<launch>
+
+	<node pkg="robocup_nocom_pila" type="nodo_rec" name="rec" output="screen">
+		<rosparam command="load" file="$(find robocup_nocom_pila)/config/rec.yaml"/>
+	</node>
+</launch>
