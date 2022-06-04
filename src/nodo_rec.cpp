@@ -39,6 +39,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_introduce_guest_rec"));
   factory.registerFromPlugin(loader.getOSName("nc_offer_chair_rec"));
   factory.registerFromPlugin(loader.getOSName("nc_start_"));
+   factory.registerFromPlugin(loader.getOSName("nc_turn_"));
 
 
   auto blackboard = BT::Blackboard::create();

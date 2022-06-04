@@ -41,13 +41,13 @@ Goto_chair_rec::tick()
   // std::cerr << chair << std::endl;
   if (age >= 55)
   {
-    nh.getParam("cx6", cx);
-    nh.getParam("cy6", cy);
-    nh.getParam("cz6", cz);
-    nh.getParam("ox6", ox);
-    nh.getParam("oy6", oy);
-    nh.getParam("oz6", oz);
-    nh.getParam("ow6", ow);
+    nh.getParam("cx5", cx);
+    nh.getParam("cy5", cy);
+    nh.getParam("cz5", cz);
+    nh.getParam("ox5", ox);
+    nh.getParam("oy5", oy);
+    nh.getParam("oz5", oz);
+    nh.getParam("ow5", ow);
   }
   else
   {
