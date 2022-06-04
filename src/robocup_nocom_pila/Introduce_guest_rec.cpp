@@ -69,6 +69,12 @@ Introduce_guest_rec::tick()
   age_r = getInput<std::string>("r_age").value();
   drink_r = getInput<std::string>("r_drink").value();
 
+  ROS_WARN("The guest:");
+  std::cerr << "The guest is in chair " << n_chair << std::endl;
+  std::cerr << "Name: " << name_r << std::endl;
+  std::cerr << "Age: " << age_r << std::endl;
+  std::cerr << "Drink: " << drink_r << std::endl;
+
   sleep(0.1);
 
   forwarder.speak(name_r + "is " + age_r + "years old, is in the chair number "

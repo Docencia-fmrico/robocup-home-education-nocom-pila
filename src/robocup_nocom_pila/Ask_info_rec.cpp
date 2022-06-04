@@ -132,6 +132,7 @@ Ask_info_rec::tick()
         num = 0;
         name = "";
         age = "";
+        drink = "";
         return BT::NodeStatus::SUCCESS;
       break;
     }

@@ -50,7 +50,7 @@ class ExampleDF: public DialogInterface
         "Start_");
       this->registerCallback(
         std::bind(&ExampleDF::drinkIntentCB, this, ph::_1),
-        "Drinks");
+        "Fav_drink");
       this->registerCallback(
         std::bind(&ExampleDF::ageIntentCB, this, ph::_1),
         "Age_rec");
