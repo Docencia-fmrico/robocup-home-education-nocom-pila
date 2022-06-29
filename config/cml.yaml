@@ -6,10 +6,26 @@ hoy: 0
 hoz: 0  
 how: 1
 
-opx: -3.2188
-opy: 1.9126
+opx: 1.1937
+opy: 5.4054
 opz: 0
 oox: 0  
 ooy: 0
-ooz: 0.93778  
-oow: -0.34722
+ooz: 0.90979  
+oow: 0.41508
+
+dpx1: 5.2789
+dpy1: 2.4302
+dpz1: 0  
+dox1: 0  
+doy1: 0  
+doz1: 0.9997
+dow1: 0.022
+
+dpx2: 5.3167
+dpy2: 5.8174
+dpz2: 0  
+dox2: 0  
+doy2: 0  
+doz2: 0.9997
+dow2: 0.022
