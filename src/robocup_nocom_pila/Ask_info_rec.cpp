@@ -129,6 +129,7 @@ Ask_info_rec::tick()
         return BT::NodeStatus::RUNNING;
       break;
       case 3:
+        forwarder.speak("Follow me uwu");
         num = 0;
         name = "";
         age = "";
