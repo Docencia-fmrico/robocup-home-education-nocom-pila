@@ -9,6 +9,7 @@
                     <Turn_ name="Turn_" r_person="{person}"/>
                     <Goto_chair_rec name="goto_chair" r_chair="{chair}" r_age="{age}" w_chair="{chair}"/>
                     <Offer_chair_rec name="offer_chair"/>
+                    <Turn_ name="Turn_" r_person="{person}"/>
                     <Go_operator_ name="Go_operator" r_person="{person}"/>
                     <Turn_ name="Turn_" r_person="{person}"/>
                     <Introduce_guest_rec name="introduce_guest" r_name="{name}" r_age="{age}" r_drink="{drink}" r_chair="{chair}"/>
