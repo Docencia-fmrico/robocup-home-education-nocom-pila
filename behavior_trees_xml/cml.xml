@@ -5,7 +5,6 @@
                 <Go_door name="go_door" r_door="{door}"/> 
                 <Detect_door name="detect_door" w_door="{door}" r_door="{door}"/>
             </ReactiveSequence> -->
-            
             <Start name="Start"/>
             <Go_operator_ name="go_operator" r_person="{person}"/> 
             <Detect_bag_cml name="detect_bag"/>
