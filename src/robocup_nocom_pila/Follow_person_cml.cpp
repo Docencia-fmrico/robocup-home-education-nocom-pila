@@ -71,7 +71,7 @@ Follow_person_cml::tick()
   pub_vel_.publish(msg);
 
   if (arrived)
-    return BT::NodeStatus::RUNNING;
+    return BT::NodeStatus::SUCCESS;
   else
     return BT::NodeStatus::RUNNING;
 

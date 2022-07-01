@@ -38,14 +38,19 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_follow_person_cml"));
   factory.registerFromPlugin(loader.getOSName("nc_go_home_"));
   factory.registerFromPlugin(loader.getOSName("nc_start_"));
+  factory.registerFromPlugin(loader.getOSName("nc_detect_door"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_door"));
+
 
   auto blackboard = BT::Blackboard::create();
+  blackboard->set("door", 1);
   blackboard->set("data", "no");
   blackboard->set("data", 1);
   blackboard->set("r_order", 1);
   blackboard->set("centre", 0.0);
   blackboard->set("counter", 0);
   blackboard->set("person", 1);
+  
 
   std::string pkgpath = ros::package::getPath("robocup_nocom_pila");
   std::string xml_file = pkgpath + "/behavior_trees_xml/cml.xml";

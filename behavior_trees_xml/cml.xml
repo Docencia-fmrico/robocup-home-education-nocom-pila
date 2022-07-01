@@ -1,9 +1,14 @@
 <root main_tree_to_execute = "MainTree" >
     <BehaviorTree ID="MainTree">
         <Sequence>
-            <!--<Start name="Start"/>
+            <!--<ReactiveSequence>
+                <Go_door name="go_door" r_door="{door}"/> 
+                <Detect_door name="detect_door" w_door="{door}" r_door="{door}"/>
+            </ReactiveSequence> -->
+            
+            <Start name="Start"/>
             <Go_operator_ name="go_operator" r_person="{person}"/> 
-            <Detect_bag_cml name="detect_bag"/>-->
+            <Detect_bag_cml name="detect_bag"/>
             <ReactiveSequence>
                 <Detect_person_cml name="detect_person" w_dist="{distance}" w_centre="{centre}" counter="{counter}"/>
                 <Follow_person_cml name="follow_person" r_dist="{distance}" r_centre="{centre}" counter="{counter}"/>

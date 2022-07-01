@@ -79,6 +79,8 @@ add_library(nc_go_operator_ SHARED src/robocup_nocom_pila/Go_operator_.cpp)
 add_library(nc_start_ SHARED src/robocup_nocom_pila/Start.cpp)
 add_library(nc_turn_ SHARED src/robocup_nocom_pila/Turn_.cpp)
 add_library(nc_turn_no_detect SHARED src/robocup_nocom_pila/Turn_no_detect.cpp)
+add_library(nc_detect_door SHARED src/robocup_nocom_pila/Detect_door.cpp)
+add_library(nc_go_door SHARED src/robocup_nocom_pila/Go_door.cpp)
 
 list(APPEND plugin_libs
   nc_detect_bag_cml
@@ -103,6 +105,8 @@ list(APPEND plugin_libs
   nc_start_
   nc_turn_
   nc_turn_no_detect
+  nc_detect_door
+  nc_go_door
 )
 
 foreach(bt_plugin ${plugin_libs})
@@ -153,6 +157,8 @@ roslint_cpp(
   include/robocup_nocom_pila/Offer_chair_rec.h src/robocup_nocom_pila/Offer_chair_rec.cpp
   include/robocup_nocom_pila/Turn_is_empty_rec.h src/robocup_nocom_pila/Turn_is_empty_rec.cpp
   
+  include/robocup_nocom_pila/Detect_door.h src/robocup_nocom_pila/Detect_door.cpp
+  include/robocup_nocom_pila/Go_door.h src/robocup_nocom_pila/Go_door.cpp
   include/robocup_nocom_pila/Go_operator_.h src/robocup_nocom_pila/Go_operator_.cpp
   include/robocup_nocom_pila/Go_home_.h src/robocup_nocom_pila/Go_home_.cpp
   include/robocup_nocom_pila/PIDController.hpp src/robocup_nocom_pila/PIDController.cpp
