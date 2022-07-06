@@ -40,7 +40,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_start_"));
   factory.registerFromPlugin(loader.getOSName("nc_detect_door"));
   factory.registerFromPlugin(loader.getOSName("nc_go_door"));
-
+  factory.registerFromPlugin(loader.getOSName("nc_turn_"));
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("door", 1);

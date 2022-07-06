@@ -29,3 +29,6 @@ dox2: 0
 doy2: 0  
 doz2: 0.9997
 dow2: 0.022
+
+TURNING_SPEED: 1.4
+TURNING_TIME: 3.4
