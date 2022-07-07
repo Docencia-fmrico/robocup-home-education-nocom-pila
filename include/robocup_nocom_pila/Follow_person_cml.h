@@ -65,7 +65,7 @@ private:
     const double MIN_FORW_DIST = 0.0;
     const double MAX_FORW_DIST = 1.0;
 
-    const int MIN_DISTANCE = 1.2;
+    const int MIN_DISTANCE = 1.0;
     const int MAX_VEL_DISTANCE = 3.0;    // Distances greater than this one will make the robot go max velocity
 
     const int SECURITY_DIST = 0.5;      // Meters from last person's scan to avoid new person

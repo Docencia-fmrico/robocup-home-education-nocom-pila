@@ -54,6 +54,7 @@ Goto_chair_rec::tick()
     switch (chair)
     {
       case 1:
+        chair = 2;
         nh.getParam("cx1", cx);
         nh.getParam("cy1", cy);
         nh.getParam("cz1", cz);
@@ -63,6 +64,7 @@ Goto_chair_rec::tick()
         nh.getParam("ow1", ow);
       break;
       case 2:
+        chair = 3;
         nh.getParam("cx2", cx);
         nh.getParam("cy2", cy);
         nh.getParam("cz2", cz);
@@ -72,6 +74,7 @@ Goto_chair_rec::tick()
         nh.getParam("ow2", ow);
       break;
       case 3:
+        chair = 4;
         nh.getParam("cx3", cx);
         nh.getParam("cy3", cy);
         nh.getParam("cz3", cz);
@@ -81,6 +84,7 @@ Goto_chair_rec::tick()
         nh.getParam("ow3", ow);
       break;
       case 4:
+        chair = 5;
         nh.getParam("cx4", cx);
         nh.getParam("cy4", cy);
         nh.getParam("cz4", cz);
@@ -90,6 +94,7 @@ Goto_chair_rec::tick()
         nh.getParam("ow4", ow);
       break;
       case 5:
+        chair = 6;
         nh.getParam("cx5", cx);
         nh.getParam("cy5", cy);
         nh.getParam("cz5", cz);
@@ -99,6 +104,7 @@ Goto_chair_rec::tick()
         nh.getParam("ow5", ow);
       break;
       case 6:
+        chair = 7;
         nh.getParam("cx6", cx);
         nh.getParam("cy6", cy);
         nh.getParam("cz6", cz);
@@ -132,7 +138,6 @@ Goto_chair_rec::tick()
   if (my_node.checkstatus())
   {
     action = true;
-    chair++;  //-- Cambia a la siguiente silla
     setOutput<int>("w_chair", chair);
     return BT::NodeStatus::SUCCESS;
   }
