@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,15 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_GO_HOME_H
-#define ROBOCUP_NOCOM_PILA_GO_HOME_H
+#ifndef ROBOCUP_NOCOM_PILA_GO_ARENA_H
+#define ROBOCUP_NOCOM_PILA_GO_ARENA_H
 
 #include "ros/ros.h"
 
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
-#include "<sensor_msgs/Image.h>"
 
 #include "../src/nav.cpp"
 
@@ -32,16 +31,11 @@ namespace robocup_nocom_pila
 class Go_arena : public BT::ActionNodeBase
 {
 public:
-    explicit Go_arena(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Go_arena(const std::string& name);
 
     void halt();
 
     BT::NodeStatus tick();
-
-    static BT::PortsList providedPorts()
-    {
-        return { BT::InputPort<std::vector<float>>("posx"), BT::InputPort<std::vector<float>>("posy") };
-    }
 
 private:
     MyNode my_node;
@@ -49,23 +43,19 @@ private:
     ros::NodeHandle nh;
     float px;
     float py;
-    const float pz = 0;
-    const float ox = 0;
-    const float oy = 0;
-    const float oz = 0;
-    const float ow = 1;
+    float pz;
+    float ox;
+    float oy;
+    float oz;
+    float ow;
 
     int action = true;
     float dist;
     bool finish = false;
 
     int counter_;
-    int target = 0;
-
-    std::vector<float> xvector = std::vector<float>(20, 0);
-    std::vector<float> yvector = std::vector<float>(20, 0);
 };
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_GO_HOME_H
+#endif  // ROBOCUP_NOCOM_PILA_GO_ARENA_H

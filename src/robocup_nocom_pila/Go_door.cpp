@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,16 +57,8 @@ Go_door::tick()
       nh.getParam("doy2", oy);
       nh.getParam("doz2", oz);
       nh.getParam("dow2", ow);
-    break;  
+    break;
   }
-
-  std::cerr << px << std::endl;
-  std::cerr << py << std::endl;
-  std::cerr << pz << std::endl;
-  std::cerr << ox << std::endl;
-  std::cerr << oy << std::endl;
-  std::cerr << oz << std::endl;
-  std::cerr << ow << std::endl;
 
   if (action)
   {

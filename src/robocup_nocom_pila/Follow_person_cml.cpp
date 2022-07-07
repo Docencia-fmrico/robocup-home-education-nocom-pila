@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,13 +37,12 @@ Follow_person_cml::halt()
   ROS_INFO("Follow_person_cml halt");
 }
 
-void 
+void
 Follow_person_cml::EndCallback(const std_msgs::String::ConstPtr& msg)
 {
   if (msg->data != "")
     arrived = true;
 }
-
 
 BT::NodeStatus
 Follow_person_cml::tick()
@@ -74,7 +73,6 @@ Follow_person_cml::tick()
     return BT::NodeStatus::SUCCESS;
   else
     return BT::NodeStatus::RUNNING;
-
 }
 
 }  // namespace robocup_nocom_pila

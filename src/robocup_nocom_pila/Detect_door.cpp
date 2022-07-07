@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ Detect_door::halt()
 void Detect_door :: LaserCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
 {
   n_door = getInput<int>("r_door").value();
+  /*
   max_array_ = (msg->angle_max - msg->angle_min) / msg->angle_increment;
 
   max_sweep_left = max_array_ - max_array_/10;  // initialization of every angle of detection
@@ -47,39 +48,49 @@ void Detect_door :: LaserCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
   for (int i = max_sweep_left; i < min_sweep_left; i++)  // reads every value in the range (LEFT)
   {
     laser_detected_ = msg->ranges[i] >= DISTANCE_;  // updates the value of laser_detected_ (true if is under 0.4m)
-    if(!laser_detected_)
+    if (!laser_detected_)
     {
       setOutput<int>("w_door", n_door++);
       door = true;
       break;
     }
   }
-  
+
   for (int i = min_sweep_right; i < max_sweep_right; i++)  // reads every value in the range (RIGTH)
   {
-    if(!laser_detected_)  // to prevent the case that the last value of the left range detect an object and the rigth range overwrite it
-    {
+    if (!laser_detected_) 
+    {  // to prevent the case that the last value of the left range detect an object and the rigth range overwrite it
       break;
     }
     laser_detected_ = msg->ranges[i] >= DISTANCE_;  // Updates the value of laser_detected_ (true if is under 0.4m)
     dist = msg->ranges[min_sweep_right];
-    if(!laser_detected_)
+    if (!laser_detected_)
     {
       door = true;
-      setOutput<int>("w_door", n_door++);
+      setOutput<int>("w_door", 2);
       break;
     }
-  }  
-
-} 
-
+  }
+  */
+  laser_detected_ = msg->ranges[1] >= DISTANCE_;  // updates the value of laser_detected_ (true if is under 0.4m)
+  dist = msg->ranges[1];
+  if (!laser_detected_)
+  {
+    setOutput<int>("w_door", 2);
+    door = true;
+  }
+  else
+  {
+    door = false;
+  }
+}
 
 BT::NodeStatus
 Detect_door::tick()
 {
   ROS_INFO("Detect_door tick");
-  std::cerr << dist << std::endl;
-  if(door)
+  std::cerr << dist << " " << door << std::endl;
+  if (door)
     return BT::NodeStatus::RUNNING;
   else
     return BT::NodeStatus::SUCCESS;

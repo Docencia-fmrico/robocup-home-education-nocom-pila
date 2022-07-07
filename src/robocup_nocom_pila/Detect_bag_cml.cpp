@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ void
 Detect_bag_cml::OrderCallback(const std_msgs::String::ConstPtr& msg)
 {
   order = msg->data;
-  // std::cerr << order << std::endl;
+  std::cerr << order << std::endl;
 }
 
 void
@@ -69,7 +69,7 @@ Detect_bag_cml::tick()
 {
   ROS_INFO("Detect_bag_cml tick");
   geometry_msgs::Twist cmd;
-  // std::cerr << order << std::endl;
+  std::cerr << order << std::endl;
 
   // forwarder.speak("Which bag baby?");
 
@@ -122,8 +122,8 @@ Detect_bag_cml::tick()
             if ((ros::Time::now()-turn_ts_).toSec() > 1)
             {
               time2 = 0;
-              forwarder.speak("this one");
-              sleep(3);
+              forwarder.speak("Put the bag on me");
+              sleep(4);
               return BT::NodeStatus::RUNNING;
             }
           break;

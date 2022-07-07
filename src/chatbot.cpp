@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -127,7 +127,7 @@ class ExampleDF: public DialogInterface
       {
         sound_pub_order.publish(msg_order);
       }
-      //speak(result.fulfillment_text);
+      // speak(result.fulfillment_text);
     }
 
     void endIntentCB(dialogflow_ros_msgs::DialogflowResult result)
@@ -176,32 +176,31 @@ class ExampleDF: public DialogInterface
 
 
     void drinkIntentCB(dialogflow_ros_msgs::DialogflowResult result)
-    {// Metodo para pedir que maleta coger.
+    {  // Metodo para pedir que maleta coger.
       std_msgs::String msg_drink;
-      
+
       ROS_INFO("[ExampleDF] drinkIntentCB: intent [%s]", result.intent.c_str());
 
-      for(const auto & param : result.parameters)
+      for (const auto & param : result.parameters)
       {
         // std::cerr << "Param: "<< param << std::endl;
-        for(const auto &value : param.value)
+        for (const auto &value : param.value)
         {
           // std::cerr << "\t" << value << std::endl;
           msg_drink.data = value;
         }
-
       }
       if ( msg_drink.data != "")
       {
         sound_pub_drink.publish(msg_drink);
       }
-      speak(result.fulfillment_text);      
+      speak(result.fulfillment_text);
     }
 
     void ageIntentCB(dialogflow_ros_msgs::DialogflowResult result)
-    {// Metodo para pedir que maleta coger.
+    {  // Metodo para pedir que maleta coger.
       std_msgs::String msg_years;
-      
+
       ROS_INFO("[ExampleDF] drinkIntentCB: intent [%s]", result.intent.c_str());
 
       msg_years.data = result.parameters[0].value[0].c_str();
@@ -219,7 +218,7 @@ class ExampleDF: public DialogInterface
       {
         sound_pub_age.publish(msg_years);
       }
-      speak(result.fulfillment_text);      
+      speak(result.fulfillment_text);
     }
 
 

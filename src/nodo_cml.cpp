@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_detect_door"));
   factory.registerFromPlugin(loader.getOSName("nc_go_door"));
   factory.registerFromPlugin(loader.getOSName("nc_turn_"));
+  factory.registerFromPlugin(loader.getOSName("nc_go_arena"));
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("door", 1);
@@ -50,7 +51,6 @@ int main(int argc, char **argv)
   blackboard->set("centre", 0.0);
   blackboard->set("counter", 0);
   blackboard->set("person", 1);
-  
 
   std::string pkgpath = ros::package::getPath("robocup_nocom_pila");
   std::string xml_file = pkgpath + "/behavior_trees_xml/cml.xml";

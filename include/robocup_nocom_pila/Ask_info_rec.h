@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_ASK_INFO_H
-#define ROBOCUP_NOCOM_PILA_ASK_INFO_H
+#ifndef ROBOCUP_NOCOM_PILA_ASK_INFO_REC_H
+#define ROBOCUP_NOCOM_PILA_ASK_INFO_REC_H
 
 #include "ros/ros.h"
 
@@ -77,4 +77,4 @@ private:
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_ASK_INFO_H
+#endif  // ROBOCUP_NOCOM_PILA_ASK_INFO_REC_H

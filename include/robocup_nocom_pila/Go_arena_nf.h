@@ -12,26 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_GO_PERSON_FMM_H
-#define ROBOCUP_NOCOM_PILA_GO_PERSON_FMM_H
+#ifndef ROBOCUP_NOCOM_PILA_GO_ARENA_NF_H
+#define ROBOCUP_NOCOM_PILA_GO_ARENA_NF_H
 
 #include "ros/ros.h"
 
 #include "behaviortree_cpp_v3/behavior_tree.h"
 #include "behaviortree_cpp_v3/bt_factory.h"
 #include "geometry_msgs/Twist.h"
+#include "sensor_msgs/Image.h"
 
 #include "../src/nav.cpp"
 
+#include <vector>
 #include <string>
 
 namespace robocup_nocom_pila
 {
 
-class Go_person_fmm : public BT::ActionNodeBase
+class Go_arena_nf : public BT::ActionNodeBase
 {
 public:
-    explicit Go_person_fmm(const std::string& name, const BT::NodeConfiguration& config);
+    explicit Go_arena_nf(const std::string& name,  const BT::NodeConfiguration & config);
 
     void halt();
 
@@ -39,7 +41,7 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return { BT::InputPort<int>("r_person")};
+        return { BT::InputPort<std::vector<float>>("posx"), BT::InputPort<std::vector<float>>("posy") };
     }
 
 private:
@@ -48,20 +50,24 @@ private:
     ros::NodeHandle nh;
     float px;
     float py;
-    float pz;
-    float ox;
-    float oy;
-    float oz;
-    float ow;
-
-    int person;
+    const float pz = 0;
+    const float ox = 0;
+    const float oy = 0;
+    const float oz = 0;
+    const float ow = 1;
 
     int action = true;
-    int counter_;
     float dist;
     bool finish = false;
+    bool move;
+
+    int counter_;
+    int target = 0;
+
+    std::vector<float> xvector = std::vector<float>(20, 0);
+    std::vector<float> yvector = std::vector<float>(20, 0);
 };
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_GO_PERSON_FMM_H
+#endif  // ROBOCUP_NOCOM_PILA_GO_ARENA_NF_H

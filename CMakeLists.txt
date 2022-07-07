@@ -60,6 +60,8 @@ add_library(pid SHARED src/robocup_nocom_pila/PIDController.cpp)
 add_library(nc_detect_bag_cml SHARED src/robocup_nocom_pila/Detect_bag_cml.cpp)
 add_library(nc_detect_person_cml SHARED src/robocup_nocom_pila/Detect_person_cml.cpp)
 add_library(nc_follow_person_cml SHARED src/robocup_nocom_pila/Follow_person_cml.cpp)
+add_library(nc_go_arena SHARED src/robocup_nocom_pila/Go_arena.cpp)
+add_library(nc_go_arena_nf SHARED src/robocup_nocom_pila/Go_arena_nf.cpp)
 
 add_library(nc_describe_person_fmm SHARED src/robocup_nocom_pila/Describe_person_fmm.cpp)
 add_library(nc_detect_person_fmm SHARED src/robocup_nocom_pila/Detect_person_fmm.cpp)
@@ -72,7 +74,6 @@ add_library(nc_goto_chair_rec SHARED src/robocup_nocom_pila/Goto_chair_rec.cpp)
 add_library(nc_goto_guest_rec SHARED src/robocup_nocom_pila/Goto_guest_rec.cpp)
 add_library(nc_introduce_guest_rec SHARED src/robocup_nocom_pila/Introduce_guest_rec.cpp)
 add_library(nc_offer_chair_rec SHARED src/robocup_nocom_pila/Offer_chair_rec.cpp)
-add_library(nc_turn_is_empty_rec SHARED src/robocup_nocom_pila/Turn_is_empty_rec.cpp)
 
 add_library(nc_go_home_ SHARED src/robocup_nocom_pila/Go_home_.cpp)
 add_library(nc_go_operator_ SHARED src/robocup_nocom_pila/Go_operator_.cpp)
@@ -86,6 +87,8 @@ list(APPEND plugin_libs
   nc_detect_bag_cml
   nc_detect_person_cml
   nc_follow_person_cml
+  nc_go_arena
+  nc_go_arena_nf
 
   nc_describe_person_fmm
   nc_detect_person_fmm
@@ -98,7 +101,6 @@ list(APPEND plugin_libs
   nc_goto_guest_rec
   nc_introduce_guest_rec
   nc_offer_chair_rec
-  nc_turn_is_empty_rec
 
   nc_go_operator_
   nc_go_home_
@@ -142,6 +144,8 @@ roslint_cpp(
   include/robocup_nocom_pila/Detect_bag_cml.h src/robocup_nocom_pila/Detect_bag_cml.cpp
   include/robocup_nocom_pila/Detect_person_cml.h src/robocup_nocom_pila/Detect_person_cml.cpp
   include/robocup_nocom_pila/Follow_person_cml.h src/robocup_nocom_pila/Follow_person_cml.cpp
+  include/robocup_nocom_pila/Go_arena.h src/robocup_nocom_pila/Go_arena.cpp
+  include/robocup_nocom_pila/Go_arena_nf.h src/robocup_nocom_pila/Go_arena_nf.cpp
   
 
   include/robocup_nocom_pila/Describe_person_fmm.h src/robocup_nocom_pila/Describe_person_fmm.cpp
@@ -155,7 +159,6 @@ roslint_cpp(
   include/robocup_nocom_pila/Goto_guest_rec.h src/robocup_nocom_pila/Goto_guest_rec.cpp
   include/robocup_nocom_pila/Introduce_guest_rec.h src/robocup_nocom_pila/Introduce_guest_rec.cpp
   include/robocup_nocom_pila/Offer_chair_rec.h src/robocup_nocom_pila/Offer_chair_rec.cpp
-  include/robocup_nocom_pila/Turn_is_empty_rec.h src/robocup_nocom_pila/Turn_is_empty_rec.cpp
   
   include/robocup_nocom_pila/Detect_door.h src/robocup_nocom_pila/Detect_door.cpp
   include/robocup_nocom_pila/Go_door.h src/robocup_nocom_pila/Go_door.cpp

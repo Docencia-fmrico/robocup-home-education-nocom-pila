@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -114,7 +114,6 @@ Goto_chair_rec::tick()
         nh.getParam("ow6", ow);
       break;
     }
-
   }
 /*
   std::cerr << cx << std::endl;

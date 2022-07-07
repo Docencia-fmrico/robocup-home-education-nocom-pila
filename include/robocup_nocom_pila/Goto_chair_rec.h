@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,8 +39,8 @@ public:
 
     static BT::PortsList providedPorts()
     {
-        return 
-        { 
+        return
+        {
             BT::InputPort<int>("r_chair"),
             BT::OutputPort<int>("w_chair"),
             BT::InputPort<int>("r_age")
