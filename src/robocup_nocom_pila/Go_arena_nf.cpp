@@ -12,38 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "robocup_nocom_pila/Go_home_.h"
+#include "robocup_nocom_pila/Go_arena_nf.h"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
 #include <string>
+#include <vector>
 #include "ros/ros.h"
+#include "std_msgs/Float64.h"
 
 namespace robocup_nocom_pila
 {
 
-Go_home_::Go_home_(const std::string& name)
-: BT::ActionNodeBase(name, {}), counter_(0),  nh("~")
+Go_arena_nf::Go_arena_nf(const std::string& name,  const BT::NodeConfiguration & config)
+: BT::ActionNodeBase(name, config), counter_(0),  nh("~")
 {
-  nh.getParam("hpx", px);
-  nh.getParam("hpy", py);
-  nh.getParam("hpz", pz);
-  nh.getParam("hox", ox);
-  nh.getParam("hoy", oy);
-  nh.getParam("hoz", oz);
-  nh.getParam("how", ow);
 }
 
 void
-Go_home_::halt()
+Go_arena_nf::halt()
 {
-    ROS_INFO("Go_home_ halt");
+    ROS_INFO("Go_arena_nf halt");
 }
 
 BT::NodeStatus
-Go_home_::tick()
+Go_arena_nf::tick()
 {
-  ROS_INFO("Go_home_ tick");
-
+  ROS_INFO("Go_arena_nf tick");
+/*
   if (action)
   {
     my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
@@ -59,6 +54,20 @@ Go_home_::tick()
   {
     return BT::NodeStatus::RUNNING;
   }
+  */
+
+  xvector = getInput<std::vector<float>>("posx").value();
+  yvector = getInput<std::vector<float>>("posy").value();
+
+  while (xvector[target] ==0 ) { target--; }
+  move = true;
+  if (move)
+  {
+    px = xvector[target];
+    py = yvector[target];
+    my_node.doWork(px, py, pz, ox, oy, oz, ow, 200);
+    move = false;
+  }
 }
 
 }  // namespace robocup_nocom_pila
@@ -66,5 +75,5 @@ Go_home_::tick()
 #include "behaviortree_cpp_v3/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<robocup_nocom_pila::Go_home_>("Go_home_");
+  factory.registerNodeType<robocup_nocom_pila::Go_arena_nf>("Go_arena_nf");
 }

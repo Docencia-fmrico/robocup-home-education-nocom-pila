@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROBOCUP_NOCOM_PILA_DETECT_DOOR__H
-#define ROBOCUP_NOCOM_PILA_DETECT_DOOR__H
+#ifndef ROBOCUP_NOCOM_PILA_DETECT_DOOR_H
+#define ROBOCUP_NOCOM_PILA_DETECT_DOOR_H
 
 #include "ros/ros.h"
 
@@ -44,8 +44,8 @@ public:
 private:
     ros::NodeHandle nh;
     static const int TURNING_RIGHT = 3;
-    const float DISTANCE_ = 0.7;  // minim distance the kobuki change state
-    
+    const float DISTANCE_ = 0.9;  // minim distance the kobuki change state
+
     int max_array_;  // contains the max size of the array
     int max_sweep_left;  // max left angle kobuki uses to detect
     int min_sweep_right;  // min left angle kobuki uses to detect (center)
@@ -61,4 +61,4 @@ private:
 
 }  // namespace robocup_nocom_pila
 
-#endif  // ROBOCUP_NOCOM_PILA_DETECT_DOOR__H
+#endif  // ROBOCUP_NOCOM_PILA_DETECT_DOOR_H

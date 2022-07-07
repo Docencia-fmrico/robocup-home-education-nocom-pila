@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,6 +52,7 @@ public:
     else
     {
       msg_end.data = "stop";
+      forwarder.speak("Ok, take your bag and I go home");
       pub_end.publish(msg_end);
     }
   }
@@ -63,24 +64,22 @@ public:
     std_msgs::String msg_end;
     std::string end;
     gb_dialog::ExampleDF forwarder;
-}; 
+};
 
 int main(int argc, char** argv)
 {
- 
   ros::init(argc, argv, "listener_node");
   ros::NodeHandle n;
   Listener listen;
-  //ros::Publisher num_pub = n.advertise<std_msgs::Int64>("/message", 1);
+  // ros::Publisher num_pub = n.advertise<std_msgs::Int64>("/message", 1);
 
   ros::Rate loop_rate(10);
 
-  int count=0;
+  int count = 0;
 
   while (ros::ok())
   {
-    
-    listen.listener(); 
+    listen.listener();
 
     ros::spinOnce();
     loop_rate.sleep();

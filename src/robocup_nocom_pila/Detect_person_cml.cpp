@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ Detect_person_cml::tick()
     {
       setOutput<float>("w_dist", dist_w);
       setOutput<double>("w_centre", centre_w);
-      //std::cerr << "Distancia real: " << dist_w << std::endl;
+      // std::cerr << "Distancia real: " << dist_w << std::endl;
       cont = 0;
       is_person = false;
       return BT::NodeStatus::SUCCESS;
@@ -79,7 +79,7 @@ void Detect_person_cml::DetectPersonBBXCallback(const darknet_ros_msgs::Bounding
     {
       // std::cerr << "CALLBACK PX" << std::endl;
 
-      if(area < ((box.xmax - box.xmin) * (box.ymax - box.ymin)))
+      if (area < ((box.xmax - box.xmin) * (box.ymax - box.ymin)))
       {
         area = (box.xmax - box.xmin) * (box.ymax - box.ymin);
         px = (box.xmax + box.xmin) / 2;
@@ -113,7 +113,6 @@ void Detect_person_cml::DetectPersonImageCallback(const sensor_msgs::ImageConstP
     std::cerr << "CALLBACK == NULL" << std::endl;
     dist_w = 0.0;
   }
-
 }
 
 }  // namespace robocup_nocom_pila

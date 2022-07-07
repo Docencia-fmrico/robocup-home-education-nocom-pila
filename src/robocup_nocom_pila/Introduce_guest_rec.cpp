@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -79,7 +79,6 @@ Introduce_guest_rec::tick()
 
   forwarder.speak(name_r + "is " + age_r + "years old, is in the chair number "
    + n_chair + " and it's favorite drink is " + drink_r);
-      
 
   sleep(4);
 
