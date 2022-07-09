@@ -52,7 +52,6 @@ public:
     else
     {
       msg_end.data = "stop";
-      forwarder.speak("Ok, take your bag and I go home");
       pub_end.publish(msg_end);
     }
   }
