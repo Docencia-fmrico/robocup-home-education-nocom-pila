@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public:
     void halt();
 
     BT::NodeStatus tick();
-    
+
     void EndCallback(const std_msgs::String::ConstPtr& msg);
 
     static BT::PortsList providedPorts()
@@ -52,8 +52,6 @@ public:
             };
     }
 
-
-
 private:
     const double MIN_TURN_SPEED = 0.0;
     const double MAX_TURN_SPEED = 0.7;
@@ -65,7 +63,7 @@ private:
     const double MIN_FORW_DIST = 0.0;
     const double MAX_FORW_DIST = 1.0;
 
-    const int MIN_DISTANCE = 1.0;
+    const int MIN_DISTANCE = 0.95;
     const int MAX_VEL_DISTANCE = 3.0;    // Distances greater than this one will make the robot go max velocity
 
     const int SECURITY_DIST = 0.5;      // Meters from last person's scan to avoid new person
@@ -77,7 +75,7 @@ private:
     float dist_r, last_dist = 0;
 
     double centre_r;
-    bool is_person = false;  
+    bool is_person = false;
     bool arrived = false;
     PIDController turn_pid_, forw_pid_;
     int counter_ = 0;

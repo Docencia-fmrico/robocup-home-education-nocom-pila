@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,8 +39,7 @@ int main(int argc, char **argv)
   factory.registerFromPlugin(loader.getOSName("nc_introduce_guest_rec"));
   factory.registerFromPlugin(loader.getOSName("nc_offer_chair_rec"));
   factory.registerFromPlugin(loader.getOSName("nc_start_"));
-   factory.registerFromPlugin(loader.getOSName("nc_turn_"));
-
+  factory.registerFromPlugin(loader.getOSName("nc_turn_"));
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("chair", 1);

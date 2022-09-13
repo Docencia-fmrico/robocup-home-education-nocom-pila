@@ -1,4 +1,4 @@
-// Copyright 2022 Intelligent Robotics Lab
+// Copyright 2022 Nocom-pila
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ Offer_chair_rec::Offer_chair_rec(const std::string& name /*const BT::NodeConfigu
   objects_bbx = nh.subscribe("/darknet_ros/bounding_boxes", 1, &Offer_chair_rec::DetectChairBBXCallback, this);
   objects_image = nh.subscribe("/camera/depth/image_raw", 1, &Offer_chair_rec::DetectChairImageCallback, this);
   */
-  
 }
 
 void
@@ -84,7 +83,6 @@ Offer_chair_rec::tick()
   }*/
 
   // <----- say here is your chair
-  
 }
 
 /*
